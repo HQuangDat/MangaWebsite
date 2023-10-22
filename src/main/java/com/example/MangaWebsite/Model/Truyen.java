@@ -15,7 +15,7 @@ public class Truyen {
 
     @ManyToOne
     @JoinColumn(name = "MaTheLoai")
-    private LoaiTruyen MaTheLoai;
+    private Category MaTheLoai;
 
     @ManyToOne
     @JoinColumn(name = "MaChuong")

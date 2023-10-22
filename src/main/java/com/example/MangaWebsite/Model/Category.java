@@ -8,7 +8,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "loaitruyen")
-public class LoaiTruyen {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private char MaTheLoai;
