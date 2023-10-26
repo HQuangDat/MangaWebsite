@@ -14,6 +14,6 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("/account/${id}")
+    @GetMapping("/account/{id}")
     public TaiKhoan get(@PathVariable char id){return accountService.get(id);}
 }

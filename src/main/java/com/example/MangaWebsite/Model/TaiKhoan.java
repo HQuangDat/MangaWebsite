@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -39,4 +40,7 @@ public class TaiKhoan {
     @ManyToOne
     @JoinColumn(name = "MaTruyen")
     private Truyen MaTruyen;
+
+    @OneToMany
+    private Set<Chuong> chuongs;
 }

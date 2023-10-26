@@ -1,6 +1,8 @@
 package com.example.MangaWebsite.Service;
 
 import com.example.MangaWebsite.Model.TaiKhoan;
+import com.example.MangaWebsite.Repository.IAccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class AccountService {
+    @Autowired
+    private IAccountRepository accountRepository;
     //Tạo list chứa toàn bộ thông tin tai khoan
     private List<TaiKhoan> listTK = new ArrayList<>();
     //Tra ve toan bo cac tai khoan hien co
