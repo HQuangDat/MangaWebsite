@@ -18,7 +18,7 @@ public class MangaController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/manga/{id}")
-    public Truyen get(@PathVariable char id)
+    public Truyen get(@PathVariable long id)
     {
         return mangaService.getTruyenById(id);
     }
@@ -38,7 +38,7 @@ public class MangaController {
     }
     //Xoa truyen
     @GetMapping("/delete/{id}")
-    public void delete(@PathVariable char id)
+    public void delete(@PathVariable long id)
     {
         mangaService.deleteTruyen(id);
     }
@@ -46,13 +46,13 @@ public class MangaController {
     //edit truyen
     //Lấy thông tin của một manga dựa vào ID
     @GetMapping("/edit/{id}")
-    public String editTruyenForm(@PathVariable("id") Character id, Model model) {
+    public String editTruyenForm(@PathVariable("id") Long id, Model model) {
         Optional<Truyen> editTruyen = Optional.ofNullable(mangaService.getTruyenById(id));
         if (editTruyen.isPresent()) {
             Truyen truyen = editTruyen.get();
             model.addAttribute("truyen", truyen);
             model.addAttribute("categories", categoryService.getAllCategories());
-            model.addAttribute("selectedCategoryId", truyen.getMaTheLoai().getMaTheLoai());
+            model.addAttribute("selectedCategoryId", truyen.getCategory().getId());
             return "manga/edit";
         } else {
             return "not-found";

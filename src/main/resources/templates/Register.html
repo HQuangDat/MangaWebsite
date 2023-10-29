@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html id="ctl00_Html1" lang="vi">
+<html id="ctl00_Html1" lang="vi" xmlns:th="http://www.thymeleaf.org">
    <head id="ctl00_Head1">
       <meta property="fb:app_id" content="552913042834971"/>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <title>Đọc truyện tranh live - Truyện gì cũng có - NetTruyenLive</title>
       <meta name="description" content="Web đọc truyện tranh live lớn nhất được cập nhật liên tục hàng giờ - Cùng tham gia đọc truyện live và thảo luận với hơn 💚15 triệu thành viên tại NetTruyenLive"/>
-      <meta name="keywords" content="Truyện tranh, Truyen tranh online, Đọc truyện tranh, Truyện tranh hot, Truyện tranh hay, Truyện ngôn tình, truyenqq, mi2manga, doctruyen3q, cmanga, vlogtruyen, blogtruyen, saytruyen, dichtruyen, truyentranhaudio, hamtruyen, truyensieuhay, vcomi, nettruyen, nettruyenco, nettruyentv, nettruyenlive">
+      <meta name="keywords" content="Truyện tranh, Truyen tranh online, Đọc truyện tranh, Truyện tranh hot, Truyện tranh hay, Truyện ngôn tình, truyenqq, mi2manga, doctruyen3q, cmanga, vlogtruyen, blogtruyen, saytruyen, dichtruyen, truyentranhaudio, hamtruyen, truyensieuhay, vcomi, nettruyen, nettruyenco, nettruyentv, nettruyenlive"/>
       <meta property="og:image" content="http://st.ntcdntempv3.com/data/sites/1/share.jpg"/>
       <meta property="og:title" content="Đọc truyện tranh live - Truyện gì cũng có - NetTruyenLive"/>
       <meta property="og:site_name" content="NetTruyenLive"/>
@@ -14,10 +14,10 @@
       <meta property="og:description" content="Web đọc truyện tranh live lớn nhất được cập nhật liên tục hàng giờ - Cùng tham gia đọc truyện live và thảo luận với hơn 💚15 triệu thành viên tại NetTruyenLive"/>
       <meta itemprop="name" content="Đọc truyện tranh live - Truyện gì cũng có - NetTruyenLive"/>
       <meta itemprop="description" content="Web đọc truyện tranh live lớn nhất được cập nhật liên tục hàng giờ - Cùng tham gia đọc truyện live và thảo luận với hơn 💚15 triệu thành viên tại NetTruyenLive"/>
-      <link rel="next" href="https://nettruyen.live?page=2"/>
-      <link rel="canonical" href="https://nettruyen.live/Secure/Login.aspx"/>
+      <link rel="next" th:href="@{/page=2}"/>
+      <link rel="canonical" th:href="@{/Secure/Login.aspx}"/>
       <meta name="referrer" content="no-referrer"/>
-      <link rel="icon" type="image/png" href="https://nettruyen.live/public/assets/images/favicon.png"/>
+      <link rel="icon" type="image/png" th:href="@{/public/assets/images/favicon.png}"/>
       <meta name="copyright" content="Copyright © 2023 Truyện tranh NetTruyenLive"/>
       <meta name="Author" content="Truyện tranh NetTruyenLive"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -25,14 +25,14 @@
       <meta http-equiv="x-dns-prefetch-control" content="on"/>
       <meta name="color-scheme" content="light only"/>
       <meta name="google" content="notranslate"/>
-      <link rel="stylesheet" type="text/css" href="/css/font-manga.min.css.css"/>
-      <link rel="stylesheet" type="text/css" href="/css/styles.min.css"/>
-      <link rel="stylesheet" type="text/css" href="/css/mystyle.css"/>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/font-manga.min.css.css}"/>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/styles.min.css}"/>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/mystyle.css}"/>
       <link rel="apple-touch-icon" href=""/>
       <style>
          iframe {
-         height: 200px;
-         border-width: 0px;
+            height: 200px;
+            border-width: 0px;
          }
       </style>
       <meta name="apple-itunes-app" content="app-id=6446489911, app-argument=">
@@ -420,7 +420,44 @@
                   <div class="col-sm-offset-3 col-sm-6">
                      <div class="user-page clearfix">
                         <h1 class="postname"> Đăng ký tài khoản </h1>
-                        <p>Hiện tại chỉ hỗ trợ đăng ký tài khoản qua tài khoản Facebook hoặc Google</p>
+                        <form th:action="@{/Register}" th:object="${user}" method="post">
+                           <div id="ctl00_mainContent_login1_LoginCtrl_pnlLContainer" class="signup-wrapper">
+                              <div class="form-group">
+                                 <label for="username" class="control-label">Username</label>
+                                 <input th:field="*{username}" type="text" maxlength="50" id="username" tabindex="10" class="form-control" placeholder="Username">
+                                 <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="password" class="control-label">Mật khẩu </label>
+                                 <input th:field="*{password}" type="password" id="password" tabindex="10" class="form-control" placeholder="Mật khẩu">
+                                 <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="name" class="control-label">Name</label>
+                                 <input th:field="*{displayname}" type="text" maxlength="100" id="name" tabindex="10" class="form-control" placeholder="Tên hiển thị">
+                                 <span class="text-danger" th:if="${#fields.hasErrors('displayname')}" th:errors="*{displayname}"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="CCCD" class="control-label">CCCD</label>
+                                 <input th:field="*{CCCD}" type="text" maxlength="13" id="CCCD" tabindex="10" class="form-control" placeholder="Căn cước công dân">
+                                 <span class="text-danger" th:if="${#fields.hasErrors('CCCD')}" th:errors="*{CCCD}"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="ngaysinh" class="control-label">Ngày sinh</label>
+                                 <input th:field="*{ngaysinh}" type="date" id="ngaysinh" tabindex="10" class="form-control" placeholder="Ngày sinh">
+                              </div>
+                              <div class="form-group">
+                                 <label for="SDT" class="control-label">SDT</label>
+                                 <input th:field="*{SDT}" type="text" maxlength="13" id="SDT" tabindex="10" class="form-control" placeholder="Số điện thoại">
+                                 <span class="text-danger" th:if="${#fields.hasErrors('SDT')}" th:errors="*{SDT}"></span>
+                              </div>
+                              <div class="login-action">
+                                 <div class="form-group">
+                                    <input type="submit" value="Đăng ký" id="ctl00_mainContent_login1_LoginCtrl_Login" tabindex="10" class="btn btn-primary">
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
                      </div>
                      <div class="open-login mrt20 mrb20">
                         <div class="form-group"> <a class="btn login-facebook" href="/auth/facebook/redirect"> <i class="fa fa-facebook"></i> <span>Đăng ký bằng tài khoản Facebook</span> </a> </div>

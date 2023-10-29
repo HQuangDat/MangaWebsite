@@ -11,36 +11,36 @@ import java.util.Set;
 public class Truyen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private char MaTruyen;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "MaTheLoai")
-    private Category MaTheLoai;
+    @JoinColumn(name = "caterory_id")
+    private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "MaChuong")
-    private Chuong MaChuong;
+    @JoinColumn(name = "chuong_id")
+    private Chuong chuong;
 
     @Column
     private int SoChuong;
 
     @ManyToOne
-    @JoinColumn(name = "MaTrangThai")
-    private TrangThaiTruyen MaTrangThai;
+    @JoinColumn(name = "manga_status_id")
+    private TrangThaiTruyen trangThaiTruyen;
 
     @Column(name = "SoLike")
     private int SoLike;
+
     @Column(name = "SoCmt")
     private int SoCmt;
 
     @ManyToOne
-    @JoinColumn(name = "MaPhanLoai")
-    private Premium MaPhanLoai;
+    @JoinColumn(name = "premium_id")
+    private Premium premium;
 
     @Column(name = "TenTruyen")
     private String TenTruyen;
 
-    //Forgein Key for taikhoan
     @OneToMany(mappedBy = "truyen")
-    private Set<TaiKhoan> taikhoans;
+    private Set<User> users;
 }

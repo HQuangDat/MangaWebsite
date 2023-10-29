@@ -13,7 +13,7 @@ public class MangaService {
     public List<Truyen> getAllTruyens(){
         return mangaRepository.findAll();
     }
-    public Truyen getTruyenById(Character id){
+    public Truyen getTruyenById(Long id){
         return mangaRepository.findById(id).orElse(null);
     }
     public void addTruyen(Truyen truyen){
@@ -22,7 +22,7 @@ public class MangaService {
     public void updateTruyen(Truyen truyen){
         mangaRepository.save(truyen);
     }
-    public void deleteTruyen(Character id){
+    public void deleteTruyen(Long id){
         mangaRepository.deleteById(id);
     }
 }

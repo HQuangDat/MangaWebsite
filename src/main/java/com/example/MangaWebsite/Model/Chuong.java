@@ -12,11 +12,15 @@ import java.util.Set;
 public class Chuong {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private char MaChuong;
+    private Long id;
+
     @Column(name = "TenChuong")
+
     private String TenChuong;
+
     @Column(name = "MaTruyen")
-    private char MaTruyen;
+    private Long MaTruyen;
+
     @Lob
     @Column(name = "NoiDung", columnDefinition = "longblob")
     private byte[] NoiDung;
@@ -25,8 +29,8 @@ public class Chuong {
     private LocalDateTime NgayDang;
 
     @ManyToOne
-    @JoinColumn(name = "MaTK")
-    private TaiKhoan MaTK;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @OneToMany(mappedBy = "chuong")
     private Set<Truyen> truyens;

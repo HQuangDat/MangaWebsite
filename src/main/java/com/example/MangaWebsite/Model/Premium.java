@@ -12,7 +12,8 @@ import java.util.Set;
 public class Premium {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private char MaPhanLoai;
+    private Long id;
+
     @Column(name = "GiaTien",precision = 18, scale = 2)
     private BigDecimal GiaTien;
 

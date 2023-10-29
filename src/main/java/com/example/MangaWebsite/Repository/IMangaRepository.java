@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IMangaRepository extends JpaRepository<Truyen, Character> {
+public interface IMangaRepository extends JpaRepository<Truyen, Long> {
 }

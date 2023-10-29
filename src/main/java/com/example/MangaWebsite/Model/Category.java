@@ -7,15 +7,12 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "loaitruyen")
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private char MaTheLoai;
+    private Long id;
 
-    @Column(name = "TenTheLoai")
+    @Column(name = "ten_the_loai")
     private String TenTheLoai;
-
-    @OneToMany(mappedBy = "loaitruyen")
-    private Set<Truyen> truyens;
 }
