@@ -27,6 +27,12 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("username");
+        return "redirect:/";
+    }
+
     @PostMapping("/login")
     public String login(@ModelAttribute("user") User user, Model model, HttpSession session) {
         User existingUser = userRepository.findByUsername(user.getUsername());
@@ -39,6 +45,8 @@ public class UserController {
             return "login";
         }
     }
+
+
 
     @GetMapping("/Register")
     public String register(Model model){
