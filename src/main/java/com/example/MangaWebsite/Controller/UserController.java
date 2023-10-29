@@ -1,7 +1,9 @@
 package com.example.MangaWebsite.Controller;
 
 import com.example.MangaWebsite.Model.User;
+import com.example.MangaWebsite.Repository.IUserRepository;
 import com.example.MangaWebsite.Service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private IUserRepository userRepository;
 
     @GetMapping("/login")
-    public String login(){return "/login";}
+    public String loginForm(Model model) {
+        model.addAttribute("user", new User()); // Add an empty User object to the model
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute("user") User user, Model model, HttpSession session) {
+        User existingUser = userRepository.findByUsername(user.getUsername());
+
+        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+            session.setAttribute("username", existingUser.getUsername());
+            return "redirect:/";
+        } else {
+            model.addAttribute("loginError", "Invalid username or password");
+            return "login";
+        }
+    }
 
     @GetMapping("/Register")
     public String register(Model model){
