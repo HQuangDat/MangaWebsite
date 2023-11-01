@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginForm(Model model) {
-        model.addAttribute("user", new User()); // Add an empty User object to the model
+        model.addAttribute("user", new User());
         return "login";
     }
 
