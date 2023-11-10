@@ -1,6 +1,6 @@
 package com.example.MangaWebsite.Service;
 
-import com.example.MangaWebsite.Model.User;
+import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Repository.IUserRepository;
 import com.example.MangaWebsite.Repository.IRoleRepository;
 import jakarta.transaction.Transactional;

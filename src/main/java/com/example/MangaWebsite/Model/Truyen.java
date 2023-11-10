@@ -1,5 +1,7 @@
 package com.example.MangaWebsite.Model;
 
+import com.example.MangaWebsite.Entity.User;
+import com.example.MangaWebsite.Validator.annotation.ValidUserId;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,7 +16,8 @@ public class Truyen {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "caterory_id")
+    @JoinColumn(name = "caterory_id" ,referencedColumnName = "id")
+    @ValidUserId
     private Category category;
 
     @ManyToOne
@@ -40,6 +43,11 @@ public class Truyen {
 
     @Column(name = "TenTruyen")
     private String TenTruyen;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ValidUserId
+    private  User user;
 
     @OneToMany(mappedBy = "truyen")
     private Set<User> users;

@@ -1,7 +1,7 @@
 package com.example.MangaWebsite.Service;
 
-import com.example.MangaWebsite.Model.CustomUserDetail;
-import com.example.MangaWebsite.Model.User;
+import com.example.MangaWebsite.Entity.CustomUserDetail;
+import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

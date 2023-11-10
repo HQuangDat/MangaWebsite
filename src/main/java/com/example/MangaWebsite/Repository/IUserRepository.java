@@ -1,6 +1,6 @@
 package com.example.MangaWebsite.Repository;
 
-import com.example.MangaWebsite.Model.User;
+import com.example.MangaWebsite.Entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

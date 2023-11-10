@@ -1,5 +1,6 @@
 package com.example.MangaWebsite.Model;
 
+import com.example.MangaWebsite.Entity.User;
 import jakarta.persistence.*;
 import lombok.Data;
 

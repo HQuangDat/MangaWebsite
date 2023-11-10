@@ -1,6 +1,6 @@
 package com.example.MangaWebsite.Controller;
 
-import com.example.MangaWebsite.Model.User;
+import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Repository.IUserRepository;
 import com.example.MangaWebsite.Service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserController {
