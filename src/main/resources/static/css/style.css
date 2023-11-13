@@ -22,7 +22,7 @@ select.form-control{height: 42px;}
 @media (min-width: 992px){
 	.c-page-on-scroll.c-layout-header-fixed .c-layout-header .c-brand {
 		transition: margin 0.2s;
-		margin: 12px 0px 19px 12px;
+		margin: 12px 0 19px 12px;
 	}
 }
 
@@ -198,7 +198,7 @@ select.form-control{height: 42px;}
 	margin-bottom: 6px;
 
 }
-.field-search .input-group{width: 100%;border-radius: 0px !important;}
+.field-search .input-group{width: 100%;border-radius: 0 !important;}
 /*end game-detail*/
 
 @media only screen and (max-width: 768px){
@@ -256,7 +256,7 @@ select.form-control{height: 42px;}
 }
 
 .tutorial_area .panel{
-	border-radius: 0px !important;
+	border-radius: 0 !important;
 	border: 1px solid #32c5d2 ;
 
 }
@@ -460,7 +460,7 @@ select.form-control{height: 42px;}
 
  .chat-message .fa-file-o, .chat-message .fa-file-image-o {
 	font-size: 16px;
-	color: gray;
+	color: rgb(128, 128, 128);
 	cursor: pointer;
 }
 .mess-gallery img{
@@ -1107,7 +1107,6 @@ label.label-custom{
 .covenient_service .list_network a.active:before, .covenient_service  .list_price a.active:before {
 	content: "";
 	position: absolute;
-	background: url("/assets/frontend/images/naptien_active_v2.png") no-repeat;
 	width: 16px;
 	height: 16px;
 	display: inline-block;
@@ -1243,4 +1242,6 @@ label.label-custom{
 @media only screen and (min-width: 1200px) {
 
 }
+/*Admin , Page*/
+
 

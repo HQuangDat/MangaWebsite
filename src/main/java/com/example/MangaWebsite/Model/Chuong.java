@@ -1,6 +1,8 @@
 package com.example.MangaWebsite.Model;
 
+import com.example.MangaWebsite.Entity.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,24 +16,30 @@ public class Chuong {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TenChuong")
 
-    private String TenChuong;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ma_truyen" ,referencedColumnName = "id", nullable = false)
+    private truyen truyen;
 
-    @Column(name = "MaTruyen")
-    private Long MaTruyen;
+    @Column(name = "ten_chuong")
+    private String tenChuong;
 
     @Lob
-    @Column(name = "NoiDung", columnDefinition = "longblob")
-    private byte[] NoiDung;
+    @Column(name = "noi_dung")
+    private byte[] noiDung;
 
-    @Column(name = "NgayDang")
-    private LocalDateTime NgayDang;
+    @Column(name = "ngay_dang")
+    private LocalDateTime ngayDang;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private user user;
 
-    @OneToMany(mappedBy = "chuong")
-    private Set<Truyen> truyens;
+
+
+    @OneToMany(mappedBy = "chuong", fetch = FetchType.LAZY)
+    private Set<user> users;
+
+
+
 }

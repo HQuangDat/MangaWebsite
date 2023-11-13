@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
+        
         return new CustomUserDetailService();
     }
     @Bean
@@ -41,7 +42,7 @@ public class SecurityConfig {
                         .permitAll()
                        .requestMatchers( "/manga/edit", "/manga/delete")
                         .hasAnyAuthority("ADMIN","CTV")
-                        .requestMatchers("/manga", "/manga/add")
+                        .requestMatchers("/manga", "/manga/add","/admin")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
@@ -50,6 +51,11 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
+                        .permitAll()
+                )
+                .formLogin(formLogin -> formLogin.loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .rememberMe(rememberMe -> rememberMe.key("uniqueAndSecret")

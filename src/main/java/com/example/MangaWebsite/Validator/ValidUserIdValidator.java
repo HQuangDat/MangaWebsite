@@ -1,6 +1,6 @@
 package com.example.MangaWebsite.Validator;
 
-import com.example.MangaWebsite.Model.User;
+import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Validator.annotation.ValidUserId;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
