@@ -19,7 +19,7 @@ public class Chuong {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_truyen" ,referencedColumnName = "id", nullable = false)
-    private truyen truyen;
+    private Truyen truyen;
 
     @Column(name = "ten_chuong")
     private String tenChuong;
@@ -33,12 +33,12 @@ public class Chuong {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private user user;
+    private User user;
 
 
 
-    @OneToMany(mappedBy = "chuong", fetch = FetchType.LAZY)
-    private Set<user> users;
+  /*  @OneToMany(mappedBy = "chuong", fetch = FetchType.LAZY)
+    private Set<User> users;*/
 
 
 
