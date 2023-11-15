@@ -20,9 +20,16 @@ public class UserService {
         userRepository.save(user);
         Long userId = userRepository.getUserIdByUsername(user.getUsername());
         Long roleId = roleRepository.getRoleIdByName("USER");
-        roleId = 0L;
         if (roleId != 0 && userId != 0) {
             userRepository.addRoleToUser(userId, roleId);
         }
+    }
+
+    public void updateUser(User user){
+        userRepository.save(user);
+    }
+
+    public User getUserbyId(Long id){
+        return userRepository.findById(id).orElse(null);
     }
 }
