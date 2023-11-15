@@ -4,25 +4,28 @@ import com.example.MangaWebsite.Model.Truyen;
 import com.example.MangaWebsite.Repository.IMangaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
-public class MangaService {
+public class TruyenService {
     @Autowired
-    private IMangaRepository mangaRepository;
+    private IMangaRepository truyenService;
     public List<Truyen> getAllTruyens(){
-        return mangaRepository.findAll();
+        return truyenService.findAll();
     }
     public Truyen getTruyenById(Long id){
-        return mangaRepository.findById(id).orElse(null);
+        return truyenService.findById(id).orElse(null);
     }
+    public List<Truyen> getTruyensByUserId(Long userId){return truyenService.findAllById(userId);};
+
     public void addTruyen(Truyen truyen){
-        mangaRepository.save(truyen);
+        truyenService.save(truyen);
     }
     public void updateTruyen(Truyen truyen){
-        mangaRepository.save(truyen);
+        truyenService.save(truyen);
     }
     public void deleteTruyen(Long id){
-        mangaRepository.deleteById(id);
+        truyenService.deleteById(id);
     }
 }

@@ -1,11 +1,13 @@
 package com.example.MangaWebsite.Model;
 
+import com.example.MangaWebsite.Entity.Role;
 import com.example.MangaWebsite.Entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -35,7 +37,15 @@ public class Chuong {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
+    public Chuong() {
+    }
 
+    public Chuong(String tenChuong, LocalDateTime ngayDang, User user,Truyen truyen) {
+        this.tenChuong = tenChuong;
+        this.ngayDang = ngayDang;
+        this.user = user;
+        this.truyen = truyen;
+    }
 
   /*  @OneToMany(mappedBy = "chuong", fetch = FetchType.LAZY)
     private Set<User> users;*/

@@ -1,6 +1,7 @@
 package com.example.MangaWebsite.Entity;
 
 import com.example.MangaWebsite.Model.Chuong;
+import com.example.MangaWebsite.Model.Chuong_User;
 import com.example.MangaWebsite.Model.Truyen;
 import com.example.MangaWebsite.Validator.annotation.ValidUsername;
 import jakarta.persistence.*;
@@ -69,4 +70,6 @@ public class User {
     private Set<Chuong> chuongs;
     @OneToMany(mappedBy = "user")
     private Set<Truyen> truyens;
+    @OneToMany(mappedBy = "user")
+    private Set<Chuong_User> chuong_users;
 }

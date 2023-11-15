@@ -4,7 +4,9 @@ import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Validator.annotation.ValidUserId;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -20,9 +22,6 @@ public class Truyen {
     @ValidUserId
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "chuong_id")
-    private Chuong chuong;
 
     @Column(name = "SoChuong",nullable = true)
     private int SoChuong;
@@ -36,6 +35,12 @@ public class Truyen {
 
     @Column(name = "so_cmt",nullable = true)
     private int SoCmt;
+    @Column(name = "mieu_ta")
+    private String moTaNoiDung;
+
+    @Getter
+    @Column(name = "avatar_url")
+    private byte[] avatar;
 
     @ManyToOne
     @JoinColumn(name = "premium_id",nullable = true)
@@ -47,10 +52,17 @@ public class Truyen {
     @Column(name = "tac_gia",nullable = true)
     private  String TacGia;
 
+    @Column(name = "ngay_dang")
+    private LocalDateTime ngayDang;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ValidUserId
     private  User user;
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
 
     @OneToMany(mappedBy = "truyen")
     private Set<User> users;
