@@ -37,7 +37,7 @@ public class SecurityConfig {
             Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/css/**", "/js/**", "/", "/Register",
+                        .requestMatchers( "/css/**", "/js/**", "/", "/Register","/Profile",
                                 "/error","/img/**")
                         .permitAll()
                        .requestMatchers( "/manga/edit", "/manga/delete")
