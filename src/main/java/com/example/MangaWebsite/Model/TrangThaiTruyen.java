@@ -2,6 +2,8 @@ package com.example.MangaWebsite.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -15,8 +17,13 @@ public class TrangThaiTruyen {
 
 
     @Column(name = "TenTrangThai")
+    @Getter
+    @Setter
     private String tentrangthai;
     @OneToMany(mappedBy = "trangThaiTruyenid")
     private Set<Truyen> truyens;
+
+
+
 
 }

@@ -66,14 +66,14 @@
                     <a href="../Admin/chuyen-muc.html"> <i class="menu-icon fa fa-list-ol"></i>Chuyên mục </a>
                 </li>
                 <li>
-                    <a href="../truyen/add.html"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
+                    <a href="../truyen/add"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
                 </li>
                 <li>
-                    <a href="../truyen/add-chuong.html"> <i class="menu-icon fa fa-pencil"></i>Đăng chương</a>
+                    <a href="../truyen/add-chuong"> <i class="menu-icon fa fa-pencil"></i>Đăng chương</a>
                 </li>
 
                 <li>
-                    <a href="../truyen/list.html"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
+                    <a href="../truyen/list"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
                 </li>
                 <li class="menu-title">Quản lý dịch vụ</li><!-- /.menu-title -->
 
@@ -264,7 +264,13 @@
 
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label class="form-control-label">Thời gian đăng truyện</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-clock"></i></div>
+                                            <input type="text" class="form-control" id="thoiGianDang" readonly />
+                                        </div>
+                                    </div>
                                     <button type="submit" class="btn btn-outline-success" name="themsanpham" id="themtruyen">Thêm</button>
                                 </form>
                             </div>
@@ -330,52 +336,21 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 
-    <!--Script Đẩy truyện lên database-->
-<!--script>
-    // Lấy thông tin truyện từ các phần tử HTML
-    const tacgia = document.getElementById("tacgia").value;
-    const tentruyen = document.getElementById("tentruyen").value;
-    const tinhtrang = document.getElementById("tinhtrang").value;
-    const loaitruyen = document.getElementById("loaitruyen").value;
-    const avatarInput = document.getElementById("avatar");
-    const noidungtruyen = document.getElementById("noidungtruyen").value;
+<script>
+    // JavaScript để tự động đếm thời gian và hiển thị trên trường input
+    var thoiGianDangInput = document.getElementById('thoiGianDang');
 
-    // Tạo đối tượng FormData và thêm dữ liệu vào đó
-    const formData = new FormData();
-    formData.append("tacgia", tacgia);
-    formData.append("tentruyen", tentruyen);
-    formData.append("tinhtrang", tinhtrang);
-    formData.append("loaitruyen", loaitruyen);
-    formData.append("noidungtruyen", noidungtruyen);
-
-    // Thêm avatar nếu đã chọn file
-    if (avatarInput.files.length > 0) {
-        formData.append("avatar", avatarInput.files[0]);
+    function updateThoiGianDang() {
+        var now = moment().utcOffset(7); // Thiết lập múi giờ cho Hà Nội (UTC+7)
+        var formattedDate = now.format('YYYY-MM-DD | HH:mm'); // Định dạng theo yyyy-MM-ddTHH:mm
+        thoiGianDangInput.value = formattedDate;
     }
 
-    // Sử dụng Fetch API để gửi dữ liệu lên server
-    fetch("admin/truyen/add", {
-        method: "POST",
-        body: formData,
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Thêm truyện thất bại!");
-            }
-        })
-        .then(data => {
-            // Xử lý phản hồi từ server (nếu cần)
-            alert("Đã thêm truyện thành công!");
-        })
-        .catch(error => {
-            // Xử lý lỗi
-            alert(error.message);
-        });
+    // Gọi hàm update mỗi phút
+    setInterval(updateThoiGianDang, 60000);
+
+    // Gọi hàm lần đầu để hiển thị giá trị ban đầu
+    updateThoiGianDang();
 </script>
-
-<Local Stuff-->
-
 </body>
 </html>

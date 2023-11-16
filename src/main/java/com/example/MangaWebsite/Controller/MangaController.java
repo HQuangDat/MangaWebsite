@@ -1,7 +1,6 @@
 package com.example.MangaWebsite.Controller;
 
 import com.example.MangaWebsite.Model.Category;
-import com.example.MangaWebsite.Model.TrangThaiTruyen;
 import com.example.MangaWebsite.Model.Truyen;
 import com.example.MangaWebsite.Service.CategoryService;
 import com.example.MangaWebsite.Service.TruyenService;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -123,7 +122,7 @@ public String   AddTruyenForm(Model model) {
             }
             // Đặt danh mục trong đối tượng truyen
             truyen.setCategory(selectedCategory);
-
+            truyen.setNgayDang(LocalDateTime.now());
             // Lưu dữ liệu vào cơ sở dữ liệu bằng MangaService
             truyenService.addTruyen(truyen);
 

@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 
 import java.sql.Date;
 import java.util.HashSet;
@@ -35,6 +36,7 @@ public class User {
     @Column(name = "displayname", length = 200, nullable = false)
     @NotBlank(message = "Display name must be required")
     @Size(max = 200,message = "Display name must less than 200 characters")
+    @Getter
     private String displayname;
 
     @Column(name = "CCCD", length = 13)
