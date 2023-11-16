@@ -63,7 +63,7 @@
                 </li>
                 <li class="menu-title">Quản lý chuyên mục</li><!-- /.menu-title -->
                 <li>
-                    <a href="chuyen-muc.html"> <i class="menu-icon fa fa-list-ol"></i>Chuyên mục </a>
+                    <a href="../Admin/chuyen-muc.html"> <i class="menu-icon fa fa-list-ol"></i>Chuyên mục </a>
                 </li>
                 <li>
                     <a href="../truyen/add.html"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
@@ -81,18 +81,18 @@
                 <li class="menu-title">Thành viên</li><!-- /.menu-title -->
 
                 <li>
-                    <a href="quan-tri-vien.html"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
+                    <a href="../Admin/quan-tri-vien.html"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
                 </li>
                 <li>
-                    <a href="cong-tac-vien.html"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
+                    <a href="../Admin/cong-tac-vien.html"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
                 </li>
                 <li>
-                    <a href="thanh-vien.html"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
+                    <a href="../Admin/thanh-vien.html"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
                 </li>
                 <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
 
                 <li>
-                    <a href="lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
+                    <a href="../Admin/lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
                 </li>
 
             </ul>
@@ -216,8 +216,8 @@
                                 <strong>Đăng Truyện</strong>
                             </div>
                             <div class="card-body card-block">
-                                <form method="POST" enctype="multipart/form-data" th:action="@{truyen/add}">
-                                    <div class="form-group">
+                                <form method="POST" enctype="multipart/form-data" th:action="@{/admin/truyen/add}">
+                                <div class="form-group">
                                         <label class="form-control-label">Tên Truyện</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -236,34 +236,13 @@
                                             </label>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
-                                        <label class="form-control-label">Tình Trạng</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-star"></i></div>
-                                            <label>
-                                                <input class="form-control" th:field="${truyen.trangThaiTruyen}" />
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
+                                        <label class="form-control-label">Thể Loại Truyện</label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="ti-dropbox-alt"></i></div>
-                                            <label class="form-control-label">Thể Loại Truyện</label><label
-                                                for="loaitruyen"></label><select name="loaitruyen" id="loaitruyen" class="form-control" th:field="${truyen.category}">
+                                            <select name="category" id="category" class="form-control" th:field="${truyen.category.id}">
                                                 <option value="">Chọn Loại Truyện</option>
-                                                <!-- Các option khác -->
-                                                <option value="">Chọn Loại Truyện</option>
-                                                <option name="loaitruyen"  value="1">Drama</option>
-                                                <option name="loaitruyen"  value="2">Acction</option>
-                                                <option name="loaitruyen"  value="3">Fantasy</option>
-                                                <option name="loaitruyen"  value="5">Advanture</option>
-                                                <option name="loaitruyen"  value="6">Anime</option>
-                                                <option name="loaitruyen"  value="7">Chuyển Sinh</option>
-                                                <option name="loaitruyen"  value="8">Comedy</option>
-                                                <option name="loaitruyen"  value="9">Harem</option>
-
+                                                <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.tenTheLoai}"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -279,9 +258,10 @@
 
                                     <div class="form-group">
                                         <label class="form-control-label">Hình ảnh bìa truyện</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="ti-image"></i></div>
-                                            <input type="file" name="files[]" id="avatar" multiple th:field="${truyen.avatar}" />
+
+                                            <div class="form-group">
+                                                <input type="file" id="avatar" name="avatar" accept="image/*">
+
                                         </div>
                                     </div>
 
@@ -289,6 +269,7 @@
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

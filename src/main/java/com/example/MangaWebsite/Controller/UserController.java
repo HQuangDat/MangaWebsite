@@ -2,11 +2,9 @@ package com.example.MangaWebsite.Controller;
 
 import com.example.MangaWebsite.Entity.CustomUserDetail;
 import com.example.MangaWebsite.Entity.User;
-import com.example.MangaWebsite.Repository.IUserRepository;
 import com.example.MangaWebsite.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

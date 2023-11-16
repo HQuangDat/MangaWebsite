@@ -5,6 +5,7 @@ import com.example.MangaWebsite.Validator.annotation.ValidUserId;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -19,16 +20,24 @@ public class Truyen {
 
     @ManyToOne
     @JoinColumn(name = "caterory_id" ,referencedColumnName = "id")
-    @ValidUserId
     private Category category;
 
 
     @Column(name = "SoChuong",nullable = true)
     private int SoChuong;
 
-    @ManyToOne
-    @JoinColumn(name = "manga_status_id")
-    private TrangThaiTruyen trangThaiTruyen;
+    // Đặt giá trị mặc định cho trangThaiTruyenid là 1 khi tạo mới đối tượng Truyen
+// Giả sử 1 là giá trị mặc định bạn muốn set
+        @ManyToOne
+        @JoinColumn(name = "manga_status_id")
+        private TrangThaiTruyen trangThaiTruyenid ;
+
+    public Truyen() {
+        // Tạo một đối tượng TrangThaiTruyen với id là 1 và set làm giá trị mặc định cho trangThaiTruyenid
+        this.trangThaiTruyenid = new TrangThaiTruyen();
+        this.trangThaiTruyenid.setId(1L);
+    }
+
 
     @Column(name = "so_like",nullable = true)
     private int SoLike;
@@ -38,9 +47,15 @@ public class Truyen {
     @Column(name = "mieu_ta")
     private String moTaNoiDung;
 
-    @Getter
+
     @Column(name = "avatar_url")
-    private byte[] avatar;
+    private String avatarFileName;
+
+    @Transient
+    private transient MultipartFile avatarFile;
+
+    @Transient
+    private String avatarFilePath;
 
     @ManyToOne
     @JoinColumn(name = "premium_id",nullable = true)
@@ -60,10 +75,9 @@ public class Truyen {
     @ValidUserId
     private  User user;
 
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
-    }
 
     @OneToMany(mappedBy = "truyen")
     private Set<User> users;
+
+
 }

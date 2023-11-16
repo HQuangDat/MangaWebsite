@@ -11,11 +11,12 @@ import java.util.Set;
 public class TrangThaiTruyen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id ;
+
 
     @Column(name = "TenTrangThai")
-    private String TenTrangThai;
-
-    @OneToMany(mappedBy = "trangThaiTruyen")
+    private String tentrangthai;
+    @OneToMany(mappedBy = "trangThaiTruyenid")
     private Set<Truyen> truyens;
+
 }
