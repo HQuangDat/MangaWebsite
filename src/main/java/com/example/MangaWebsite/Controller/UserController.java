@@ -105,8 +105,27 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public String editform(@ModelAttribute("user") User user){
-        userService.updateUser(user);
-        return "redirect:/Profile";
+    public String editform(@ModelAttribute("user") User updatedUser) {
+        User existingUser = userService.getUserbyId(updatedUser.getId());
+
+        if (existingUser != null) {
+            if (updatedUser.getCCCD() != null) {
+                existingUser.setCCCD(updatedUser.getCCCD());
+            }
+            if (updatedUser.getSDT() != null) {
+                existingUser.setSDT(updatedUser.getSDT());
+            }
+            if (updatedUser.getNgaysinh() != null) {
+                existingUser.setNgaysinh(updatedUser.getNgaysinh());
+            }
+            if (updatedUser.getDisplayname() != null) {
+                existingUser.setDisplayname(updatedUser.getDisplayname());
+            }
+
+            userService.updateUser(existingUser);
+            return "redirect:/profile";
+        } else {
+            return "redirect:/error";
+        }
     }
 }
