@@ -1,5 +1,6 @@
 package com.example.MangaWebsite.Controller;
 
+import com.example.MangaWebsite.Entity.CustomUserDetail;
 import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Repository.IUserRepository;
 import com.example.MangaWebsite.Service.UserService;
@@ -17,7 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -65,5 +69,44 @@ public class UserController {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userService.save(user);
         return "redirect:/login";
+    }
+
+    //Profile
+
+
+    @GetMapping("/profile")
+    public String showUserProfile(Model model, Authentication authentication) {
+        CustomUserDetail userDetails = (CustomUserDetail) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        User user = userService.getUserbyId(userId);
+
+        if (user != null) {
+            model.addAttribute("user", user);
+            return "/Profile";
+        } else {
+            return "redirect:/error";
+        }
+    }
+
+
+
+    //edit
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model){
+        Optional<User> editUser = Optional.ofNullable(userService.getUserbyId(id));
+
+        if (editUser.isPresent()) {
+            User user = editUser.get();
+            model.addAttribute("user", user);
+            return "/EditUser";
+        }
+        else
+            return "redirect:/error";
+    }
+
+    @PostMapping("/edit")
+    public String editform(@ModelAttribute("user") User user){
+        userService.updateUser(user);
+        return "redirect:/Profile";
     }
 }

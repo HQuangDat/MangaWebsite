@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html id="ctl00_Html1" lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html id="ctl00_Html1" lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
    <head id="ctl00_Head1">
       <meta property="fb:app_id" content="552913042834971"/>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -390,7 +392,7 @@
          </nav>
          <main class="main">
             <div class="container" style="max-width:1030px">
-               <div class="notify_block" style="margin:0;margin-bottom:10px;border-radius:0">
+               <div class="notify_block" style="margin:0;margin-bottom:10px;border-radius:0" sec:authorize="!isAuthenticated()">
                   <div class="info">
                      <em class="fa fa-info-circle"></em>
                   </div>
