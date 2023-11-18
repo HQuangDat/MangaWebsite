@@ -32,6 +32,13 @@
       <link rel="stylesheet" type="text/css" href="css/font-manga.min.css"/>
       <link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
       <link rel="stylesheet" type="text/css" href="css/mystyle.css"/>
+      <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
+
+      <script th:src="@{https://code.jquery.com/jquery-3.5.1.min.js}"></script>
+      <script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js}"></script>
+      <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+
       <script type="application/ld+json">
          {"@context": "http://schema.org","@type": "ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://nettruyen.live/truyen-tranh/one-piece-128"},{"@type":"ListItem","position":2,"url":"https://nettruyen.live/truyen-tranh/vo-luyen-dinh-phong-3926"},{"@type":"ListItem","position":3,"url":"https://nettruyen.live/truyen-tranh/tong-tai-tai-thuong-4979"},{"@type":"ListItem","position":4,"url":"https://nettruyen.live/truyen-tranh/danh-mon-chi-ai-8077"},{"@type":"ListItem","position":5,"url":"https://nettruyen.live/truyen-tranh/onepunch-man-244"},{"@type":"ListItem","position":6,"url":"https://nettruyen.live/truyen-tranh/that-hinh-dai-toi-740"},{"@type":"ListItem","position":7,"url":"https://nettruyen.live/truyen-tranh/black-clover-the-gioi-phep-thuat-499"},{"@type":"ListItem","position":8,"url":"https://nettruyen.live/truyen-tranh/co-vo-ngot-ngao-co-chut-bat-luong-2000163642"},{"@type":"ListItem","position":9,"url":"https://nettruyen.live/truyen-tranh/jujutsu-kaisen-chu-thuat-hoi-chien-5058"},{"@type":"ListItem","position":10,"url":"https://nettruyen.live/truyen-tranh/naruto-197"},{"@type":"ListItem","position":11,"url":"https://nettruyen.live/truyen-tranh/toan-chuc-phap-su-4140"},{"@type":"ListItem","position":12,"url":"https://nettruyen.live/truyen-tranh/thien-tai-bong-da-tien-dao-so-1-14899"}]}
       </script>
@@ -43,6 +50,72 @@
          height: 200px;
          border-width: 0px;
          }
+         .navbar .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            border-radius: 4px;
+            border-color: #e5e5e5;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+         }
+
+         .navbar .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+         }
+
+         .navbar .dropdown-menu a {
+            color: #333;
+            padding: 12px 20px;
+            line-height: normal;
+            font-size: 16px;
+            display: block;
+            transition: all 0.3s ease;
+         }
+
+         .navbar .nav-item.dropdown .nav-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            color: #212121;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            outline: none;
+         }
+
+         .navbar .nav-item.dropdown .nav-link:hover,
+         .navbar .nav-item.dropdown .nav-link:focus {
+            background-color: #d0d0d0;
+            color: #000;
+         }
+
+         .material-design-dropdown {
+            padding: 0.5rem 1rem;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            color: #212121;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            outline: none;
+            border: none;
+            cursor: pointer;
+         }
+
+         .material-design-dropdown:hover,
+         .material-design-dropdown:focus {
+            background-color: #d0d0d0;
+            color: #000;
+            transform: translateY(-2px);
+         }
+
+
       </style>
       <script type="application/ld+json">
          {"@context": "http://schema.org","@type": "WebSite","url": "https://nettruyen.live","potentialAction": {"@type": "SearchAction","target": "https://nettruyen.live/tim-truyen?keyword={search_term_string}","query-input": "required name=search_term_string"}} 
@@ -127,25 +200,34 @@
                   </script>
                   <ul class="nav-account list-inline hidden-xs pull-right">
 <!--                     Kiem tra User co dang nhap hay chua-->
-                     <li sec:authorize="isAuthenticated()">
-                        <a>Xin chào!  </a>
-                        <a th:text="${#authentication.name}"></a>
-                        <a sec:authorize="hasAuthority('ADMIN')"> || </a>
-                        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}">Quản lý</a>
-                        <a> || </a>
-                        <a th:href="@{/profile}">Profile</a>
-                        <a> || </a>
-                        <a th:href="@{/logout}">Đăng xuất</a>
+<!--                     <li sec:authorize="isAuthenticated()">-->
+<!--                        <a>Xin chào!  </a>-->
+<!--                        <a th:text="${#authentication.name}"></a>-->
+<!--                        <a sec:authorize="hasAuthority('ADMIN')"> || </a>-->
+<!--                        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}">Quản lý</a>-->
+<!--                        <a> || </a>-->
+<!--                        <a th:href="@{/profile}">Profile</a>-->
+<!--                        <a> || </a>-->
+<!--                        <a th:href="@{/logout}">Đăng xuất</a>-->
+<!--                     </li>-->
+                     <li th:if="${#authorization.expression('isAuthenticated()')}" class="nav-item dropdown">
+                        <button class="nav-link dropdown-toggle material-design-dropdown" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false" disabled>
+                           <span class="username" th:text="${#authentication.name}"></span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                           <a th:href="@{/profile}" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+                           <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" th:href="@{/admin}" class="dropdown-item"><i class="fa fa-user-o"></i> Quản lý</a>
+                           <div class="dropdown-divider"></div>
+                           <a th:href="@{/logout}" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                        </div>
                      </li>
-                     <li sec:authorize="!isAuthenticated()">
-                        <a th:href="@{/login}">Đăng nhập</a>
-                        <a> / </a>
-                     </li>
-                     <li sec:authorize="!isAuthenticated()">
-                        <a th:href="@{/Register}">Đăng ký</a>
-                     </li>
+                     <th:block th:if="${#authorization.expression('!isAuthenticated()')}">
+                        <li class="nav-item">
+                           <a th:href="@{/login}" class="btn btn-primary rounded-pill px-4 mr-3">Đăng nhập</a>
+                           <a th:href="@{/Register}" class="btn btn-outline-primary rounded-pill px-4">Đăng ký</a>
+                        </li>
+                     </th:block>
                   </ul>
-               </div>
             </div>
          </header>
          <nav class="main-nav hidden-xs" id="mainNav">

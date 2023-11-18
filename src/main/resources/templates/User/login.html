@@ -93,14 +93,12 @@
                             } else
                                 toggleDarkObj[_0xcca4[18]] && toggleDarkObj[_0xcca4[18]][_0xcca4[19]](toggleDarkObj);
                         </script>
-                        <ul class="nav-account list-inline hidden-xs pull-right">
-                            <li class="login-link">
-                                <a rel="nofollow" th:href="@{/login}">Đăng nhập</a>
+                        <th:block th:if="${#authorization.expression('!isAuthenticated()')}">
+                            <li class="nav-item">
+                                <a th:href="@{/login}" class="btn btn-primary rounded-pill px-4 mr-3">Đăng nhập</a>
+                                <a th:href="@{/Register}" class="btn btn-outline-primary rounded-pill px-4">Đăng ký</a>
                             </li>
-                            <li class="register-link">
-                                <a rel="nofollow" th:href="@{/Register}">Đăng ký</a>
-                            </li>
-                        </ul>
+                        </th:block>
                     </div>
                 </div>
             </header>
