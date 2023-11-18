@@ -77,10 +77,12 @@ public class UserController {
         CustomUserDetail userDetails = (CustomUserDetail) authentication.getPrincipal();
         Long userId = userDetails.getId();
         User user = userService.getUserbyId(userId);
+        String[] role = userService.getUserRolebyId(userId);
 
         if (user != null) {
             model.addAttribute("user", user);
-            return "/Profile";
+            model.addAttribute("role", role);
+            return "User/Profile";
         } else {
             return "redirect:/error";
         }

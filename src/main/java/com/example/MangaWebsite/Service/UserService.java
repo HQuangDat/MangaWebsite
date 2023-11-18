@@ -32,4 +32,6 @@ public class UserService {
     public User getUserbyId(Long id){
         return userRepository.findById(id).orElse(null);
     }
+
+    public String[] getUserRolebyId(Long id){return userRepository.getRolesOfUser(id);}
 }
