@@ -53,18 +53,18 @@ public class MangaController {
     }
 
 // Hiển thị trang thêm truyện (GET)
-@GetMapping("/add")
-public String   AddTruyenForm(Model model) {
-    // Tạo một đối tượng Truyen để binding với form
-    Truyen truyen = new Truyen();
+    @GetMapping("/add")
+    public String   AddTruyenForm(Model model) {
+        // Tạo một đối tượng Truyen để binding với form
+        Truyen truyen = new Truyen();
 
-    // Truyền đối tượng Truyen và danh sách các danh mục vào model
-    model.addAttribute("truyen", truyen);
-    model.addAttribute("categories", categoryService.getAllCategories());
+        // Truyền đối tượng Truyen và danh sách các danh mục vào model
+        model.addAttribute("truyen", truyen);
+        model.addAttribute("categories", categoryService.getAllCategories());
 
-    // Trả về tên view (thường là tên của trang thêm truyện)
-    return "truyen/add";
-}
+        // Trả về tên view (thường là tên của trang thêm truyện)
+        return "truyen/add";
+    }
     @PostMapping("/add")
     public ResponseEntity<String> addTruyen(@ModelAttribute("truyen") @Valid Truyen truyen,
                                             @RequestParam("avatar") MultipartFile avatarFile,

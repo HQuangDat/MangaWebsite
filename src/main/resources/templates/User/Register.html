@@ -2,7 +2,24 @@
 <html id="ctl00_Html1" lang="vi"
       xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+         function showSuccessNotification() {
+            Swal.fire({
+               icon: 'success',
+               title: 'Success!',
+               text: 'Your operation was successful.',
+               showConfirmButton: false,
+               timer: 2000
+            }).then((result) => {
+               if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                  const form = document.getElementById('RegisterForm');
 
+                  form.submit();
+               }
+            });
+         }
+      </script>
 >
    <head id="ctl00_Head1">
       <meta property="fb:app_id" content="552913042834971"/>
@@ -40,6 +57,24 @@
          }
       </style>
       <meta name="apple-itunes-app" content="app-id=6446489911, app-argument=">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+         function showSuccessNotification() {
+            Swal.fire({
+               icon: 'success',
+               title: 'Success!',
+               text: 'Your operation was successful.',
+               showConfirmButton: false,
+               timer: 2000
+            }).then((result) => {
+               if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                  const form = document.getElementById('Register');
+
+                  form.submit();
+               }
+            });
+         }
+      </script>
    </head>
    <body id="ctl00_Body" class=" vi-vn site1">
       <form method="post" id="aspnetForm" enctype="multipart/form-data">
@@ -422,7 +457,7 @@
                   <div class="col-sm-offset-3 col-sm-6">
                      <div class="user-page clearfix">
                         <h1 class="postname"> Đăng ký tài khoản </h1>
-                        <form th:action="@{/Register}" th:object="${user}" method="post">
+                        <form id="RegisterForm" th:action="@{/Register}" th:object="${user}" method="post">
                            <div id="ctl00_mainContent_login1_LoginCtrl_pnlLContainer" class="signup-wrapper">
                               <div class="form-group">
                                  <label for="username" class="control-label">Username</label>
@@ -455,7 +490,7 @@
                               </div>
                               <div class="login-action">
                                  <div class="form-group">
-                                    <input type="submit" value="Đăng ký" id="ctl00_mainContent_login1_LoginCtrl_Login" tabindex="10" class="btn btn-primary">
+                                    <input onclick="showSuccessNotification()" type="submit" value="Đăng ký" id="ctl00_mainContent_login1_LoginCtrl_Login" tabindex="10" class="btn btn-primary">
                                  </div>
                               </div>
                            </div>

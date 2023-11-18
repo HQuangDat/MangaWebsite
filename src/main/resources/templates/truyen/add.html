@@ -31,6 +31,26 @@
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+<!--    Sweet Alert 2(hiện thông báo)-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showSuccessNotification() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your operation was successful.',
+                showConfirmButton: false,
+                timer: 2000
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                    const form = document.getElementById('AddForm');
+
+                    form.submit();
+                }
+            });
+        }
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     /*<![CDATA[*/
     $(document).ready(function() {
@@ -216,7 +236,7 @@
                                 <strong>Đăng Truyện</strong>
                             </div>
                             <div class="card-body card-block">
-                                <form method="POST" enctype="multipart/form-data" th:action="@{/admin/truyen/add}">
+                                <form id="AddForm" method="POST" enctype="multipart/form-data" th:action="@{/admin/truyen/add}">
                                 <div class="form-group">
                                         <label class="form-control-label">Tên Truyện</label>
                                         <div class="input-group">
@@ -271,7 +291,7 @@
                                             <input type="text" class="form-control" id="thoiGianDang" readonly />
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-outline-success" name="themsanpham" id="themtruyen">Thêm</button>
+                                    <button onclick="showSuccessNotification()" type="submit" class="btn btn-outline-success" name="themsanpham" id="themtruyen">Thêm</button>
                                 </form>
                             </div>
                         </div>

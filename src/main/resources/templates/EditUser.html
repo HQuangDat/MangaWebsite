@@ -7,6 +7,24 @@
     <title>Edit User</title>
     <link rel='stylesheet' th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showSuccessNotification() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your operation was successful.',
+                showConfirmButton: false,
+                timer: 2000
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                    const form = document.getElementById('EditForm');
+
+                    form.submit();
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -61,7 +79,7 @@
                 <div class="col-lg-8">
 <!--                    Profile info-->
                     <div class="card">
-                        <form class="card-body" th:action="@{/edit}" th:object="${user}" th:method="post">
+                        <form id="EditForm" class="card-body" th:action="@{/edit}" th:object="${user}" th:method="post">
                             <input type="hidden" th:field="*{id}" th:value="${user.id}" />
                             <div class="row mb-3">
                                 <div class="col-sm-3">
@@ -100,7 +118,7 @@
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="submit" class="btn btn-primary px-4" value="Save Changes">
+                                    <input onclick="showSuccessNotification()" type="button" class="btn btn-primary px-4" value="Save Changes">
                                 </div>
                             </div>
                         </form>
