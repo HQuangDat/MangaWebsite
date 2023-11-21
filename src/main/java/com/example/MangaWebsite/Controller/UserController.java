@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("user", new User());
-        return "User/login";
+        return "User/login2";
     }
 
     @GetMapping("/logout")
@@ -47,7 +47,7 @@ public class UserController {
             return "redirect:/";
         } else {
             model.addAttribute("loginError", "Invalid username or password");
-            return "User/login";
+            return "User/login2";
         }
     }
 
@@ -56,17 +56,17 @@ public class UserController {
     @GetMapping("/Register")
     public String register(Model model){
         model.addAttribute("user", new User());
-        return "User/Register";
+        return "User/signup";
     }
     @PostMapping("/Register")
     public String register(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField() + "_error",error.getDefaultMessage()));
-            return "User/Register";
+            return "User/signup";
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userService.save(user);
-        return "redirect:/login";
+        return "redirect:/login2";
     }
 
     //Profile
