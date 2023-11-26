@@ -10,22 +10,23 @@ import java.util.List;
 @Service
 public class TruyenService {
     @Autowired
-    private IMangaRepository truyenService;
+    private IMangaRepository truyenRepository;
     public List<Truyen> getAllTruyens(){
-        return truyenService.findAll();
+        return truyenRepository.findAll();
     }
     public Truyen getTruyenById(Long id){
-        return truyenService.findById(id).orElse(null);
+        return truyenRepository.findById(id).orElse(null);
     }
-    public List<Truyen> getTruyensByUserId(Long userId){return truyenService.findAllById(userId);};
+    public List<Truyen> getTruyensByUserId(Long userId){return truyenRepository.findAllById(userId);};
 
     public void addTruyen(Truyen truyen){
-        truyenService.save(truyen);
+        truyenRepository.save(truyen);
     }
     public void updateTruyen(Truyen truyen){
-        truyenService.save(truyen);
+        truyenRepository.save(truyen);
     }
     public void deleteTruyen(Long id){
-        truyenService.deleteById(id);
+        truyenRepository.deleteById(id);
     }
+
 }

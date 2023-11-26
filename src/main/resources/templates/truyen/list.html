@@ -228,7 +228,7 @@ $(document).ready(function() {
                                         <td th:if="${truyen.trangThaiTruyenid != null}" th:text="${truyen.trangThaiTruyenid.tentrangthai}"></td>
                                         <td th:text="${#temporals.format(truyen.ngayDang, 'dd-MM-yyyy HH:mm')}"></td>
 
-                                        <td th:text="${truyen.user != null ? truyen.user.displayname : 'Unknown'}"></td>
+                                        <td th:text="${truyen.user.displayname != null ? truyen.user.displayname : 'Unknown'}"></td>
                                         <td>
                                             <img th:src="@{'/imgtaive/' + ${truyen.avatarFileName}}" alt="Avatar" style="width: 50px; height: 50px;">
                                         </td>
@@ -260,7 +260,7 @@ $(document).ready(function() {
                         Copyright &copy; 2023 Admin Cpanel
                     </div>
                     <div class="col-sm-6 text-right">
-                        Designed by <a href="https://facebook.com/quangmaster321">Huynh Can</a>
+                        Designed by <a href="https://facebook.com/">Huynh Can</a>
                     </div>
                 </div>
             </div>

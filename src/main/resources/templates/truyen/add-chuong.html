@@ -1,13 +1,19 @@
-
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin Cpanel TMQ</title>
+
     <meta name="description" content="Admin Cpanel TMQ">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="/admin/images/favicon.png">
-    <link rel="shortcut icon" href="/admin/images/favicon.png">
+    <link rel="apple-touch-icon" href="">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" th:href="@{/css/admin/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/style.css}">
+
+    <!-- External CSS files -->
     <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
     <link rel="stylesheet" href="/css/admin/style.css">
 
@@ -17,35 +23,44 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="/admin/assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="/admin/assets/css/style.css">
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
+
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/scss/mixins/_alert.scss" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-   <script src="/ckeditor/ckeditor/ckeditor.js" type="text/javascript" ></script>
-<script>
-$(document).ready(function() {
-	// get current URL path and assign 'active' class
-	var pathname = window.location.pathname;
-	$('.nav navbar-nav > li > a[href="'+pathname+'"]').parent().addClass('active');
-})
-</script>
-</script>
-   <style>
-    #weatherWidget .currentDesc {
-        color: #ffffff!important;
-    }
-        .traffic-chart {
-            min-height: 335px;
+
+    <!--    Sweet Alert 2(hiện thông báo)-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showSuccessNotification() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your operation was successful.',
+                showConfirmButton: false,
+                timer: 2000
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                    const form = document.getElementById('AddForm');
+
+                    form.submit();
+                }
+            });
         }
-        #flotPie1  {
-            height: 150px;
-        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    /*<![CDATA[*/
+    $(document).ready(function() {
+    var pathname = window.location.pathname;
+    $('.nav navbar-nav > li > a[href="'+pathname+'"]').parent().addClass('active');
+    });
+    /*]]>*/
+
+    <style>
+
         #flotPie1 td {
             padding:3px;
         }
@@ -53,358 +68,296 @@ $(document).ready(function() {
             top: 20px!important;
             right: -10px!important;
         }
-        .chart-container {
-            display: table;
-            min-width: 270px ;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        #flotLine5  {
-             height: 105px;
-        }
-
-        #flotBarChart {
-            height: 150px;
-        }
-        #cellPaiChart{
-            height: 160px;
-        }
 
     </style>
 </head>
 
-<body>
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/admin"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
-                    </li>
-                    <li class="menu-title">Quản lý chuyên mục</li><!-- /.menu-title -->
-                                        <li>
-                        <a href="../Admin/chuyen-muc.html"> <i class="menu-icon fa fa-list-ol"></i>Chuyên mục </a>
-                    </li>
-                    <li>
-                        <a href="add.html"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
-                    </li>
-                     <li>
-                        <a href="add-chuong.html"> <i class="menu-icon fa fa-pencil"></i>Đăng chương</a>
-                    </li>
-                
-                    <li>
-                        <a href="list.html"> <i class="menu-icon  fa  fa-list-alt"></i>Danh sách truyện tranh</a>
-                    </li>   
-                                         <li class="menu-title">Quản lý dịch vụ</li><!-- /.menu-title -->
-                  
-                  
-                    <li class="menu-title">Thành viên</li><!-- /.menu-title -->
+<body th:body>
+<aside  id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div th:fragment="commonAside" id="main-menu" class="main-menu collapse navbar-collapse">
 
-                   <li>
-                        <a href="../Admin/quan-tri-vien.html"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
-                    </li>
-                    <li>
-                        <a href="../Admin/cong-tac-vien.html"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
-                    </li>
-                    <li>
-                        <a href="../Admin/thanh-vien.html"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
-                    </li>   
-                    <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
-                   
-                   <li>
-                        <a href="lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử giao dịch</a>
-                    </li>
-                 
-               
-                     <li class="menu-title">Cài đặt shop</li><!-- /.menu-title -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/admin"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                <li class="menu-title">Quản lý chuyên mục</li><!-- /.menu-title -->
+                <li>
+                    <a href="../Admin/chuyen-muc.html"> <i class="menu-icon fa fa-list-ol"></i>Chuyên mục </a>
+                </li>
+                <li>
+                    <a href="../truyen/add"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
+                </li>
+                <li>
+                    <a href="../truyen/add-chuong"> <i class="menu-icon fa fa-pencil"></i>Đăng chương</a>
+                </li>
 
-                   <li>
-                        <a href=thong-tin.html"> <i class="menu-icon ti-settings"></i>Thông tin shop </a>
-                    </li>
-                     <li>
-                        <a href="quan-ly-banner.html"> <i class="menu-icon ti-settings"></i>Quản Lý Banner</a>
-                    </li>
-                </ul>
-                              </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
-    <!-- /#left-panel -->
-    <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
-        <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../Admin"><img width="25%" src="" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="../Admin"><img src="" alt="Logo"></a>
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-                </div>
+                <li>
+                    <a href="../truyen/list"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
+                </li>
+                <li class="menu-title">Quản lý dịch vụ</li><!-- /.menu-title -->
+
+
+                <li class="menu-title">Thành viên</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="../Admin/quan-tri-vien.html"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
+                </li>
+                <li>
+                    <a href="../Admin/cong-tac-vien.html"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
+                </li>
+                <li>
+                    <a href="../Admin/thanh-vien.html"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
+                </li>
+                <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="../Admin/lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+
+
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../Admin"><img width="25%" src="" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="../Admin"><img src="" alt="Logo"></a>
+                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
-            <div class="top-right">
-                <div class="header-menu">
-                    <div class="header-left">
-                        <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>
+        </div>
+        <div class="top-right">
+            <div class="header-menu">
+                <div class="header-left">
+                    <button class="search-trigger"><i class="fa fa-search"></i></button>
+                    <div class="form-inline">
+                        <form class="search-form">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                            <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
 
-                        <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">3</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-check"></i>
-                                    <p>Server #1 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-info"></i>
-                                    <p>Server #2 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-warning"></i>
-                                    <p>Server #3 overloaded.</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown for-message">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-envelope"></i>
-                                <span class="count bg-primary">0</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <p class="red">Bạn có 0 thư</p>
-                                                       
-                            </div>
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <span class="count bg-danger">3</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                            <p class="red">You have 3 Notification</p>
+                            <a class="dropdown-item media" href="#">
+                                <i class="fa fa-check"></i>
+                                <p>Server #1 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media" href="#">
+                                <i class="fa fa-info"></i>
+                                <p>Server #2 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media" href="#">
+                                <i class="fa fa-warning"></i>
+                                <p>Server #3 overloaded.</p>
+                            </a>
                         </div>
                     </div>
 
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                 <img class="user-avatar rounded-circle" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="User Avatar">
-                                                    </a>
+                    <div class="dropdown for-message">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-envelope"></i>
+                            <span class="count bg-primary">0</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="message">
+                            <p class="red">Bạn có 0 thư</p>
 
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="/profile/info.html"><i class="fa fa- user"></i>My Profile</a>
-
-                         
-
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-                            <a class="nav-link" href="/static"><i class="fa fa-power -off"></i>Về Shop</a>
                         </div>
                     </div>
-
                 </div>
+
+                <div class="user-area dropdown float-right">
+                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="User Avatar">
+                    </a>
+
+                    <div class="user-menu dropdown-menu">
+                        <a class="nav-link" href="/profile/info.html"><i class="fa fa- user"></i>My Profile</a>
+
+
+
+                        <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+
+                        <a class="nav-link" href="/static"><i class="fa fa-power -off"></i>Về Shop</a>
+                    </div>
+                </div>
+
             </div>
-        </header>
-        <!-- /#header -->
+        </div>
+    </header>
+    <!-- /#header -->
 
     <div class="breadcrumbs">
-            <div class="breadcrumbs-inner">
-                <div class="row m-0">
-                    <div class="col-sm-4">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <h1>Dashboard</h1>
-                            </div>
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
                         </div>
                     </div>
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Chuyên mục</a></li>
-                                    <li class="active">Đăng Chương</li>
-                                </ol>
-                            </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Dashboard</a></li>
+                                <li><a href="#">Chuyên mục</a></li>
+                                <li class="active">Đăng Chương</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="content">
-            <div class="animated fadeIn">
 
-                <div class="row">
 
-                    <div class="col-xs-12 col-sm-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong>Đăng chương</strong>
-                            </div>
-                         
-                          
-                            <div class="card-body card-block">
-                                <form method="POST" enctype="multipart/form-data">
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Đăng Chương</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <form id="AddForm" method="POST" enctype="multipart/form-data" th:action="@{/admin/truyen/add-chuong}">
+
                                 <div class="form-group">
-                                    <label class=" form-control-label">Tên Truyện</label>
+                                    <label class="form-control-label">Tên Truyện</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-book"></i></div>
-
-                                        <select name="tentruyen" id="tentruyen" class="form-control" onchange="getTenTruyen()">
-                                            <option value="">Chọn Loại Truyện</option>
-
+                                        <div class="input-group-addon"><i class="ti-dropbox-alt"></i></div>
+                                        <select name="truyen" id="truyenid" class="form-control" th:field="${chuong.truyen.id}">
+                                            <option value="">Chọn Truyện</option>
+                                            <option th:each="tru : ${truyen}" th:value="${tru.id}" th:text="${tru.tenTruyen}"></option>
                                         </select>
 
                                     </div>
-                                  
                                 </div>
-                          
-                                    
-                                
-                                <div class="form-group">
-                                    <label class=" form-control-label">Tên chương</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-bookmark"></i></div>
-                                        <input class="form-control" name="" type="number" id="tenchuong">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Số thứ tự chương</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                        <input class="form-control" name="" type="number" id="sochuong">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Danh Sách Chương</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                        <input class="form-control" name="" type="number" id="">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Nội dung</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="ti-image"></i></div>
-                                     <input type="file" name="files[]" id="files[]" multiple >
-                                  
-                                </div>
-                            
-                        <button type="submit" class="btn btn-outline-success" name="themsanpham" id="themsanpham">Thêm</button>
-                        </form>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-</div><!-- .animated -->
-</div><!-- .content -->
-    <div class="clearfix"></div>
-    
-    
 
-<script src="/js/ajax.js"></script>
-   <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        Copyright &copy; 2023 Admin Cpanel
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        Designed by <a href="https://facebook.com/quangmaster321">Huynh Can</a>
+                                <!-- Thêm trường để nhập tên chương -->
+                                <div class="form-group">
+                                    <label class="form-control-label">Tên Chương</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-font"></i></div>
+                                        <label>
+                                            <input class="form-control" th:field="${chuong.tenChuong}" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Thêm trường để tải lên nội dung chương -->
+                                <div class="form-group">
+                                    <label class="form-control-label">Thời gian đăng chương</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-clock"></i></div>
+                                        <input type="text" class="form-control" id="thoiGianDang" readonly />
+                                    </div>
+                                </div>
+
+                                <!-- Thêm trường để tải lên ảnh chương -->
+                                <div class="form-group">
+                                    <label class="form-control-label">Ảnh Chương</label>
+                                    <div class="form-group">
+                                        <input type="file" id="anhChuong" name="anhChuong" accept="image/*" multiple>
+                                    </div>
+                                </div>
+
+                                <!-- Thêm nút để submit form -->
+                                <button type="submit" class="btn btn-outline-success" name="themchuong" id="themchuong">Thêm Chương</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- /.site-footer -->
+        </div>
     </div>
-    <!-- /#right-panel -->
-
-    <!-- <script src="/admin/assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="/admin/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="/admin/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="/admin/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="/admin/assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="/admin/assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="/admin/assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="/admin/assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="/admin/assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="/admin/assets/js/init/datatables-init.js"></script> -->
 
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-  </script>
 
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="/admin/assets/js/main.js"></script>
+</div> <!-- .content -->
+<div class="clearfix"></div>
 
-    <!--  Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
-    <!--Chartist Chart-->
-    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+<footer class="site-footer">
+    <div class="footer-inner bg-white">
+        <div class="row">
+            <div class="col-sm-6">
+                Copyright &copy; 2023 Admin Cpanel
+            </div>
+            <div class="col-sm-6 text-right">
+                Designed by <a href="https://facebook.com/quangmaster321">Huynh Can</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- /.site-footer -->
 
-    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="/admin/assets/js/init/weather-init.js"></script>
+<!-- /#right-panel -->
 
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="/admin/assets/js/init/fullcalendar-init.js"></script>
-    <!--Script lấy tên truyện-->
-    <script>
-        function getTenTruyen() {
-            const selectElement = document.getElementById('tentruyen');
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', '/api/user');
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    const storyIds = JSON.parse(xhr.responseText);
 
-                    // Clear existing options
-                    selectElement.innerHTML = '';
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
+    } );
+</script>
 
-                    // Fetch story details for each ID
-                    for (const storyId of storyIds) {
-                        const storyDetailsXhr = new XMLHttpRequest();
-                        storyDetailsXhr.open('GET', `/api/truyen/${id}`);
-                        storyDetailsXhr.onload = function () {
-                            if (storyDetailsXhr.status === 200) {
-                                const storyDetails = JSON.parse(storyDetailsXhr.responseText);
 
-                                // Create and append new option for each story
-                                const option = document.createElement('option');
-                                option.value = storyDetails.id;
-                                option.textContent = storyDetails.title;
-                                selectElement.appendChild(option);
-                            }
-                        };
-                        storyDetailsXhr.send();
-                    }
-                }
-            };
-            xhr.send();
-        }
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script src="/js/main.js"></script>
 
-    </script>
-    <!--Local Stuff-->
+<!--  Chart js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
+<!--Chartist Chart-->
+<script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+<script src="/js/weather-init.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+
+<script>
+    // JavaScript để tự động đếm thời gian và hiển thị trên trường input
+    var thoiGianDangInput = document.getElementById('thoiGianDang');
+
+    function updateThoiGianDang() {
+        var now = moment().utcOffset(7); // Thiết lập múi giờ cho Hà Nội (UTC+7)
+        var formattedDate = now.format('YYYY-MM-DD | HH:mm'); // Định dạng theo yyyy-MM-ddTHH:mm
+        thoiGianDangInput.value = formattedDate;
+    }
+
+    // Gọi hàm update mỗi phút
+    setInterval(updateThoiGianDang, 60000);
+
+    // Gọi hàm lần đầu để hiển thị giá trị ban đầu
+    updateThoiGianDang();
+</script>
 </body>
 </html>

@@ -72,6 +72,4 @@ public class User {
     private Set<Chuong> chuongs;
     @OneToMany(mappedBy = "user")
     private Set<Truyen> truyens;
-    @OneToMany(mappedBy = "user")
-    private Set<Chuong_User> chuong_users;
 }

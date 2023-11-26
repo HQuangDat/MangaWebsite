@@ -15,6 +15,8 @@ public class UserService {
     @Autowired
     private IRoleRepository roleRepository;
 
+
+
     @Transactional
     public void save(User user) {
         userRepository.save(user);
@@ -34,4 +36,10 @@ public class UserService {
     }
 
     public String[] getUserRolebyId(Long id){return userRepository.getRolesOfUser(id);}
+
+    public Long getUserIdByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return (user != null) ? user.getId() : null;
+    }
+
 }

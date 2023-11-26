@@ -1,46 +1,34 @@
 package com.example.MangaWebsite.Model;
 
 import com.example.MangaWebsite.Entity.User;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Date;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
 @Data
-    @Entity
-    @Table(name = "chuong_user")
-    public class Chuong_User {
+@Entity
+@Table(name = "chuong_user")
+@IdClass(ChuongUserId.class)
+public class Chuong_User implements Serializable {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chuong_id")
+    private Chuong chuongId;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "chuong_id")
-        private Chuong chuongId;
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User userId;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id")
-        private User user;
+    @Column(name = "ngay_mua", nullable = false)
+    private LocalDateTime ngay_mua;
 
-        @Column(name = "created_at", nullable = false)
-        private LocalDateTime createdAt;
+    @Column(name = "gia", nullable = false)
+    private double gia;
 
-        @Column(name = "price", nullable = false)
-        private double price;
-
-        public Chuong_User() {
-        }
-
-        public Chuong_User(Chuong chuongId, User userId, double price,LocalDateTime createdAt) {
-            this.chuongId = chuongId;
-            this.user = userId;
-            this.price = price;
-            this.createdAt = createdAt;
-        }
-    }
-
-
+    // other fields and methods
+}

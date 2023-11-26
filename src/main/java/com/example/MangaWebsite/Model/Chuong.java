@@ -2,10 +2,13 @@ package com.example.MangaWebsite.Model;
 
 import com.example.MangaWebsite.Entity.Role;
 import com.example.MangaWebsite.Entity.User;
+import com.example.MangaWebsite.Validator.annotation.ValidUserId;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,32 +22,34 @@ public class Chuong {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ma_truyen" ,referencedColumnName = "id", nullable = false)
     private Truyen truyen;
 
     @Column(name = "ten_chuong")
     private String tenChuong;
 
-    @Lob
-    @Column(name = "noi_dung")
-    private byte[] noiDung;
-
     @Column(name = "ngay_dang")
     private LocalDateTime ngayDang;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ValidUserId
+    private  User user;
 
-    public Chuong() {
-    }
+    @OneToMany(mappedBy = "chuong", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    private List<Anh> anhList;
+
 
     public Chuong(String tenChuong, LocalDateTime ngayDang, User user,Truyen truyen) {
         this.tenChuong = tenChuong;
         this.ngayDang = ngayDang;
         this.user = user;
         this.truyen = truyen;
+    }
+
+    public Chuong() {
+
     }
 
   /*  @OneToMany(mappedBy = "chuong", fetch = FetchType.LAZY)

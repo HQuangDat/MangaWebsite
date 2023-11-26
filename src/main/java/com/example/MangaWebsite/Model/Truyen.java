@@ -4,7 +4,6 @@ import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Validator.annotation.ValidUserId;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -80,4 +79,9 @@ public class Truyen {
     private Set<User> users;
 
 
+    public void setUserId(Long currentUser) {
+
+    } public String getName() {
+        return TenTruyen;
+    }
 }
