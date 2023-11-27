@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("user", new User());
-        return "User/login2";
+        return "User/login";
     }
 
     @GetMapping("/logout")
@@ -47,7 +47,7 @@ public class UserController {
             return "redirect:/";
         } else {
             model.addAttribute("loginError", "Invalid username or password");
-            return "User/login2";
+            return "User/login";
         }
     }
 
@@ -66,7 +66,7 @@ public class UserController {
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userService.save(user);
-        return "redirect:/login2";
+        return "redirect:/login";
     }
 
     //Profile
