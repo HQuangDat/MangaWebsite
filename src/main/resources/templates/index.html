@@ -1,1594 +1,741 @@
 <!DOCTYPE html>
-<html id="ctl00_Html1" lang="vi"
-   xmlns:th="https://www.thymeleaf.org"
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
-   <head id="ctl00_Head1">
-      <meta property="fb:app_id" content="552913042834971"/>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-      <title>Đọc truyện tranh live - Truyện gì cũng có - NTRTruyenLive</title>
-      <meta name="description" content="Web đọc truyện tranh live lớn nhất được cập nhật liên tục hàng giờ - Cùng tham gia đọc truyện live và thảo luận với hơn 💚15 triệu thành viên tại NetTruyenLive"/>
-      <meta name="keywords" content="Truyện tranh, Truyen tranh online, Đọc truyện tranh, Truyện tranh hot, Truyện tranh hay, Truyện ngôn tình, truyenqq, mi2manga, doctruyen3q, cmanga, vlogtruyen, blogtruyen, saytruyen, dichtruyen, truyentranhaudio, hamtruyen, truyensieuhay, vcomi, nettruyen, nettruyenco, nettruyentv, nettruyenlive">
-      <meta property="og:image" content="http://st.ntcdntempv3.com/data/sites/1/share.jpg"/>
-      <meta property="og:title" content="Đọc truyện tranh live - Truyện gì cũng có - NetTruyenLive"/>
-      <meta property="og:site_name" content="NetTruyenLive"/>
-      <meta property="og:url" content="https://nettruyen.live"/>
-      <meta property="og:type" content="website"/>
-      <meta property="og:description" content="Web đọc truyện tranh live lớn nhất được cập nhật liên tục hàng giờ - Cùng tham gia đọc truyện live và thảo luận với hơn 💚15 triệu thành viên tại NetTruyenLive"/>
-      <meta itemprop="name" content="Đọc truyện tranh live - Truyện gì cũng có - NetTruyenLive"/>
-      <meta itemprop="description" content="Web đọc truyện tranh live lớn nhất được cập nhật liên tục hàng giờ - Cùng tham gia đọc truyện live và thảo luận với hơn 💚15 triệu thành viên tại NetTruyenLive"/>
-      <link rel="next" href="https://nettruyen.live?page=2"/>
-      <link rel="canonical" href="https://nettruyen.live"/>
-      <link rel="amphtml" href="https://nettruyen.live/amp"/>
-      <meta name="referrer" content="no-referrer"/>
-      <link rel="icon" type="image/png" href="img/image1_0.jpg"/>
-      <meta name="copyright" content="Copyright © 2023 Truyện tranh NetTruyenLive"/>
-      <meta name="Author" content="Truyện tranh NetTruyenLive"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-      <meta http-equiv="x-dns-prefetch-control" content="on"/>
-      <meta name="color-scheme" content="light only"/>
-      <meta name="google" content="notranslate"/>
-      <link rel="stylesheet" type="text/css" href="css/font-manga.min.css"/>
-      <link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
-      <link rel="stylesheet" type="text/css" href="css/mystyle.css"/>
-      <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
 
-      <script th:src="@{https://code.jquery.com/jquery-3.5.1.min.js}"></script>
-      <script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js}"></script>
-      <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
-      <script type="application/ld+json">
-         {"@context": "http://schema.org","@type": "ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://nettruyen.live/truyen-tranh/one-piece-128"},{"@type":"ListItem","position":2,"url":"https://nettruyen.live/truyen-tranh/vo-luyen-dinh-phong-3926"},{"@type":"ListItem","position":3,"url":"https://nettruyen.live/truyen-tranh/tong-tai-tai-thuong-4979"},{"@type":"ListItem","position":4,"url":"https://nettruyen.live/truyen-tranh/danh-mon-chi-ai-8077"},{"@type":"ListItem","position":5,"url":"https://nettruyen.live/truyen-tranh/onepunch-man-244"},{"@type":"ListItem","position":6,"url":"https://nettruyen.live/truyen-tranh/that-hinh-dai-toi-740"},{"@type":"ListItem","position":7,"url":"https://nettruyen.live/truyen-tranh/black-clover-the-gioi-phep-thuat-499"},{"@type":"ListItem","position":8,"url":"https://nettruyen.live/truyen-tranh/co-vo-ngot-ngao-co-chut-bat-luong-2000163642"},{"@type":"ListItem","position":9,"url":"https://nettruyen.live/truyen-tranh/jujutsu-kaisen-chu-thuat-hoi-chien-5058"},{"@type":"ListItem","position":10,"url":"https://nettruyen.live/truyen-tranh/naruto-197"},{"@type":"ListItem","position":11,"url":"https://nettruyen.live/truyen-tranh/toan-chuc-phap-su-4140"},{"@type":"ListItem","position":12,"url":"https://nettruyen.live/truyen-tranh/thien-tai-bong-da-tien-dao-so-1-14899"}]}
-      </script>
-      <script type="application/ld+json">
-         { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://nettruyen.live" }, { "@type": "ListItem", "position": 2, "name": "✅Website chính thức", "item": "https://nettruyen.live/tim-truyen" } ] } 
-      </script>
-      <style>
-         iframe {
-         height: 200px;
-         border-width: 0px;
-         }
-         .navbar .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            border-radius: 4px;
-            border-color: #e5e5e5;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-         }
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{css/login/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/plyr.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/style.css}" type="text/css">
+</head>
 
-         .navbar .nav-item.dropdown:hover .dropdown-menu {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-         }
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
-         .navbar .dropdown-menu a {
-            color: #333;
-            padding: 12px 20px;
-            line-height: normal;
-            font-size: 16px;
-            display: block;
-            transition: all 0.3s ease;
-         }
-
-         .navbar .nav-item.dropdown .nav-link {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            color: #212121;
-            text-decoration: none;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            outline: none;
-         }
-
-         .navbar .nav-item.dropdown .nav-link:hover,
-         .navbar .nav-item.dropdown .nav-link:focus {
-            background-color: #d0d0d0;
-            color: #000;
-         }
-
-         .material-design-dropdown {
-            padding: 0.5rem 1rem;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            color: #212121;
-            text-decoration: none;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-            outline: none;
-            border: none;
-            cursor: pointer;
-         }
-
-         .material-design-dropdown:hover,
-         .material-design-dropdown:focus {
-            background-color: #d0d0d0;
-            color: #000;
-            transform: translateY(-2px);
-         }
-
-
-      </style>
-      <script type="application/ld+json">
-         {"@context": "http://schema.org","@type": "WebSite","url": "https://nettruyen.live","potentialAction": {"@type": "SearchAction","target": "https://nettruyen.live/tim-truyen?keyword={search_term_string}","query-input": "required name=search_term_string"}} 
-      </script>
-      <script type="application/ld+json">
-         {"@context": "http://schema.org","@type": "Person","name": "NetTruyen","url": "https://nettruyen.live","sameAs": ["https://www.facebook.com/nettruyen"]} 
-      </script>
-      <script type="fa794d24aee149ad39fc6e3e-text/javascript">
-         window.token = 'u75TgIzK2x52TgPyIuJnYz9nbzJRaztLT0wKli5r'; 
-      </script>
-
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-      />
-      <script src="https://nettruyen.live/public/assets/js/jquery.min.js" type="fa794d24aee149ad39fc6e3e-text/javascript"></script>
-      <script
-        type="text/javascript"
-        src="https://code.jquery.com/jquery-1.11.0.min.js"
-      ></script>
-      <script
-        type="text/javascript"
-        src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"
-      ></script>
-      <script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-      ></script>
-      <meta name="apple-itunes-app" content="app-id=6446489911, app-argument=">
-   </head>
-   <body id="ctl00_Body" class="homepage  vi-vn site1">
-      <form method="post" id="aspnetForm" enctype="multipart/form-data">
-         <input type="hidden" name="_token" value="u75TgIzK2x52TgPyIuJnYz9nbzJRaztLT0wKli5r">
-         <header class="header" id="header">
-            <!--NAVBAR-->
-            <div class="navbar" style="background-color: #635e43 ;">
-               <div class="container">
-                  <div class="navbar-header">
-                     <div class="navbar-brand">
-                        <a class="logo" title="Truyện tranh online" th:href="@{/}">
-                        <img alt="Logo NetTruyenLive" src="/img/Logo.png">
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="./index.html">
+                            <img th:src="@{img/Logo.png}" alt="">
                         </a>
-                     </div>
-                     <div class="navbar-form navbar-left hidden-xs search-box comicsearchbox">
-                        <div class="input-group">
-                           <input type="text" class="searchinput form-control" placeholder="Tìm truyện..." autocomplete="off"/>
-                           <div class="input-group-btn">
-                              <input type="submit" value class="searchbutton btn btn-default"/>
-                           </div>
-                        </div>
-                     </div>
-                     <i class="fa fa-lightbulb-o toggle-dark"></i>
-                     <button type="button" class="search-button-icon visible-xs" aria-label="Search">
-                     <i class="fa fa-search"></i>
-                     </button>
-                     <button type="button" class="navbar-toggle" aria-label="Menu">
-                     <i class="fa fa-bars"></i>
-                     </button>
-                  </div>
-                  <script data-cfasync="false">
-                     var gOpts = {};
-                     gOpts.host = "nettruyen.live";
-                     var _0xcca4 = [".toggle-dark", "querySelector", "undefined", "body", "class", "fa fa-lightbulb-o on toggle-dark", "setAttribute", "dark", "indexOf", "getAttribute", " dark", "fa fa-lightbulb-o toggle-dark", "", "replace", "dark-theme", "click", "removeItem", "addEventListener", "parentNode", "removeChild"]
-                       , toggleDarkObj = document[_0xcca4[1]](_0xcca4[0]);
-                     if (_0xcca4[2] != typeof Storage) {
-                         function setDarkTheme(c, a) {
-                             var e = document[_0xcca4[3]];
-                             1 == a ? (c[_0xcca4[6]](_0xcca4[4], _0xcca4[5]),
-                             e[_0xcca4[9]](_0xcca4[4])[_0xcca4[8]](_0xcca4[7]) < 0 && e[_0xcca4[6]](_0xcca4[4], e[_0xcca4[9]](_0xcca4[4]) + _0xcca4[10])) : (c[_0xcca4[6]](_0xcca4[4], _0xcca4[11]),
-                             e[_0xcca4[9]](_0xcca4[4])[_0xcca4[8]](_0xcca4[10]) >= 0 && e[_0xcca4[6]](_0xcca4[4], e[_0xcca4[9]](_0xcca4[4])[_0xcca4[13]](_0xcca4[10], _0xcca4[12])))
-                         }
-                         void 0 !== localStorage[_0xcca4[14]] && setDarkTheme(toggleDarkObj, !0),
-                         toggleDarkObj[_0xcca4[17]](_0xcca4[15], (function(c) {
-                             _0xcca4[11] == this[_0xcca4[9]](_0xcca4[4]) ? (setDarkTheme(this, !0),
-                             localStorage[_0xcca4[14]] = 1) : (setDarkTheme(this, !1),
-                             void 0 !== localStorage[_0xcca4[14]] && localStorage[_0xcca4[16]](_0xcca4[14]))
-                         }
-                         ))
-                     } else
-                         toggleDarkObj[_0xcca4[18]] && toggleDarkObj[_0xcca4[18]][_0xcca4[19]](toggleDarkObj);
-                  </script>
-                  <ul class="nav-account list-inline hidden-xs pull-right">
-<!--                     Kiem tra User co dang nhap hay chua-->
-<!--                     <li sec:authorize="isAuthenticated()">-->
-<!--                        <a>Xin chào!  </a>-->
-<!--                        <a th:text="${#authentication.name}"></a>-->
-<!--                        <a sec:authorize="hasAuthority('ADMIN')"> || </a>-->
-<!--                        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}">Quản lý</a>-->
-<!--                        <a> || </a>-->
-<!--                        <a th:href="@{/profile}">Profile</a>-->
-<!--                        <a> || </a>-->
-<!--                        <a th:href="@{/logout}">Đăng xuất</a>-->
-<!--                     </li>-->
-                     <li th:if="${#authorization.expression('isAuthenticated()')}" class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle material-design-dropdown" id="userDropdown" role="button" aria-haspopup="true" aria-expanded="false" disabled>
-                           <span class="username" th:text="${#authentication.name}"></span>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="userDropdown">
-                           <a th:href="@{/profile}" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
-                           <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" th:href="@{/admin}" class="dropdown-item"><i class="fa fa-user-o"></i> Quản lý</a>
-                           <div class="dropdown-divider"></div>
-                           <a th:href="@{/logout}" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
-                        </div>
-                     </li>
-                     <th:block th:if="${#authorization.expression('!isAuthenticated()')}">
-                        <li class="nav-item">
-                           <a th:href="@{/login}" class="btn btn-primary rounded-pill px-4 mr-3">Đăng nhập</a>
-                           <a th:href="@{/Register}" class="btn btn-outline-primary rounded-pill px-4">Đăng ký</a>
-                        </li>
-                     </th:block>
-                  </ul>
-            </div>
-         </header>
-         <nav class="main-nav hidden-xs" id="mainNav">
-            <div class="inner">
-               <div class="container">
-                  <div class="Module Module-144">
-                     <div class="ModuleContent">
-                        <ul class="nav navbar-nav main-menu">
-                           <li class="active">
-                              <a target="_self" href="">
-                              <i class="fa fa-home hidden-xs"></i>
-                              <span class="visible-xs">Trang chủ</span>
-                              </a>
-                           </li>
-                           <li class>
-                              <a target="_self" href="">Hot</a>
-                           </li>
-                           <li class>
-                              <a target="_self" href="">Lịch sử</a>
-                           </li>
-                           <li class="dropdown">
-                              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" target="_self" href="">
-                              Thể loại <i class="fa fa-caret-down"></i>
-                              </a>
-                              <ul class="dropdown-menu megamenu">
-                                 <li>
-                                    <div class="clearfix">
-                                       <div class="col-sm-3">
-                                          <ul class="nav">
-                                             <li>
-                                                <a data-title="Tất cả thể loại truyện tranh" href="" target="_self">
-                                                <strong>Tất cả</strong>
-                                                </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại này thường có nội dung về đánh nhau, bạo lực, hỗn loạn, với diễn biến nhanh" href="" target="_self">Action </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại Adult đề cập đến vấn đề nhạy cảm, chỉ dành cho tuổi 17+" href="" target="_self">Adult </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại phiêu lưu, mạo hiểm, thường là hành trình của các nhân vật" href="" target="_self">Adventure </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện đã được chuyển thể thành film Anime" href="" target="_self">Anime </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại này là những câu chuyện về người ở một thế giới này xuyên đến một thế giới khác, có thể là thế giới mang phong cách trung cổ với kiếm sĩ và ma thuật, hay thế giới trong game, hoặc có thể là bạn chết ở nơi này và được chuyển sinh đến nơi khác" href="s://nettruyen.live/tim-truyen/chuyen-sinh-2130" target="_self">Chuyển Sinh </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại có nội dung trong sáng và cảm động, thường có các tình tiết gây cười, các xung đột nhẹ nhàng" href="" target="_self">Comedy </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện tranh Châu Âu và Châu Mĩ" href="" target="_self">Comic </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại có nội dung về nấu ăn, ẩm thực" href="" target="_self">Cooking </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện có nội dung xảy ra ở thời cổ đại phong kiến." href="" target="_self">
-                                                <strong>Cổ Đại</strong>
-                                                </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại truyện phóng tác do fan hay có thể cả những Mangaka khác với tác giả truyện gốc. Tác giả vẽ Doujinshi thường dựa trên những nhân vật gốc để viết ra những câu chuyện theo sở thích của mình" href="" target="_self">Doujinshi </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại mang đến cho người xem những cảm xúc khác nhau: buồn bã, căng thẳng thậm chí là bi phẫn" href="" target="_self">Drama </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện tình cảm giữa nam và nam." href="" target="_self">
-                                                <strong>Đam Mỹ</strong>
-                                                </a>
-                                             </li>
-                                          </ul>
-                                       </div>
-                                       <div class="col-sm-3">
-                                          <ul class="nav">
-                                             <li>
-                                                <a data-title="Thường có những tình huống nhạy cảm nhằm lôi cuốn người xem" href="" target="_self">Ecchi </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại xuất phát từ trí tưởng tượng phong phú, từ pháp thuật đến thế giới trong mơ thậm chí là những câu chuyện thần tiên" href="" target="_self">Fantasy </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Là một thể loại trong đó giới tính của nhân vật bị lẫn lộn: nam hoá thành nữ, nữ hóa thành nam..." href="" target="_self">Gender Bender </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại truyện tình cảm, lãng mạn mà trong đó, nhiều nhân vật nữ thích một nam nhân vật chính" href="" target="_self">Harem </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại có liên quan đến thời xa xưa" href="" target="_self">Historical </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Horror là: rùng rợn, nghe cái tên là bạn đã hiểu thể loại này có nội dung thế nào. Nó làm cho bạn kinh hãi, khiếp sợ, ghê tởm, run rẩy, có thể gây sock - một thể loại không dành cho người yếu tim" href="" target="_self">Horror </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại của manga hay anime được sáng tác chủ yếu bởi phụ nữ cho những độc giả nữ từ 18 đến 30. Josei manga có thể miêu tả những lãng mạn thực tế , nhưng trái ngược với hầu hết các kiểu lãng mạn lí tưởng của Shoujo manga với cốt truyện rõ ràng, chín chắn" href="" target="_self">Josei </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện đã được chuyển thể thành phim" href="" target="_self">Live action </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện tranh của Nhật Bản" href="" target="_self">Manga </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện tranh của Trung Quốc" href="" target="_self">
-                                                <strong>Manhua</strong>
-                                                </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện tranh Hàn Quốc, đọc từ trái sang phải" href="" target="_self">Manhwa </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Giống với tên gọi, bất cứ gì liên quan đến võ thuật trong truyện từ các trận đánh nhau, tự vệ đến các môn võ thuật như akido, karate, judo hay taekwondo, kendo, các cách né tránh" href="" target="_self">Martial Arts </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại dành cho lứa tuổi 17+ bao gồm các pha bạo lực, máu me, chém giết, tình dục ở mức độ vừa" href="" target="_self">Mature </a>
-                                             </li>
-                                          </ul>
-                                       </div>
-                                       <div class="col-sm-3">
-                                          <ul class="nav">
-                                             <li>
-                                                <a data-title="Mecha, còn được biết đến dưới cái tên meka hay mechs, là thể loại nói tới những cỗ máy biết đi (thường là do phi công cầm lái)" href="" target="_self">Mecha </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại thường xuất hiện những điều bí ấn không thể lí giải được và sau đó là những nỗ lực của nhân vật chính nhằm tìm ra câu trả lời thỏa đáng" href="" target="_self">Mystery </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện thuộc kiểu lãng mạn, kể về những sự kiện vui buồn trong tình yêu của nhân vật chính." href="" target="_self">
-                                                <strong>Ngôn Tình</strong>
-                                                </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Những truyện ngắn, thường là 1 chapter" href="" target="_self">One shot </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại liên quan đến những vấn đề về tâm lý của nhân vật ( tâm thần bất ổn, điên cuồng ...)" href="" target="_self">Psychological </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thường là những câu chuyện về tình yêu, tình cảm lãng mạn. Ớ đây chúng ta sẽ lấy ví dụ như tình yêu giữa một người con trai và con gái, bên cạnh đó đặc điểm thể loại này là kích thích trí tưởng tượng của bạn về tình yêu" href="" target="_self">
-                                                <strong>Romance</strong>
-                                                </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Trong thể loại này, ngữ cảnh diễn biến câu chuyện chủ yếu ở trường học" href="" target="_self">School Life </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Bao gồm những chuyện khoa học viễn tưởng, đa phần chúng xoay quanh nhiều hiện tượng mà liên quan tới khoa học, công nghệ, tuy vậy thường thì những câu chuyện đó không gắn bó chặt chẽ với các thành tựu khoa học hiện thời, mà là do con người tưởng tượng ra" href="" target="_self">Sci-fi </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại của manga thường nhằm vào những đối tượng nam 18 đến 30 tuổi, nhưng người xem có thể lớn tuổi hơn, với một vài bộ truyện nhắm đến các doanh nhân nam quá 40. Thể loại này có nhiều phong cách riêng biệt , nhưng thể loại này có những nét riêng biệt, thường được phân vào những phong cách nghệ thuật rộng hơn và phong phú hơn về chủ đề, có các loại từ mới mẻ tiên tiến đến khiêu dâm" href="" target="_self">Seinen </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Đối tượng hướng tới của thể loại này là phái nữ. Nội dung của những bộ manga này thường liên quan đến tình cảm lãng mạn, chú trọng đầu tư cho nhân vật (tính cách,...)" href="" target="_self">Shoujo </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại quan hệ hoặc liên quan tới đồng tính nữ, thể hiện trong các mối quan hệ trên mức bình thường giữa các nhân vật nữ trong các manga, anime" href="" target="_self">Shoujo Ai </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Đối tượng hướng tới của thể loại này là phái nam. Nội dung của những bộ manga này thường liên quan đến đánh nhau và/hoặc bạo lực (ở mức bình thường, không thái quá)" href="" target="_self">Shounen </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại có nội dung về tình yêu giữa những chàng trai trẻ, mang tính chất lãng mạn nhưng ko đề cập đến quan hệ tình dục" href="" target="_self">Shounen Ai </a>
-                                             </li>
-                                          </ul>
-                                       </div>
-                                       <div class="col-sm-3">
-                                          <ul class="nav">
-                                             <li>
-                                                <a data-title="Nói về cuộc sống đời thường" href="" target="_self">Slice of Life </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Những truyện có nội dung hơi nhạy cảm, đặc biệt là liên quan đến tình dục" href="" target="_self">Smut </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Boy x Boy. Nặng hơn Shounen Ai tí." href="" target="_self">Soft Yaoi </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Girl x Girl. Nặng hơn Shoujo Ai tí" href="" target="_self">Soft Yuri </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Đúng như tên gọi, những môn thể thao như bóng đá, bóng chày, bóng chuyền, đua xe, cầu lông,... là một phần của thể loại này" href="" target="_self">Sports </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể hiện những sức mạnh đáng kinh ngạc và không thể giải thích được, chúng thường đi kèm với những sự kiện trái ngược hoặc thách thức với những định luật vật lý" href="" target="_self">Supernatural </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Truyện tranh dành cho lứa tuổi thiếu nhi" href="" target="_self">Thiếu Nhi </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Thể loại chứa đựng những sự kiện mà dẫn đến kết cục là những mất mát hay sự rủi ro to lớn" href="" target="_self">Tragedy </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Các truyện có nội dung về các vụ án, các thám tử cảnh sát điều tra..." href="" target="_self">Trinh Thám </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Các truyện đã phát hành tại VN được scan đăng online" href="" target="_self">Truyện scan </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Tổng hợp truyện tranh màu, rõ, đẹp" href="" target="_self">Truyện Màu </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Là truyện tranh được đăng dài kỳ trên internet của Hàn Quốc chứ không xuất bản theo cách thông thường" href="" target="_self">Webtoon </a>
-                                             </li>
-                                             <li>
-                                                <a data-title="Xuyên Không, Xuyên Việt là thể loại nhân vật chính vì một lý do nào đó mà bị đưa đến sinh sống ở một không gian hay một khoảng thời gian khác. Nhân vật chính có thể trực tiếp xuyên qua bằng thân xác mình hoặc sống lại bằng thân xác người khác." href="" target="_self">
-                                                <strong>Xuyên Không</strong>
-                                                </a>
-                                             </li>
-                                          </ul>
-                                       </div>
-                                       <div class="col-sm-12 hidden-xs">
-                                          <p class="tip"></p>
-                                       </div>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </li>
-                           <li class="dropdown">
-                              <a rel="nofollow" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                              Xếp hạng <i class="fa fa-sort"></i>
-                              </a>
-                              <div class="dropdown-menu navbar-dropdown">
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-eye"></i>
-                                 Top all
-                                 </a>
-                                 <a href="">
-                                 <strong>
-                                 <i class="fa fa-signal"></i>
-                                 Truyện full
-                                 </strong>
-                                 </a>
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-eye"></i>
-                                 Top tháng
-                                 </a>
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-thumbs-o-up"></i>
-                                 Yêu Thích
-                                 </a>
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-eye"></i>
-                                 Top tuần
-                                 </a>
-                                 <a href="">
-                                 <i class="fa fa fa-refresh"></i>
-                                 Mới cập nhật
-                                 </a>
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-eye"></i>
-                                 Top ngày
-                                 </a>
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-cloud-upload"></i>
-                                 Truyện mới
-                                 </a>
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-eye"></i>
-                                 Top Follow
-                                 </a>
-                                 <a rel="nofollow" href="">
-                                 <i class="fa fa-list"></i>
-                                 Số chapter
-                                 </a>
-                              </div>
-                           </li>
-                           <li class>
-                              <a target="_self" href="">Tìm truyện</a>
-                           </li>
-                           <li class>
-                              <a target="_self" href="">Con gái</a>
-                           </li>
-                           <li class>
-                              <a target="_self" href="">Con trai</a>
-                           </li>
-                           <li>
-                              <a href="" target="_blank">
-                              <span style="color:#eb3349!important">Truyện chữ hay</span>
-                              </a>
-                           </li>
-                           <li>
-                              <a title="fanpage" href="" target="_blank">FANPAGE</a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </nav>
-         <main class="main">
-            <div class="container" style="max-width:1030px">
-               <div class="notify_block" style="margin:0;margin-bottom:10px;border-radius:0"  sec:authorize="!isAuthenticated()">
-                  <div class="info">
-                     <em class="fa fa-info-circle"></em>
-                  </div>
-                  <span class="dot">
-                  <span class="ping"></span>
-                  </span>
-                  Tính năng <a rel="nofollow noopener" th:href="@{/login}">Đăng Nhập</a>
-                  đã được sửa lỗi, vui lòng <a rel="nofollow noopener" th:href="@{/login}">Đăng Nhập</a>
-                  để trải nghiệm tính năng. 
-               </div>
-            </div>
-            <div class="container">
-                <!--Banner hoặc slider-->
-                <div class="row" >
-                    <div class="item">
-                       <a href="#" alt="">
-                       <img src="img/Anhbia.png" style="padding-bottom:10px" width="100%" alt="">
-                       </a>
                     </div>
-               </div>
-               <!--Mục truyện đề cử-->
-               <div id="ctl00_divAlt1" class="altcontent1 cmszone">
-                  <div class="row">
-                     <div class="ModuleContent">
-                        <h2 class="page-title">
-                           Truyện đề cử <i class="fa fa-angle-right"></i>
-                        </h2>
-                       <div class="items-slide">
-                           <div class="owl-carousel clearfix">
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="/img/one-piece.jpg" data-original="" alt="One Piece" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="One Piece">One Piece </a>
-                                    </h3>
-                                    <a href="" title="Chương 1094 - Tóm Tắt">Chương 1094 - Tóm Tắt </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    5 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="/img/vo-luyen-dinh-phong.jpg" data-original="" alt="Võ Luyện Đỉnh Phong" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Võ Luyện Đỉnh Phong">Võ Luyện Đỉnh Phong </a>
-                                    </h3>
-                                    <a href="" title="Chapter 3576">Chapter 3576 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    21 giờ trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="/img/onepunch-man.jpg" data-original="" alt="Onepunch Man" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Onepunch Man">Onepunch Man </a>
-                                    </h3>
-                                    <a href="" title="Chương 240">Chương 240 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    5 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="" data-original="" alt="Thất Hình Đại Tội" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Thất Hình Đại Tội">Thất Hình Đại Tội </a>
-                                    </h3>
-                                    <a href="" title="Chương 346">Chương 346 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    3 năm trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="" data-original="" alt="Black Clover - Thế Giới Phép Thuật" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Black Clover - Thế Giới Phép Thuật">Black Clover - Thế Giới Phép Thuật </a>
-                                    </h3>
-                                    <a href="" title="Chuong 368">Chuong 368 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    1 tháng trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="" data-original="" alt="Jujutsu Kaisen - Chú Thuật Hồi Chiến" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Jujutsu Kaisen - Chú Thuật Hồi Chiến">Jujutsu Kaisen - Chú Thuật Hồi Chiến </a>
-                                    </h3>
-                                    <a href="" title="Chuong 238">Chuong 238 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    3 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="https://nettruyen.live/truyen-live/naruto-197">
-                                 <img class="lazy" src="https://cdnnvd.com/nettruyen/thumb/naruto.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/naruto.jpg" alt="Naruto" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="https://nettruyen.live/truyen-live/naruto-197" title="Naruto">Naruto </a>
-                                    </h3>
-                                    <a href="https://nettruyen.live/truyen-live/naruto/chuong-700-9/169160" title="Chương 700.9">Chương 700.9 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    5 năm trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src=""  alt="Toàn Chức Pháp Sư" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Toàn Chức Pháp Sư">Toàn Chức Pháp Sư </a>
-                                    </h3>
-                                    <a href="" title="Chương 1099">Chương 1099 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    1 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src=""  alt="Đại Chiến Người Khổng Lồ" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Đại Chiến Người Khổng Lồ">Đại Chiến Người Khổng Lồ </a>
-                                    </h3>
-                                    <a href="" title="Chương 139">Chương 139 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    2 năm trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="" data-original="" alt="Vương Giả Thiên Hạ" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Vương Giả Thiên Hạ">Vương Giả Thiên Hạ </a>
-                                    </h3>
-                                    <a href="" title="Chương 773">Chương 773 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    2 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="" alt="Học Viện Anh Hùng" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="https://nettruyen.live/truyen-live/hoc-vien-anh-hung-380" title="Học Viện Anh Hùng">Học Viện Anh Hùng </a>
-                                    </h3>
-                                    <a href="" title="Chuong 402">Chuong 402 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    4 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="https://nettruyen.live/truyen-live/bach-luyen-thanh-than-1099">
-                                 <img class="lazy" src="https://cdnnvd.com/nettruyen/thumb/bach-luyen-thanh-than.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/bach-luyen-thanh-than.jpg" alt="Bách Luyện Thành Thần" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="https://nettruyen.live/truyen-live/bach-luyen-thanh-than-1099" title="Bách Luyện Thành Thần">Bách Luyện Thành Thần </a>
-                                    </h3>
-                                    <a href="https://nettruyen.live/truyen-live/bach-luyen-thanh-than/chapter-1119-r/756147" title="Chapter 1119: R">Chapter 1119: R </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    3 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="https://cdnnvd.com/nettruyen/thumb/tho-san-quy.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/tho-san-quy.jpg" alt="Thợ Săn Quỷ" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Thợ Săn Quỷ">Thợ Săn Quỷ </a>
-                                    </h3>
-                                    <a href="" title="Chương 142">Chương 142 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    25 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href=" 2">
-                                 <img class="lazy" src="https://cdnnvd.com/nettruyen/thumb/drstone.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/drstone.jpg" alt="Dr.stone" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="https://nettruyen.live/truyen-live/drstone-3132" title="Dr.stone">Dr.stone </a>
-                                    </h3>
-                                    <a href="" title="Chương 232.6">Chương 232.6 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    1 năm trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="https://nettruyen.live/truyen-live/yeu-than-ky-746">
-                                 <img class="lazy" src="https://cdnnvd.com/nettruyen/thumb/yeu-than-ky.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/yeu-than-ky.jpg" alt="Yêu Thần Ký" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="https://nettruyen.live/truyen-live/yeu-than-ky-746" title="Yêu Thần Ký">Yêu Thần Ký </a>
-                                    </h3>
-                                    <a href="https://nettruyen.live/truyen-live/yeu-than-ky/chapter-544-r/758717" title="Chapter 544: R">Chapter 544: R </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    3 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="https://nettruyen.live/truyen-live/fairy-tail-190">
-                                 <img class="lazy" src="/img/fairy-tail.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/fairy-tail.jpg" alt="Fairy Tail" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Fairy Tail">Fairy Tail </a>
-                                    </h3>
-                                    <a href="" title="Chương 545">Chương 545 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    6 năm trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src=""  alt="Uzumaki Boruto" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Uzumaki Boruto">Uzumaki Boruto </a>
-                                    </h3>
-                                    <a href="" title="Chương 81">Chương 81 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    1 tháng trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="https://nettruyen.live/truyen-live/chao-mung-cau-den-truong-iruma-kun-3188">
-                                 <img class="lazy" src="https://cdnnvd.com/nettruyen/thumb/chao-mung-cau-den-truong-iruma-kun.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/chao-mung-cau-den-truong-iruma-kun.jpg" alt="Chào Mừng Cậu Đến Trường Iruma-Kun" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="https://nettruyen.live/truyen-live/chao-mung-cau-den-truong-iruma-kun-3188" title="Chào Mừng Cậu Đến Trường Iruma-Kun">Chào Mừng Cậu Đến Trường Iruma-Kun </a>
-                                    </h3>
-                                    <a href="https://nettruyen.live/truyen-live/chao-mung-cau-den-truong-iruma-kun/chuong-319/756753" title="Chuong 319">Chuong 319 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    2 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="/img/" data-original="https://cdnnvd.com/nettruyen/thumb/nguyen-ton.jpg" alt="Nguyên Tôn" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Nguyên Tôn">Nguyên Tôn </a>
-                                    </h3>
-                                    <a href="" title="Chapter 720">Chapter 720 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    2 ngày trước 
-                                    </span>
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <a href="">
-                                 <img class="lazy" src="" data-original="" alt="Trọng Sinh Đô Thị Tu Tiên" referrerpolicy="origin">
-                                 </a>
-                                 <div class="slide-caption">
-                                    <h3>
-                                       <a href="" title="Trọng Sinh Đô Thị Tu Tiên">Trọng Sinh Đô Thị Tu Tiên </a>
-                                    </h3>
-                                    <a href="" title="Chương 934">Chương 934 </a>
-                                    <span class="time">
-                                    <i class="fa fa-clock-o"></i>
-                                    21 giờ trước 
-                                    </span>
-                                 </div>
-                              </div>
-                           </div> 
-                           <a href="#" class="prev" aria-label="Trước"></a>
-                           <a href="#" class="next" aria-label="Sau"></a>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="./index.html">Homepage</a></li>
+                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                                    <ul class="dropdown">
+                                        <li><a href="./categories.html">Categories</a></li>
+                                        <li><a href="truyenDetail.html">Anime Details</a></li>
+                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
+                                        <li><a href="./blog-details.html">Blog Details</a></li>
+                                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/Register}">Sign Up</a></li>
+                                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./blog.html">Our Blog</a></li>
+                                <li><a href="#">Contacts</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="header__right">
+                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="icon_profile"></span></a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/profile}"><span class="icon_profile"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__slider owl-carousel">
+                <div class="hero__items set-bg"th:attr="data-setbg=@{/img/hero/hero-1.jpg}">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div class="label">Adventure</div>
+                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
+                                <p>After 30 days of travel across the world...</p>
+                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-               </div>
-               <!--Truyện mới cập nhật-->
-               <div class="row">
-                  <div id="ctl00_divCenter" class="center-side col-md-8">
-                     <div class="Module Module-163">
-                        <div class="ModuleContent">
-                           <div class="items">
-                              <div class="relative">
-                                 <h1 class="page-title">
-                                    Truyện mới cập nhật <i class="fa fa-angle-right"></i>
-                                 </h1>
-                                 <a class="filter-icon" th:href="@{/Content}">
-                                 <i class="fa fa-filter"></i>
-                                 </a>
-                              </div>
-<!--                              Hiện thị truyện mới đăng + cập nhật-->
-                              <div class="row">
-                                 <div class="item">
-                                    <figure class="clearfix">
-                                       <div class="image">
-                                          <a title="Truyện tranh Ta Là Bạch Nguyệt Quang Quá Cố Trong Lòng Đại Boss" href="/img/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss.jpg">
-                                          <img src="/img/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss.jpg"class="lazy" data-original="" alt="Truyện tranh Ta Là Bạch Nguyệt Quang Quá Cố Trong Lòng Đại Boss" referrerpolicy="origin">
-                                          </a>
-                                          <div class="view clearfix">
-                                             <span class="pull-left">
-                                                <i class="fa-solid fa-eye"></i>
-                                             2K <i class="fa fa-comment"></i>
-                                             1,041 <i class="fa fa-heart"></i>
-                                             140 
-                                             </span>
-                                          </div>
-                                       </div>
-                                       <figcaption>
-                                          <h3>
-                                             <a class="jtip" data-jtip="#truyen-tranh-16132" href="https://nettruyen.live/truyen-live/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss-16132">Ta Là Bạch Nguyệt Quang Quá Cố Trong Lòng Đại Boss </a>
-                                          </h3>
-                                          <ul class="comic-item" data-id="16132">
-                                             <li class="chapter clearfix">
-                                                <a data-id="5" href="https://nettruyen.live/truyen-live/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss/chapter-5/5" title="Chapter 5">Chapter 5 </a>
-                                                <i class="time">5 giờ trước</i>
-                                             </li>
-                                             <li class="chapter clearfix">
-                                                <a data-id="4" href="https://nettruyen.live/truyen-live/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss/chapter-4/4" title="Chapter 4">Chapter 4 </a>
-                                                <i class="time">9 giờ trước</i>
-                                             </li>
-                                             <li class="chapter clearfix">
-                                                <a data-id="3" href="https://nettruyen.live/truyen-live/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss/chapter-3/3" title="Chapter 3">Chapter 3 </a>
-                                                <i class="time">9 giờ trước</i>
-                                             </li>
-                                          </ul>
-                                       </figcaption>
-                                    </figure>
-                                    <div class="box_tootip" style="display:none;" id="truyen-tranh-16132">
-                                       <div class="box_li">
-                                          <div class="title"></div>
-                                          <div class="clearfix">
-                                             <div class="box_img">
-                                                <a title href="https://nettruyen.live/truyen-live/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss-16132">
-                                                <img class="img_a" src="https://cdnnvd.com/nettruyen/thumb/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss.jpg" data-original="https://cdnnvd.com/nettruyen/thumb/ta-la-bach-nguyet-quang-qua-co-trong-long-dai-boss.jpg" alt referrerpolicy="origin">
-                                                </a>
-                                             </div>
-                                             <div class="message_main">
-                                                <p>
-                                                   <label>Tên khác:</label>
-                                                </p>
-                                                <p>
-                                                   <label>Thể loại:</label>
-                                                   Manhua,Ngôn Tình,Truyện Màu 
-                                                </p>
-                                                <p>
-                                                   <label>Tình trạng:</label>
-                                                   Đang tiến hành 
-                                                </p>
-                                                <p>
-                                                   <label>Lượt xem:</label>
-                                                   2K 
-                                                </p>
-                                                <p>
-                                                   <label>Bình luận:</label>
-                                                   1,041 
-                                                </p>
-                                                <p>
-                                                   <label>Theo dõi:</label>
-                                                   140 
-                                                </p>
-                                                <p>
-                                                   <label>Ngày cập nhật:</label>
-                                                   5 giờ trước 
-                                                </p>
-                                             </div>
-                                          </div>
-                                          <div class="box_text"></div>
-                                       </div>
+                    </div>
+                </div>
+                <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div class="label">Adventure</div>
+                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
+                                <p>After 30 days of travel across the world...</p>
+                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero__items set-bg" th:attr="data-setbg=@{/img/normal-breadcrumb.jpg}">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div class="label">Adventure</div>
+                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
+                                <p>After 30 days of travel across the world...</p>
+                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="trending__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Trending Now</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-1.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div id="ctl00_mainContent_ctl00_divPager" class="pagination-outter">
-                              <ul class="pagination" role="navigation">
-                                 <li class="page-item disabled" aria-disabled="true" aria-label="&laquo; Previous">
-                                    <span class="page-link" aria-hidden="true">&lsaquo;</span>
-                                 </li>
-                                 <li class="page-item active" aria-current="page">
-                                    <span class="page-link">1</span>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="">2</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="">3</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="">4</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="">5</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="">6</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="">7</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="">8</a>
-                                 </li>
-                                 <li class="page-item disabled" aria-disabled="true">
-                                    <span class="page-link">...</span>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="https://nettruyen.live?page=576">576</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="https://nettruyen.live?page=577">577</a>
-                                 </li>
-                                 <li class="page-item">
-                                    <a class="page-link" href="" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
-                                 </li>
-                              </ul>
-                           </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-2.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-3.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Shingeki no Kyojin Season 3 Part 2</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-4.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Fullmetal Alchemist: Brotherhood</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-5.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Shiratorizawa Gakuen Koukou</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/trending/trend-6.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Code Geass: Hangyaku no Lelouch R2</a></h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div id="ctl00_divRight" class="right-side col-md-4 cmszone">
-                     <div class="comics-followed-block Module Module-172">
-                        <div class="ModuleContent"></div>
-                     </div>
-                     <div class="visited-comics"></div>
-                     <div class="comic-wrap Module Module-168">
-                        <div class="ModuleContent">
-                           <div class="box-tab box darkBox">
-                              <ul class="tab-nav clearfix">
-                                 <li>
-                                    <a rel="nofollow" title="BXH truyện tranh theo tháng" class="active" href="">Top Tháng</a>
-                                 </li>
-                                 <li>
-                                    <a rel="nofollow" title="BXH truyện tranh theo tuần" href="">Top Tuần</a>
-                                 </li>
-                                 <li>
-                                    <a rel="nofollow" title="BXH truyện tranh theo ngày" href="">Top Ngày</a>
-                                 </li>
-                              </ul>
-                              <div class="tab-pane">
-                                 <div id="topMonth">
-                                    <ul class="list-unstyled">
-                                       <li class="clearfix">
-                                          <span class="txt-rank fn-order pos1">01</span>
-                                          <div class="t-item comic-item" data-id="128">
-                                             <a class="thumb" title="Truyện tranh One Piece" href="">
-                                             <img class="lazy" src="/img/one-piece.jpg"  alt="One Piece" referrerpolicy="origin">
-                                             </a>
-                                             <h3 class="title">
-                                                <a href="">One Piece</a>
-                                             </h3>
-                                             <p class="chapter top">
-                                                <a data-id="757119" href="9" title="Chương 1094 - Tóm Tắt">Chương 1094 - Tóm Tắt</a>
-                                                <span class="view pull-right">
-                                                <i class="fa fa-eye"></i>
-                                                417M
-                                                </span>
-                                             </p>
-                                          </div>
-                                       </li>
-                                       <li class="clearfix">
-                                          <span class="txt-rank fn-order pos2">02</span>
-                                          <div class="t-item comic-item" data-id="5058">
-                                             <a class="thumb" title="Truyện tranh Jujutsu Kaisen - Chú Thuật Hồi Chiến" href="">
-                                             <img class="lazy" src="/img/jujutsu-kaisen-chu-thuat-hoi-chien.jpg"  alt="Jujutsu Kaisen - Chú Thuật Hồi Chiến" referrerpolicy="origin">
-                                             </a>
-                                             <h3 class="title">
-                                                <a href="">Jujutsu Kaisen - Chú Thuật Hồi Chiến</a>
-                                             </h3>
-                                             <p class="chapter top">
-                                                <a data-id="758401" href="" title="Chuong 238">Chuong 238</a>
-                                                <span class="view pull-right">
-                                                <i class="fa fa-eye"></i>
-                                                66M
-                                                </span>
-                                             </p>
-                                          </div>
-                                       </li>
-                                       <li class="clearfix">
-                                          <span class="txt-rank fn-order pos3">03</span>
-                                          <div class="t-item comic-item" data-id="3926">
-                                             <a class="thumb" title="Truyện tranh Võ Luyện Đỉnh Phong" href="">
-                                             <img class="lazy" src="/img/vo-luyen-dinh-phong.jpg"  alt="Võ Luyện Đỉnh Phong" referrerpolicy="origin">
-                                             </a>
-                                             <h3 class="title">
-                                                <a href="">Võ Luyện Đỉnh Phong</a>
-                                             </h3>
-                                             <p class="chapter top">
-                                                <a data-id="765182" href="" title="Chapter 3576">Chapter 3576</a>
-                                                <span class="view pull-right">
-                                                <i class="fa fa-eye"></i>
-                                                98M
-                                                </span>
-                                             </p>
-                                          </div>
-                                       </li>
-                                       <li class="clearfix">
-                                          <span class="txt-rank fn-order pos4">04</span>
-                                          <div class="t-item comic-item" data-id="1241">
-                                             <a class="thumb" title="Truyện tranh Hoán Đổi Diệu Kỳ" href="">
-                                             <img class="lazy" src="img/hoan-doi-dieu-ky.jpg"  alt="Hoán Đổi Diệu Kỳ" referrerpolicy="origin">
-                                             </a>
-                                             <h3 class="title">
-                                                <a href="">Hoán Đổi Diệu Kỳ</a>
-                                             </h3>
-                                             <p class="chapter top">
-                                                <a data-id="758712" href="" title="Chương 463">Chương 463</a>
-                                                <span class="view pull-right">
-                                                <i class="fa fa-eye"></i>
-                                                1K
-                                                </span>
-                                             </p>
-                                          </div>
-                                       </li>
-                                       <li class="clearfix">
-                                          <span class="txt-rank fn-order pos5">05</span>
-                                          <div class="t-item comic-item" data-id="141">
-                                             <a class="thumb" title="Truyện tranh Thần Chết Ichigo" href="">
-                                                <img class="lazy" src="/img/than-chet-ichigo.jpg" alt="Thần Chết Ichigo"
-                                                     referrerpolicy="origin">
-                                             </a>
-                                             <h3 class="title">
-                                                <a href="">Thần Chết Ichigo</a>
-                                             </h3>
-                                             <p class="chapter top">
-                                                <a data-id="81661" href="" title="Chapter 686">Chapter 686</a>
-                                                <span class="view pull-right">
-                                                <i class="fa fa-eye"></i>
-                                                92K
-                                                </span>
-                                             </p>
-                                          </div>
+                    </div>
+                    <div class="popular__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Popular Shows</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/popular/popular-1.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Sen to Chihiro no Kamikakushi</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/popular/popular-2.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/popular/popular-3.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/popular/popular-4.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Rurouni Kenshin: Meiji Kenkaku Romantan</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/popular/popular-5.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Mushishi Zoku Shou 2nd Season</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/popular/popular-6.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Monogatari Series: Second Season</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Recently Added Shows</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/recent/recent-1.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Great Teacher Onizuka</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/recent/recent-2.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Fate/stay night Movie: Heaven's Feel - II. Lost</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/recent/recent-3.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Mushishi Zoku Shou: Suzu no Shizuku</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/recent/recent-4.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Fate/Zero 2nd Season</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/recent/recent-5.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Kizumonogatari II: Nekket su-hen</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/recent/recent-6.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="live__product">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="section-title">
+                                    <h4>Live Action</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="btn__all">
+                                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/live/live-1.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Shouwa Genroku Rakugo Shinjuu</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/live/live-2.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Mushishi Zoku Shou 2nd Season</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/live/live-3.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Mushishi Zoku Shou: Suzu no Shizuku</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/live/live-4.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/live/live-5.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Fate/stay night Movie: Heaven's Feel - II. Lost</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/live/live-6.jpg">
+                                        <div class="ep">18 / 18</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="#">Kizumonogatari II: Nekketsu-hen</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="product__sidebar">
+                        <div class="product__sidebar__view">
+                            <div class="section-title">
+                                <h5>Top Views</h5>
+                            </div>
+                            <ul class="filter__controls">
+                                <li class="active" data-filter="*">Day</li>
+                                <li data-filter=".week">Week</li>
+                                <li data-filter=".month">Month</li>
+                                <li data-filter=".years">Years</li>
+                            </ul>
+                            <div class="filter__gallery">
+                                <div class="product__sidebar__view__item set-bg mix day years"
+                                data-setbg="img/sidebar/tv-1.jpg">
+                                <div class="ep">18 / ?</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                            </div>
+                            <div class="product__sidebar__view__item set-bg mix month week"
+                            data-setbg="img/sidebar/tv-2.jpg">
+                            <div class="ep">18 / ?</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                        </div>
+                        <div class="product__sidebar__view__item set-bg mix week years"
+                        data-setbg="img/sidebar/tv-3.jpg">
+                        <div class="ep">18 / ?</div>
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                        <h5><a href="#">Sword art online alicization war of underworld</a></h5>
+                    </div>
+                    <div class="product__sidebar__view__item set-bg mix years month"
+                    data-setbg="img/sidebar/tv-4.jpg">
+                    <div class="ep">18 / ?</div>
+                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                    <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+                </div>
+                <div class="product__sidebar__view__item set-bg mix day"
+                data-setbg="img/sidebar/tv-5.jpg">
+                <div class="ep">18 / ?</div>
+                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                <h5><a href="#">Fate stay night unlimited blade works</a></h5>
+            </div>
+        </div>
+    </div>
+    <div class="product__sidebar__comment">
+        <div class="section-title">
+            <h5>New Comment</h5>
+        </div>
+        <div class="product__sidebar__comment__item">
+            <div class="product__sidebar__comment__item__pic">
+                <img src="img/sidebar/comment-1.jpg" alt="">
+            </div>
+            <div class="product__sidebar__comment__item__text">
+                <ul>
+                    <li>Active</li>
+                    <li>Movie</li>
+                </ul>
+                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+            </div>
+        </div>
+        <div class="product__sidebar__comment__item">
+            <div class="product__sidebar__comment__item__pic">
+                <img src="img/sidebar/comment-2.jpg" alt="">
+            </div>
+            <div class="product__sidebar__comment__item__text">
+                <ul>
+                    <li>Active</li>
+                    <li>Movie</li>
+                </ul>
+                <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
+                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+            </div>
+        </div>
+        <div class="product__sidebar__comment__item">
+            <div class="product__sidebar__comment__item__pic">
+                <img src="img/sidebar/comment-3.jpg" alt="">
+            </div>
+            <div class="product__sidebar__comment__item__text">
+                <ul>
+                    <li>Active</li>
+                    <li>Movie</li>
+                </ul>
+                <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
+                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+            </div>
+        </div>
+        <div class="product__sidebar__comment__item">
+            <div class="product__sidebar__comment__item__pic">
+                <img src="img/sidebar/comment-4.jpg" alt="">
+            </div>
+            <div class="product__sidebar__comment__item__text">
+                <ul>
+                    <li>Active</li>
+                    <li>Movie</li>
+                </ul>
+                <h5><a href="#">Monogatari Series: Second Season</a></h5>
+                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Section End -->
 
-                                          <span class="txt-rank fn-order pos6">06</span>
-                                          <div class="t-item comic-item" data-id="10495">
-                                             <a class="thumb" title="Truyện tranh Bạn Học Của Tôi Là Lính Đánh Thuê"
-                                                href="">
-                                                <img class="lazy" src="/img/ban-hoc-cua-toi-la-linh-danh-thue.jpg"
-                                                     alt="Bạn Học Của Tôi Là Lính Đánh Thuê" referrerpolicy="origin">
-                                             </a>
-                                             <h3 class="title">
-                                                <a href="">Bạn Học Của Tôi Là Lính Đánh Thuê</a>
-                                             </h3>
-                                             <p class="chapter top">
-                                                <a data-id="758927" href="" title="Chapter 156">Chapter 156</a>
-                                                <span class="view pull-right">
-                                                <i class="fa fa-eye"></i>
-                                                22K
-                                                </span>
-                                             </p>
-                                          </div>
-                                       </li>
-                                       <li class="clearfix">
-                                          <span class="txt-rank fn-order pos7">07</span>
-                                          <div class="t-item comic-item" data-id="4268">
-                                             <a class="thumb" title="Truyện tranh Berserk Of Gluttony" href="">
-                                             <img class="lazy" src="/img/berserk-of-gluttony.jpg"  alt="Berserk Of Gluttony" referrerpolicy="origin">
-                                             </a>
-                                             <h3 class="title">
-                                                <a href="">Berserk Of Gluttony</a>
-                                             </h3>
-                                             <p class="chapter top">
-                                                <a data-id="750866" href="" title="Chương 59">Chương 59</a>
-                                                <span class="view pull-right">
-                                                <i class="fa fa-eye"></i>
-                                                4M
-                                                </span>
-                                             </p>
-                                          </div>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div id="topWeek"></div>
-                                 <div id="topDay"></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="top-members lazy-module" data-type="top-members"></div>
-                     <div class="Module Module-283">
-                        <div class="ModuleContent">
-                           <div class="lazy-module" data-type="facebook">
-                              <div class="fb-comments" data-width="100%" data-numposts="10" data-colorscheme="light" data-href></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer__logo">
+                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                </div>
             </div>
-         </main>
-         <footer class="footer" style="background-color: #635e43;">
-            <div class="container">
-               <div class="row">
-                  <div class="col-sm-4 copyright" itemscope itemtype="http://schema.org/Organization">
-                     <a itemprop="url" href="">
-                        <img itemprop="logo" src="/img/LogoGif.gif" alt="GCCN - Truyện tranh Online"/>
-                        <br>
-                        <p class="link">
-                     <a class="btnModal" data-url="">Điều Khoản</a>
-                     </p>
-                     <p class="link">
-                        <a class="btnModal" data-url="">Chính Sách Bảo Mật</a>
-                     </p>
-                     <br>
-                     </a>
-                     <p>Copyright © 2023 GCCN - Huynh Van Can </p>
-                  </div>
-                  <div class="col-sm-8">
-                     <div class="link-footer">
-                        <h4>Từ khóa</h4>
-                        <ul>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">Truyện tranh</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">Truyen tranh online</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">Đọc truyện tranh</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">Truyện tranh hot</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">Truyện tranh hay</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">Truyện ngôn tình</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">truyenqq</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">mi2manga</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">doctruyen3q</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">cmanga</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">vlogtruyen</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">blogtruyen</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">saytruyen</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">dichtruyen</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">truyentranhaudio</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">hamtruyen</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">truyensieuhay</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">vcomi</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">nettruyen</a>
-                           </li>
-                           <li>
-                              <a title="nettruyen" target="_self" href="">nettruyenco</a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
+            <div class="col-lg-6">
+                <div class="footer__nav">
+                    <ul>
+                        <li class="active"><a href="./index.html">Homepage</a></li>
+                        <li><a href="./categories.html">Categories</a></li>
+                        <li><a href="./blog.html">Our Blog</a></li>
+                        <li><a href="#">Contacts</a></li>
+                    </ul>
+                </div>
             </div>
-         </footer>
-         <div id="myModal" class="modal">
-            <div class="modal-content">
-               <span class="close">&times;</span>
-               <div style="color:#000"></div>
-            </div>
-         </div>
-         <div class="navbar-collapse">
-            <div class="search-box comicsearchbox">
-               <div class="input-group">
-                  <input type="text" class="searchinput form-control" placeholder="Tìm truyện..." autocomplete="off"/>
-                  <div class="input-group-btn">
-                     <input type="submit" value class="searchbutton btn btn-default"/>
-                  </div>
-               </div>
-            </div>
-            <div class="Module Module-144">
-               <div class="ModuleContent">
-                  <ul class="nav navbar-nav main-menu">
-                     <li class="active">
-                        <a target="_self" href="">
-                        <i class="fa fa-home hidden-xs"></i>
-                        <span class="visible-xs">Trang chủ</span>
-                        </a>
-                     </li>
-                     <li>
-                        <a target="_self" href="">Hot</a>
-                     </li>
-                     <li>
-                        <a target="_self" href="">Lịch sử</a>
-                     </li>
-                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" target="_self" href="">
-                        Thể loại <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu megamenu">
-                           <li>
-                              <div class="clearfix">
-                                 <div class="col-sm-3">
-                                    <ul class="nav">
-                                       <li>
-                                          <a data-title="Tất cả thể loại truyện tranh" href="" target="_self">
-                                          <strong>Tất cả</strong>
-                                          </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại này thường có nội dung về đánh nhau, bạo lực, hỗn loạn, với diễn biến nhanh" href="" target="_self">Action </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại Adult đề cập đến vấn đề nhạy cảm, chỉ dành cho tuổi 17+" href="" target="_self">Adult </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại phiêu lưu, mạo hiểm, thường là hành trình của các nhân vật" href="" target="_self">Adventure </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện đã được chuyển thể thành film Anime" href="" target="_self">Anime </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại này là những câu chuyện về người ở một thế giới này xuyên đến một thế giới khác, có thể là thế giới mang phong cách trung cổ với kiếm sĩ và ma thuật, hay thế giới trong game, hoặc có thể là bạn chết ở nơi này và được chuyển sinh đến nơi khác" href="" target="_self">Chuyển Sinh </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại có nội dung trong sáng và cảm động, thường có các tình tiết gây cười, các xung đột nhẹ nhàng" href="" target="_self">Comedy </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện tranh Châu Âu và Châu Mĩ" href="" target="_self">Comic </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại có nội dung về nấu ăn, ẩm thực" href="" target="_self">Cooking </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện có nội dung xảy ra ở thời cổ đại phong kiến." href="" target="_self">
-                                          <strong>Cổ Đại</strong>
-                                          </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại truyện phóng tác do fan hay có thể cả những Mangaka khác với tác giả truyện gốc. Tác giả vẽ Doujinshi thường dựa trên những nhân vật gốc để viết ra những câu chuyện theo sở thích của mình" href="" target="_self">Doujinshi </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại mang đến cho người xem những cảm xúc khác nhau: buồn bã, căng thẳng thậm chí là bi phẫn" href="" target="_self">Drama </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện tình cảm giữa nam và nam." href="" target="_self">
-                                          <strong>Đam Mỹ</strong>
-                                          </a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="col-sm-3">
-                                    <ul class="nav">
-                                       <li>
-                                          <a data-title="Thường có những tình huống nhạy cảm nhằm lôi cuốn người xem" href="" target="_self">Ecchi </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại xuất phát từ trí tưởng tượng phong phú, từ pháp thuật đến thế giới trong mơ thậm chí là những câu chuyện thần tiên" href="" target="_self">Fantasy </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Là một thể loại trong đó giới tính của nhân vật bị lẫn lộn: nam hoá thành nữ, nữ hóa thành nam..." href="" target="_self">Gender Bender </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại truyện tình cảm, lãng mạn mà trong đó, nhiều nhân vật nữ thích một nam nhân vật chính" href="" target="_self">Harem </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại có liên quan đến thời xa xưa" href="" target="_self">Historical </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Horror là: rùng rợn, nghe cái tên là bạn đã hiểu thể loại này có nội dung thế nào. Nó làm cho bạn kinh hãi, khiếp sợ, ghê tởm, run rẩy, có thể gây sock - một thể loại không dành cho người yếu tim" href="https://nettruyen.live/tim-truyen/horror" target="_self">Horror </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại của manga hay anime được sáng tác chủ yếu bởi phụ nữ cho những độc giả nữ từ 18 đến 30. Josei manga có thể miêu tả những lãng mạn thực tế , nhưng trái ngược với hầu hết các kiểu lãng mạn lí tưởng của Shoujo manga với cốt truyện rõ ràng, chín chắn" href="https://nettruyen.live/tim-truyen/josei" target="_self">Josei </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện đã được chuyển thể thành phim" href="" target="_self">Live action </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện tranh của Nhật Bản" href="" target="_self">Manga </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện tranh của Trung Quốc" href="" target="_self">
-                                          <strong>Manhua</strong>
-                                          </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện tranh Hàn Quốc, đọc từ trái sang phải" href="" target="_self">Manhwa </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Giống với tên gọi, bất cứ gì liên quan đến võ thuật trong truyện từ các trận đánh nhau, tự vệ đến các môn võ thuật như akido, karate, judo hay taekwondo, kendo, các cách né tránh" href="" target="_self">Martial Arts </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại dành cho lứa tuổi 17+ bao gồm các pha bạo lực, máu me, chém giết, tình dục ở mức độ vừa" href="" target="_self">Mature </a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="col-sm-3">
-                                    <ul class="nav">
-                                       <li>
-                                          <a data-title="Mecha, còn được biết đến dưới cái tên meka hay mechs, là thể loại nói tới những cỗ máy biết đi (thường là do phi công cầm lái)" href="" target="_self">Mecha </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại thường xuất hiện những điều bí ấn không thể lí giải được và sau đó là những nỗ lực của nhân vật chính nhằm tìm ra câu trả lời thỏa đáng" href="" target="_self">Mystery </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện thuộc kiểu lãng mạn, kể về những sự kiện vui buồn trong tình yêu của nhân vật chính." href="" target="_self">
-                                          <strong>Ngôn Tình</strong>
-                                          </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Những truyện ngắn, thường là 1 chapter" href="" target="_self">One shot </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại liên quan đến những vấn đề về tâm lý của nhân vật ( tâm thần bất ổn, điên cuồng ...)" href="" target="_self">Psychological </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thường là những câu chuyện về tình yêu, tình cảm lãng mạn. Ớ đây chúng ta sẽ lấy ví dụ như tình yêu giữa một người con trai và con gái, bên cạnh đó đặc điểm thể loại này là kích thích trí tưởng tượng của bạn về tình yêu" href="" target="_self">
-                                          <strong>Romance</strong>
-                                          </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Trong thể loại này, ngữ cảnh diễn biến câu chuyện chủ yếu ở trường học" href="" target="_self">School Life </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Bao gồm những chuyện khoa học viễn tưởng, đa phần chúng xoay quanh nhiều hiện tượng mà liên quan tới khoa học, công nghệ, tuy vậy thường thì những câu chuyện đó không gắn bó chặt chẽ với các thành tựu khoa học hiện thời, mà là do con người tưởng tượng ra" href="" target="_self">Sci-fi </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại của manga thường nhằm vào những đối tượng nam 18 đến 30 tuổi, nhưng người xem có thể lớn tuổi hơn, với một vài bộ truyện nhắm đến các doanh nhân nam quá 40. Thể loại này có nhiều phong cách riêng biệt , nhưng thể loại này có những nét riêng biệt, thường được phân vào những phong cách nghệ thuật rộng hơn và phong phú hơn về chủ đề, có các loại từ mới mẻ tiên tiến đến khiêu dâm" href="" target="_self">Seinen </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Đối tượng hướng tới của thể loại này là phái nữ. Nội dung của những bộ manga này thường liên quan đến tình cảm lãng mạn, chú trọng đầu tư cho nhân vật (tính cách,...)" href="" target="_self">Shoujo </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại quan hệ hoặc liên quan tới đồng tính nữ, thể hiện trong các mối quan hệ trên mức bình thường giữa các nhân vật nữ trong các manga, anime" href="" target="_self">Shoujo Ai </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Đối tượng hướng tới của thể loại này là phái nam. Nội dung của những bộ manga này thường liên quan đến đánh nhau và/hoặc bạo lực (ở mức bình thường, không thái quá)" href="h" target="_self">Shounen </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại có nội dung về tình yêu giữa những chàng trai trẻ, mang tính chất lãng mạn nhưng ko đề cập đến quan hệ tình dục" href="" target="_self">Shounen Ai </a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="col-sm-3">
-                                    <ul class="nav">
-                                       <li>
-                                          <a data-title="Nói về cuộc sống đời thường" href="" target="_self">Slice of Life </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Những truyện có nội dung hơi nhạy cảm, đặc biệt là liên quan đến tình dục" href="" target="_self">Smut </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Boy x Boy. Nặng hơn Shounen Ai tí." href="" target="_self">Soft Yaoi </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Girl x Girl. Nặng hơn Shoujo Ai tí" href="" target="_self">Soft Yuri </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Đúng như tên gọi, những môn thể thao như bóng đá, bóng chày, bóng chuyền, đua xe, cầu lông,... là một phần của thể loại này" href="" target="_self">Sports </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể hiện những sức mạnh đáng kinh ngạc và không thể giải thích được, chúng thường đi kèm với những sự kiện trái ngược hoặc thách thức với những định luật vật lý" href="" target="_self">Supernatural </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Truyện tranh dành cho lứa tuổi thiếu nhi" href="i" target="_self">Thiếu Nhi </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Thể loại chứa đựng những sự kiện mà dẫn đến kết cục là những mất mát hay sự rủi ro to lớn" href="" target="_self">Tragedy </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Các truyện có nội dung về các vụ án, các thám tử cảnh sát điều tra..." href="" target="_self">Trinh Thám </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Các truyện đã phát hành tại VN được scan đăng online" href="" target="_self">Truyện scan </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Tổng hợp truyện tranh màu, rõ, đẹp" href="" target="_self">Truyện Màu </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Là truyện tranh được đăng dài kỳ trên internet của Hàn Quốc chứ không xuất bản theo cách thông thường" href="" target="_self">Webtoon </a>
-                                       </li>
-                                       <li>
-                                          <a data-title="Xuyên Không, Xuyên Việt là thể loại nhân vật chính vì một lý do nào đó mà bị đưa đến sinh sống ở một không gian hay một khoảng thời gian khác. Nhân vật chính có thể trực tiếp xuyên qua bằng thân xác mình hoặc sống lại bằng thân xác người khác." href="" target="_self">
-                                          <strong>Xuyên Không</strong>
-                                          </a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="col-sm-12 hidden-xs">
-                                    <p class="tip"></p>
-                                 </div>
-                              </div>
-                           </li>
-                        </ul>
-                     </li>
-                     <li class="dropdown">
-                        <a rel="nofollow" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Xếp hạng <i class="fa fa-sort"></i>
-                        </a>
-                        <div class="dropdown-menu navbar-dropdown">
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-eye"></i>
-                           Top all
-                           </a>
-                           <a href="">
-                           <strong>
-                           <i class="fa fa-signal"></i>
-                           Truyện full
-                           </strong>
-                           </a>
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-eye"></i>
-                           Top tháng
-                           </a>
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-thumbs-o-up"></i>
-                           Yêu Thích
-                           </a>
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-eye"></i>
-                           Top tuần
-                           </a>
-                           <a href="">
-                           <i class="fa fa fa-refresh"></i>
-                           Mới cập nhật
-                           </a>
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-eye"></i>
-                           Top ngày
-                           </a>
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-cloud-upload"></i>
-                           Truyện mới
-                           </a>
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-eye"></i>
-                           Top Follow
-                           </a>
-                           <a rel="nofollow" href="">
-                           <i class="fa fa-list"></i>
-                           Số chapter
-                           </a>
-                        </div>
-                     </li>
-                     <li>
-                        <a target="_self" href="">Tìm truyện</a>
-                     </li>
-                     <li>
-                        <a target="_self" href="">Con gái</a>
-                     </li>
-                     <li>
-                        <a target="_self" href="">Con trai</a>
-                     </li>
-                     <li>
-                        <a href="" target="_blank">
-                        <span style="color:#eb3349!important">Truyện chữ hay</span>
-                        </a>
-                     </li>
-                     <li>
-                        <a title="fanpage" href="" target="_blank">FANPAGE</a>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-            <ul class="nav-account list-inline">
-               <li class="login-link">
-                  <a rel="nofollow" th:href="@{/login}">Đăng nhập</a>
-               </li>
-               <li class="register-link">
-                  <a rel="nofollow" th:href="@{/Register}">Đăng ký</a>
-               </li>
-            </ul>
-         </div>
-         <a id="back-to-top">
-         <i class="fa fa-angle-up"></i>
-         </a>
-         <script type="fa794d24aee149ad39fc6e3e-text/javascript" src="/js/owl.carousel.min.js"></script>
-      </form>
+          </div>
+      </div>
+  </footer>
+  <!-- Footer Section End -->
 
-      <!--Java Script-->
-      <script src="https://nettruyen.live/public/assets/js/scripts.min.js" type="fa794d24aee149ad39fc6e3e-text/javascript"></script>
-      <script id="comments-js" src="/js/comment.min.js" type="fa794d24aee149ad39fc6e3e-text/javascript"></script>
-      <script src="/js/main.js" type="fa794d24aee149ad39fc6e3e-text/javascript"></script>
-      <script src="/js/auth.js" type="fa794d24aee149ad39fc6e3e-text/javascript"></script>
-      <script type="fa794d24aee149ad39fc6e3e-text/javascript">
-         window.fbAsyncInit = function() { FB.init({ appId : '552913042834971', xfbml : true, version : 'v16.0' }); FB.AppEvents.logPageView(); }; (function(d, s, id){ var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) {return;} js = d.createElement(s); js.id = id; js.src = "https://connect.facebook.net/en_US/sdk.js"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); 
-      </script>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQGFQW9LZQ" type="fa794d24aee149ad39fc6e3e-text/javascript"></script>
-      <script type="fa794d24aee149ad39fc6e3e-text/javascript">
-         window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-YQGFQW9LZQ'); 
-      </script>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-233495111-1" type="fa794d24aee149ad39fc6e3e-text/javascript"></script>
-      <script type="fa794d24aee149ad39fc6e3e-text/javascript">
-         window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-233495111-1'); 
-      </script>
-      <script src="https://cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="fa794d24aee149ad39fc6e3e-|49" defer></script>
-      <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"813adc0f0f14044b","version":"2023.8.0","r":1,"token":"886f2520a0e74e558b7232f0e15053b1","si":100}' crossorigin="anonymous"></script>
-   </body>
+  <!-- Search model Begin -->
+  <div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+
+    <!-- Js Plugins -->
+    <script th:src="@{js/login/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{js/login/bootstrap.min.js}"></script>
+    <script th:src="@{js/login/player.js}"></script>
+    <script th:src="@{js/login/jquery.nice-select.min.js}"></script>
+    <script th:src="@{js/login/mixitup.min.js}"></script>
+    <script th:src="@{js/login/jquery.slicknav.js}"></script>
+    <script th:src="@{js/login/owl.carousel.min.js}"></script>
+    <script th:src="@{js/login/main.js}"></script>
+
+
+</body>
+
 </html>

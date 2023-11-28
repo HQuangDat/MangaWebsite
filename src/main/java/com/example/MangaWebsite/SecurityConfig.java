@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .permitAll()
                        .requestMatchers( "/manga/edit", "/manga/delete")
                         .hasAnyAuthority("ADMIN","CTV")
-                        .requestMatchers("/manga", "/manga/add","/Admin")
+                        .requestMatchers("/manga", "/manga/add","/admin")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
