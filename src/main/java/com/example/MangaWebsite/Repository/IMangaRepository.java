@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface IMangaRepository extends JpaRepository<Truyen, Long> {
-    List<Truyen> findAllById(Long userId);
+    List<Truyen> findAllByUser_Id(Long userId);
 }

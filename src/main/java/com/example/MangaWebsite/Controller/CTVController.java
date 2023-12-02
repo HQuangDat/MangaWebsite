@@ -1,40 +1,42 @@
 package com.example.MangaWebsite.Controller;
 
-import com.example.MangaWebsite.Entity.CustomUserDetail;
 import com.example.MangaWebsite.Entity.User;
+import com.example.MangaWebsite.Model.Anh;
 import com.example.MangaWebsite.Model.Category;
 import com.example.MangaWebsite.Model.Chuong;
 import com.example.MangaWebsite.Model.Truyen;
-import com.example.MangaWebsite.Model.Anh;
-import com.example.MangaWebsite.Repository.IChuongRepository;
-import com.example.MangaWebsite.Service.*;
 
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import com.example.MangaWebsite.Service.CategoryService;
+import com.example.MangaWebsite.Service.ChuongService;
+import com.example.MangaWebsite.Service.TruyenService;
+import com.example.MangaWebsite.Service.UserService;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
+@Configuration
 @Controller
-@RequestMapping("admin/truyen/")
-public class MangaController {
+@RequestMapping("/CTV")
+public class CTVController {
     @Autowired
     private TruyenService truyenService;
 
@@ -46,40 +48,53 @@ public class MangaController {
 
     @Autowired
     private ChuongService chuongService;
-    @Autowired
-    private AnhService anhService;
+    @GetMapping("/{userId}/CTV-list")
+    public String CTVGetTruyen(@PathVariable Long userId, Model model,Authentication authentication) {
 
-    @GetMapping("List/{id}")
-    public ResponseEntity<?> getTruyen(@PathVariable String id) {
-        try {
-            long truyenId = Long.parseLong(id);
-            Truyen truyen = truyenService.getTruyenById(truyenId);
-            if (truyen != null) {
-                return new ResponseEntity<>(truyen, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Truyen not found", HttpStatus.NOT_FOUND);
-            }
-        } catch (NumberFormatException e) {
-            // Xử lý ngoại lệ nếu id không thể chuyển đổi thành kiểu long
-            return new ResponseEntity<>("Lỗi này này", HttpStatus.BAD_REQUEST);
-        }
+        List<Truyen> truyens = truyenService.getTruyensByUserId(userId);
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("truyens", truyens);
+        return "CTV/CTV-list";
     }
+    @GetMapping("/{userId}/{truyenId}/CTV-list-chuong")
+    public String getTruyenAndChuongsByUserId(
+            @PathVariable("userId") Long userId,
+            @PathVariable("truyenId") Long truyenId,
+            Model model) {
 
-// Hiển thị trang thêm truyện (GET)
-    @GetMapping("/add")
-    public String   AddTruyenForm(Model model) {
+        // Kiểm tra xem truyen có tồn tại hay không, nếu không thì trả về 404
+
+        Truyen truyen = truyenService.getTruyenById(truyenId);
+        if (truyen == null) {
+            return "error/404";  // Hoặc chuyển hướng đến trang lỗi 404
+        }
+
+        // Lấy danh sách chương của truyen
+        List<Chuong> chuong = chuongService.getChuongsByTruyenId(truyenId);
+
+        // Đưa thông tin truyen và danh sách chuong vào model để hiển thị trên view
+        model.addAttribute("truyen", truyen);
+        model.addAttribute("chuong", chuong);
+
+        // Trả về tên của view template hiển thị thông tin truyen và danh sách chuong
+        return "CTV/CTV-list-chuong";
+    }
+    // Hiển thị trang thêm truyện (GET)
+    @GetMapping("/{userId}/CTV-add")
+    public String AddTruyenFormByUser( @PathVariable("userId") Long userId,Model model, Authentication authentication) {
         // Tạo một đối tượng Truyen để binding với form
         Truyen truyen = new Truyen();
-
+        model.addAttribute("authentication", authentication);
         // Truyền đối tượng Truyen và danh sách các danh mục vào model
         model.addAttribute("truyen", truyen);
         model.addAttribute("categories", categoryService.getAllCategories());
 
         // Trả về tên view (thường là tên của trang thêm truyện)
-        return "truyen/add";
+        return "CTV/CTV-add";
     }
-    @PostMapping("/add")
-    public ResponseEntity<String> addTruyen(@ModelAttribute("truyen") @Valid Truyen truyen,
+    @PostMapping("/{userId}/CTV-add")
+    public ResponseEntity<String> addTruyen(@PathVariable("userId") Long userId,
+                                            @ModelAttribute("truyen") @Valid Truyen truyen,
                                             @RequestParam("avatar") MultipartFile avatarFile,
                                             BindingResult result,
                                             Model model,
@@ -158,76 +173,9 @@ public class MangaController {
         }
     }
 
-
-
-
-    // Xóa truyện
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<String> deleteTruyen(@PathVariable long id) {
-        truyenService.deleteTruyen(id);
-        return new ResponseEntity<>("Truyện đã được xóa thành công", HttpStatus.OK);
-    }
-    @PostMapping("/delete")
-    public ResponseEntity<String> deleteTruyen(@RequestParam("truyenId") Long truyenId,
-                                               Authentication authentication) {
-        try {
-            // Nhận thông tin người dùng hiện tại từ Authentication
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String currentUsername = userDetails.getUsername();
-
-            // Lấy ID của người dùng từ service
-            Long currentUserId = userService.getUserIdByUsername(currentUsername);
-
-            // Kiểm tra xem truyện có thuộc về người dùng hiện tại không
-            Truyen truyen = truyenService.getTruyenById(truyenId);
-
-            if (truyen != null && truyen.getUser() != null && truyen.getUser().getId().equals(currentUserId)) {
-                // Xóa truyện nếu nó thuộc về người dùng hiện tại
-                truyenService.deleteTruyen(truyenId);
-                return new ResponseEntity<>("Truyện đã được xóa thành công", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Không tìm thấy hoặc bạn không có quyền xóa truyện này", HttpStatus.BAD_REQUEST);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi khi xóa Truyện: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    // Chỉnh sửa truyện
-    // Lấy thông tin của một manga dựa vào ID
-    @GetMapping("/edit/{id}")
-    public String editTruyenForm(@PathVariable("id") Long id, Model model) {
-        Optional<Truyen> editTruyen = Optional.ofNullable(truyenService.getTruyenById(id));
-        if (editTruyen.isPresent()) {
-            Truyen truyen = editTruyen.get();
-            model.addAttribute("truyen", truyen);
-            model.addAttribute("categories", categoryService.getAllCategories());
-            model.addAttribute("selectedCategoryId", truyen.getCategory().getId());
-            return "truyen/edit";
-        } else {
-            return "not-found";
-        }
-    }
-
-    @PostMapping("/edit")
-    public String editTruyen(@ModelAttribute("truyen") Truyen truyen) {
-        truyenService.updateTruyen(truyen);
-        return "redirect:/list"; // Sửa đường dẫn chuyển hướng
-    }
-
-
-    @GetMapping("/list")
-    public String listTruyens(Model model) {
-        List<Truyen> truyens = truyenService.getAllTruyens();
-        model.addAttribute("truyens", truyens);
-        return "truyen/list";
-    }
-
-    //<----------------------------------------------------------------------------------------->
-    //Chương và Ảnh
-    // Endpoint để tạo một Chương mới cho Truyện
-    @PostMapping("/add-chuong")
+    @PostMapping("/{userId}/CTV-add-chuong")
     public ResponseEntity<String> createChuong(
+            @PathVariable("userId") Long userId,
             @ModelAttribute("chuong") @Valid Chuong chuong,
             @RequestParam("anhChuong") MultipartFile[] anhFiles,
             BindingResult result,
@@ -235,6 +183,21 @@ public class MangaController {
             Authentication authentication
     ) {
         try {
+            // Lấy thông tin người dùng đăng nhập
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            // Kiểm tra xem người dùng đăng nhập có đúng là chủ sở hữu của truyện hay không
+            if (!userId.equals(userService.getUserIdByUsername(userDetails.getUsername()))) {
+                return new ResponseEntity<>("Người dùng không có quyền thêm chương cho truyện này", HttpStatus.FORBIDDEN);
+            }
+
+            // Lọc danh sách truyện chỉ hiển thị những truyện thuộc về người dùng
+            List<Truyen> truyens = truyenService.getTruyensByUserId(userId);
+
+            // Kiểm tra xem chương được thêm có thuộc về truyện của người dùng hay không
+            if (chuong.getTruyen() == null || !truyens.contains(chuong.getTruyen())) {
+                return new ResponseEntity<>("Chương không thuộc về truyện của người dùng", HttpStatus.BAD_REQUEST);
+            }
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (chuong.getTruyen() == null || chuong.getTruyen().getId() == null) {
                 return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
@@ -269,7 +232,6 @@ public class MangaController {
 
 
             // Liên kết chương với người dùng hiện tại
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String currentUsername = userDetails.getUsername();
 
             // Bạn có thể sử dụng username để lấy ID của người dùng từ service
@@ -309,17 +271,19 @@ public class MangaController {
 
 
     // Endpoint để lấy tất cả các Chương của một Truyện
-            @GetMapping("/add-chuong")
-            public String showAddChuongForm( Model model) {
+    @GetMapping("/{userId}/CTV-add-chuong")
+    public String showAddChuongForm( @PathVariable("userId") Long userId, Model model, Authentication authentication) {
 
 
-                Chuong chuong = new Chuong();
-
-                model.addAttribute("chuong", chuong);
-                model.addAttribute("truyen", truyenService.getAllTruyens());
-
-                return "truyen/add-chuong";
-            }
+        Chuong chuong = new Chuong();
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("chuong", chuong);
+        model.addAttribute("truyen", truyenService.getAllTruyens());
+    // Lọc danh sách truyện chỉ hiển thị những truyện thuộc về người dùng
+        List<Truyen> userTruyens = truyenService.getTruyensByUserId(userId);
+        model.addAttribute("truyen", userTruyens);
+        return "CTV/CTV-add-chuong";
+    }
     // Endpoint để tải lên một ảnh cho một Chương
     private String saveImageToDatabase(MultipartFile image, String tenTruyen, String tenChuong) throws IOException {
         // Kiểm tra kích thước tệp
@@ -355,29 +319,4 @@ public class MangaController {
         return "/" + directoryPath.toString() + "/" + fileName;
     }
 
-
-    // Endpoint để lấy tất cả các ảnh của một Chương
-    @GetMapping("/{truyenId}/list-chuong")
-    public String getTruyenAndChuongs(@PathVariable Long truyenId, Model model) {
-        // Kiểm tra xem truyen có tồn tại hay không, nếu không thì trả về 404
-        Truyen truyen = truyenService.getTruyenById(truyenId);
-        if (truyen == null) {
-            return "error/404";  // Hoặc chuyển hướng đến trang lỗi 404
-        }
-
-        // Lấy danh sách chương của truyen
-        List<Chuong> chuong = chuongService.getChuongsByTruyenId(truyenId);
-
-        // Đưa thông tin truyen và danh sách chuong vào model để hiển thị trên view
-        model.addAttribute("truyen", truyen);
-        model.addAttribute("chuong", chuong);
-
-        // Trả về tên của view template hiển thị thông tin truyen và danh sách chuong
-        return "truyen/list-chuong";
-    }
-
-    // ...
 }
-
-
-

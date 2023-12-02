@@ -17,7 +17,7 @@ public class TruyenService {
     public Truyen getTruyenById(Long id){
         return truyenRepository.findById(id).orElse(null);
     }
-    public List<Truyen> getTruyensByUserId(Long userId){return truyenRepository.findAllById(userId);};
+    public List<Truyen> getTruyensByUserId(Long userId){return truyenRepository.findAllByUser_Id(userId);};
 
     public void addTruyen(Truyen truyen){
         truyenRepository.save(truyen);
