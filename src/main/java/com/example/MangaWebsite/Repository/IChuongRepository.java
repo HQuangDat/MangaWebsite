@@ -5,6 +5,7 @@ import com.example.MangaWebsite.Model.Truyen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IChuongRepository extends JpaRepository<Chuong, Long> {
     List<Chuong> findAllById(Long truyenId);
@@ -12,4 +13,6 @@ public interface IChuongRepository extends JpaRepository<Chuong, Long> {
     List<Chuong> findAllByUserId(Long userId);
 
     List<Chuong> findAllByTruyenId(Long truyenId);
+
+    Optional<Chuong> getChuongById(Long chuongId);
 }

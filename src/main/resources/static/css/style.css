@@ -1237,6 +1237,30 @@ label.label-custom{
 		font-size: 20px !important;
 	}
 }
+.chapter-list {
+	max-width: 400px;
+	margin: auto;
+}
+
+.chapter-list h3 {
+	color: #333;
+}
+
+.chapter-list ul {
+	list-style: none;
+	padding: 0;
+}
+
+.chapter-list li {
+	border: 1px solid #ddd;
+	margin-bottom: 5px;
+	padding: 10px;
+	background-color: #f9f9f9;
+}
+
+.chapter-list p {
+	color: #777;
+}
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width: 1200px) {

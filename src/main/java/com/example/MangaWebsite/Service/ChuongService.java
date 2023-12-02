@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChuongService {
@@ -38,4 +39,9 @@ public class ChuongService {
     public void addChuongs(Chuong chuong) { // Kiểm tra xem user đã được thiết lập hay chưa
         chuongRepository.save(chuong);
     }
+    public boolean isChuongBelongsToTruyen(Long truyenId, Long chuongId) {
+        Optional<Chuong> chuong = chuongRepository.getChuongById(chuongId);
+        return chuong.isPresent() && chuong.get().getTruyen().getId().equals(truyenId);
+    }
+
 }

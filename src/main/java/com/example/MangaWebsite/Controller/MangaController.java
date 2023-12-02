@@ -262,7 +262,7 @@ public class MangaController {
 
             // Lưu các URL của ảnh vào table Anh
             for (MultipartFile image : anhFiles) {
-                String imageUrl = saveImageToDatabase(image, chuong.getTruyen().getTenTruyen(), chuong.getId());
+                String imageUrl = saveImageToDatabase(image, chuong.getTruyen().getTenTruyen(), chuong.getTenChuong());
                 Anh anh = new Anh();
                 anh.setChuong(chuong);
                 anh.setDuongDan(imageUrl);
@@ -295,6 +295,17 @@ public class MangaController {
             }
             // Thêm chương
             chuongService.addChuongs(chuong);
+            // Lấy thông tin truyện từ chương vừa thêm
+            Truyen truyen = chuong.getTruyen();
+
+            // Lấy số lượng chương hiện tại của truyện
+            int soLuongChuongHienTai = truyen.getSoChuong();
+
+            // Cập nhật số lượng chương
+            truyen.setSoChuong(soLuongChuongHienTai + 1);
+
+            // Lưu truyện đã cập nhật vào cơ sở dữ liệu
+            truyenService.updateTruyen(truyen);
 
             return new ResponseEntity<>("Thêm chương và ảnh thành công", HttpStatus.OK);
         } catch (IOException e) {
@@ -316,7 +327,7 @@ public class MangaController {
                 return "truyen/add-chuong";
             }
     // Endpoint để tải lên một ảnh cho một Chương
-    private String saveImageToDatabase(MultipartFile image, String tenTruyen, Long chuongId) throws IOException {
+    private String saveImageToDatabase(MultipartFile image, String tenTruyen, String tenChuong) throws IOException {
         // Kiểm tra kích thước tệp
         long maxSize = 10 * 1024 * 1024; // 10MB
         if (image.getSize() > maxSize) {
@@ -330,7 +341,7 @@ public class MangaController {
         }
 
         // Xây dựng đường dẫn thư mục
-        Path directoryPath = Paths.get("imgtaive", tenTruyen, chuongId.toString());
+        Path directoryPath = Paths.get("imgtaive", tenTruyen, tenChuong);
 
         // Lưu ảnh vào thư mục
         String fileName = image.getOriginalFilename();
@@ -352,12 +363,23 @@ public class MangaController {
 
 
     // Endpoint để lấy tất cả các ảnh của một Chương
-    @GetMapping("/{truyenId}/chuongs/{chuongId}/anhs")
-    public List<Anh> getAnhsByChuongId(@PathVariable Long truyenId, @PathVariable Long chuongId) {
-        // Lấy danh sách các ảnh cho chương có id chuongId của truyện có id truyenId
-        // ...
+    @GetMapping("/{truyenId}/list-chuong")
+    public String getTruyenAndChuongs(@PathVariable Long truyenId, Model model) {
+        // Kiểm tra xem truyen có tồn tại hay không, nếu không thì trả về 404
+        Truyen truyen = truyenService.getTruyenById(truyenId);
+        if (truyen == null) {
+            return "error/404";  // Hoặc chuyển hướng đến trang lỗi 404
+        }
 
-        return anhService.getAnhsByChuongId(chuongId);
+        // Lấy danh sách chương của truyen
+        List<Chuong> chuong = chuongService.getChuongsByTruyenId(truyenId);
+
+        // Đưa thông tin truyen và danh sách chuong vào model để hiển thị trên view
+        model.addAttribute("truyen", truyen);
+        model.addAttribute("chuong", chuong);
+
+        // Trả về tên của view template hiển thị thông tin truyen và danh sách chuong
+        return "truyen/list-chuong";
     }
 
     // ...
