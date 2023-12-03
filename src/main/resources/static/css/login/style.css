@@ -1928,6 +1928,72 @@ ol {
 }
 
 /*---------------------
+  Chương
+-----------------------*/
+
+.container {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+
+.reading-control {
+	position: sticky;
+	top: 0;
+	background: none repeat scroll 0 0 #072a4f;
+	margin-bottom: 10px;
+	padding: 10px;
+	text-align: center;
+	z-index: 100;
+	overflow: visible;
+}
+
+.chapter-nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.chapter-nav a {
+	margin: 0 10px;
+}
+
+.select-chapter {
+	z-index: 200;
+}
+
+.bottom {
+	background: none repeat scroll 0 0 #072a4f;
+	border-bottom: 1px solid #072a4f;
+	overflow: hidden;
+}
+
+.chapter-nav-bottom {
+	margin: 5px 0;
+}
+
+#toTop {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	background-color: red;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 4px;
+}
+
+#toTop:hover {
+	background-color: #555;
+}
+
+/*---------------------
   Footer
 -----------------------*/
 

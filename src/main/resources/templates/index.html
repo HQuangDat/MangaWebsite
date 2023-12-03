@@ -29,6 +29,7 @@
 </head>
 
 <body>
+    <button th:onclick="topFunction()" th:id="toTop">Top</button>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -696,13 +697,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="footer__logo">
-                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    <a th:href="@{/}"><img th:src="@{img/Logo.png}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="footer__nav">
                     <ul>
-                        <li class="active"><a href="./index.html">Homepage</a></li>
+                        <li class="active"><a th:href="@{/}">Homepage</a></li>
                         <li><a href="./categories.html">Categories</a></li>
                         <li><a href="./blog.html">Our Blog</a></li>
                         <li><a href="#">Contacts</a></li>
@@ -734,7 +735,27 @@
     <script th:src="@{js/login/jquery.slicknav.js}"></script>
     <script th:src="@{js/login/owl.carousel.min.js}"></script>
     <script th:src="@{js/login/main.js}"></script>
+    <!--    Back to top button-->
+    <script>
+        // Khởi tạo nút
+        let mybutton = document.getElementById("toTop");
 
+        // Hiện nút khi người dụng cuộn xuống 20px
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 
 </body>
 

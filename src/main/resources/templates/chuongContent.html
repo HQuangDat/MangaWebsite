@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+<head>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <title>Nội dung chương</title>
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{css/login/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/plyr.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/login/style.css}" type="text/css">
+</head>
+<body>
+    <button th:onclick="topFunction()" th:id="toTop">Top</button>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a th:href="@{/}">
+                            <img th:src="@{img/Logo.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="./index.html">Homepage</a></li>
+                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                                    <ul class="dropdown">
+                                        <li><a href="./categories.html">Categories</a></li>
+                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
+                                        <li><a href="./blog-details.html">Blog Details</a></li>
+                                        <li><a th:href="@{/Register}">Sign Up</a></li>
+                                        <li><a th:href="@{/login}">Login</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./blog.html">Our Blog</a></li>
+                                <li><a href="#">Contacts</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="header__right">
+                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="icon_profile"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!--    Thanh chuyển chương-->
+    <div class="container">
+        <div class="reading-control">
+            <div class="chapter-nav" id="chapterNav">
+                <a class="home" th:href="@{/}" title="Trang chủ"><i class="fa fa-home"></i></a>
+                <a href="#" class="prev a_prev"><i class="fa fa-chevron-left"></i></a>
+                <select name="ctl00$mainContent$ddlSelectChapter" id="ctl00_mainContent_ddlSelectChapter" class="select-chapter">
+                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 107</option>
+                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 106</option>
+                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 108</option>
+                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 109</option>
+                </select>
+                <a href="#" class="next a_next disabled"><i class="fa fa-chevron-right"></i></a>
+            </div>
+        </div>
+        <div class="content" style="text-align: center;">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+        </div>
+        <div class="bottom">
+            <div class="chapter-nav-bottom text-center" id="chapterNavBottom">
+                <a href="https://www.nettruyenus.com/truyen-tranh/boku-girl/chap-107/450055" class="btn btn-danger prev"><em class="fa fa-chevron-left"></em> Chap trước</a>
+                <a href="#" class="btn btn-danger next">Chap sau <em class="fa fa-chevron-right"></em></a>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer__logo">
+                        <a th:href="@{/}"><img th:src="@{img/Logo.png}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer__nav">
+                        <ul>
+                            <li class="active"><a th:href="@{/}">Homepage</a></li>
+                            <li><a href="./categories.html">Categories</a></li>
+                            <li><a href="./blog.html">Our Blog</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Js Plugins -->
+    <script th:src="@{js/login/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{js/login/bootstrap.min.js}"></script>
+    <script th:src="@{js/login/player.js}"></script>
+    <script th:src="@{js/login/jquery.nice-select.min.js}"></script>
+    <script th:src="@{js/login/mixitup.min.js}"></script>
+    <script th:src="@{js/login/jquery.slicknav.js}"></script>
+    <script th:src="@{js/login/owl.carousel.min.js}"></script>
+    <script th:src="@{js/login/main.js}"></script>
+<!--    Back to top button-->
+    <script>
+        // Khởi tạo nút
+        let mybutton = document.getElementById("toTop");
+
+        // Hiện nút khi người dụng cuộn xuống 20px
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

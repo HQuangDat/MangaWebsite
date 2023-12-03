@@ -29,6 +29,7 @@
 </head>
 
 <body>
+    <button th:onclick="topFunction()" th:id="toTop">Top</button>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -84,7 +85,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a th:href="@{/}"><i class="fa fa-home"></i> Home</a>
                         <a href="./categories.html">Categories</a>
                         <span>Romance</span>
                     </div>
@@ -298,7 +299,27 @@
         <script th:src="@{js/login/jquery.slicknav.js}"></script>
         <script th:src="@{js/login/owl.carousel.min.js}"></script>
         <script th:src="@{js/login/main.js}"></script>
+        <!--    Back to top button-->
+        <script>
+            // Khởi tạo nút
+            let mybutton = document.getElementById("toTop");
 
+            // Hiện nút khi người dụng cuộn xuống 20px
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                }
+            }
+
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
     </body>
 
     </html>

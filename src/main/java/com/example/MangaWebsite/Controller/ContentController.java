@@ -25,9 +25,24 @@ public class ContentController {
     @Autowired
     private ChuongService chuongService;
 
-    @GetMapping("/Content")
+//    Chuong test
+//    @GetMapping("/chuong/{id}")
+//    public String Content(@PathVariable("id") Long id, Model model){
+//        Optional<Chuong> chuongOptional = Optional.ofNullable(chuongService.getChuongById(id));
+//        List<Chuong> chuongs = chuongService.getAllChuongs();
+//        model.addAttribute("chuongs", chuongs);
+//        if (chuongOptional.isPresent()) {
+//            Chuong chuong = chuongOptional.get();
+//            model.addAttribute("chuong", chuong);
+//            return "/chuongContent";
+//        }
+//        else
+//            return "redirect:/error";
+//    }
+
+    @GetMapping("/chuong")
     public String Content(){
-        return "Content";
+            return "/chuongContent";
     }
 
     //edit
