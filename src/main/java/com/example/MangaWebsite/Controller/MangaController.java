@@ -112,26 +112,21 @@ public class MangaController {
                 return new ResponseEntity<>("Tên file lỗi", HttpStatus.BAD_REQUEST);
             }
             // Xây dựng đường dẫn thư mục
-            Path directoryPath = Paths.get("D:/GCWT2", truyen.getTenTruyen());
+            String fileName = avatarFile.getOriginalFilename();
+            String sanitizedFileName = sanitizeFileName(fileName);
+
+            Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(truyen.getTenTruyen()));
 
             // Lưu ảnh vào thư mục
-            String fileName = avatarFile.getOriginalFilename();
-            Path filePath = directoryPath.resolve(fileName);
-
-
+            Path filePath = directoryPath.resolve(sanitizedFileName);
+            String filepath = sanitizeFileName(truyen.getTenTruyen()) + sanitizedFileName;
             // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
-
             if (Files.notExists(directoryPath)) {
                 Files.createDirectories(directoryPath);
             }
 
-            try {
-
-                // Ghi tệp vào đường dẫn
-                Files.write(filePath, avatarFile.getBytes());
-            } catch (IOException e) {
-                throw new IOException("Lỗi khi lưu ảnh: " + e.getMessage());
-            }
+            // Ghi tệp vào đường dẫn
+            Files.write(filePath, avatarFile.getBytes());
 
             // Nhận thông tin người dùng hiện tại từ SecurityContext
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -144,8 +139,6 @@ public class MangaController {
             User currentUser = userService.getUserbyId(currentUserId);
             truyen.setUser(currentUser);
 
-
-
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
                 return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
@@ -154,8 +147,9 @@ public class MangaController {
             if (selectedCategory == null) {
                 return new ResponseEntity<>("Danh mục không tồn tại", HttpStatus.BAD_REQUEST);
             }
+
             // Lưu thông tin vào đối tượng truyen
-            truyen.setAvatarFileName("/" +filePath.toString() + "/" + fileName);
+            truyen.setAvatarFileName(filepath);
 
             // Đặt danh mục trong đối tượng truyen
             truyen.setCategory(selectedCategory);
@@ -169,7 +163,16 @@ public class MangaController {
         }
     }
 
+    private String sanitizeFileName(String fileName) {
+        // Chuyển đổi tên file thành không dấu và thay thế khoảng trắng bằng dấu _
+        String fileNameWithoutAccent = convertToAscii(fileName);
+        return fileNameWithoutAccent.replaceAll("\\s", "_");
+    }
 
+    private String convertToAscii(String input) {
+        return java.text.Normalizer.normalize(input, java.text.Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+    }
 
 
     // Xóa truyện
@@ -346,16 +349,20 @@ public class MangaController {
         }
 
         // Xây dựng đường dẫn thư mục
-        Path directoryPath = Paths.get("D:/GCWT2", tenTruyen, tenChuong);
+        String fileName = image.getOriginalFilename();
+        String sanitizedFileName = sanitizeFileName(fileName);
+
+        Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(tenTruyen),sanitizeFileName(tenChuong));
 
         // Lưu ảnh vào thư mục
-        String fileName = image.getOriginalFilename();
-        Path filePath = directoryPath.resolve(fileName);
+        Path filePath = directoryPath.resolve(sanitizedFileName);
+
+        // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
+        if (Files.notExists(directoryPath)) {
+            Files.createDirectories(directoryPath);
+        }
 
         try {
-            // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
-            Files.createDirectories(directoryPath);
-
             // Ghi tệp vào đường dẫn
             Files.write(filePath, image.getBytes());
         } catch (IOException e) {
@@ -363,7 +370,7 @@ public class MangaController {
         }
 
         // Trả về URL của ảnh (đường dẫn tương đối)
-        return "/" + directoryPath.toString() + "/" + fileName;
+        return sanitizeFileName(tenTruyen)+"/"+sanitizeFileName(tenChuong)+"/"+sanitizedFileName;
     }
 
 

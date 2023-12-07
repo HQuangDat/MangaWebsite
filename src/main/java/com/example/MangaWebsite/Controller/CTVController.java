@@ -122,22 +122,22 @@ public class CTVController {
             if (!Objects.requireNonNull(avatarFile.getContentType()).startsWith("image/")) {
                 return new ResponseEntity<>("Loại tệp không được hỗ trợ, vui lòng chọn tệp hình ảnh", HttpStatus.BAD_REQUEST);
             }
-
-// Lưu tên tệp và đường dẫn thực tế
+            // Xây dựng đường dẫn thư mục
             String fileName = avatarFile.getOriginalFilename();
-            Path filePath = Paths.get("imgtaive", fileName);
+            String sanitizedFileName = sanitizeFileName(fileName);
 
-            try {
-                // Đảm bảo thư mục "imgtaive" đã tồn tại
-                if (!Files.exists(filePath.getParent())) {
-                    Files.createDirectories(filePath.getParent());
-                }
+            Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(truyen.getTenTruyen()));
 
-                // Ghi tệp vào đường dẫn
-                Files.write(filePath, avatarFile.getBytes());
-            } catch (IOException e) {
-                return new ResponseEntity<>("Lỗi khi lưu tệp: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            // Lưu ảnh vào thư mục
+            Path filePath = directoryPath.resolve(sanitizedFileName);
+
+            // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
+            if (Files.notExists(directoryPath)) {
+                Files.createDirectories(directoryPath);
             }
+
+            // Ghi tệp vào đường dẫn
+            Files.write(filePath, avatarFile.getBytes());
             // Nhận thông tin người dùng hiện tại từ SecurityContext
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String currentUsername = userDetails.getUsername();
@@ -151,8 +151,6 @@ public class CTVController {
 
             // Lưu thông tin vào đối tượng truyen
             truyen.setAvatarFileName(fileName);
-            truyen.setAvatarFilePath(filePath.toString());
-
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
                 return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
@@ -173,6 +171,16 @@ public class CTVController {
         }
     }
 
+    private String sanitizeFileName(String fileName) {
+        // Chuyển đổi tên file thành không dấu và thay thế khoảng trắng bằng dấu _
+        String fileNameWithoutAccent = convertToAscii(fileName);
+        return fileNameWithoutAccent.replaceAll("\\s", "_");
+    }
+
+    private String convertToAscii(String input) {
+        return java.text.Normalizer.normalize(input, java.text.Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+    }
     @PostMapping("/{userId}/CTV-add-chuong")
     public ResponseEntity<String> createChuong(
             @PathVariable("userId") Long userId,
@@ -293,18 +301,21 @@ public class CTVController {
         if (!Objects.requireNonNull(image.getContentType()).startsWith("image/")) {
             throw new IOException("Loại tệp không được hỗ trợ, vui lòng chọn tệp hình ảnh");
         }
-
         // Xây dựng đường dẫn thư mục
-        Path directoryPath = Paths.get("imgtaive", tenTruyen, tenChuong);
+        String fileName = image.getOriginalFilename();
+        String sanitizedFileName = sanitizeFileName(fileName);
+
+        Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(tenTruyen),sanitizeFileName(tenChuong));
 
         // Lưu ảnh vào thư mục
-        String fileName = image.getOriginalFilename();
-        Path filePath = directoryPath.resolve(fileName);
+        Path filePath = directoryPath.resolve(sanitizedFileName);
+
+        // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
+        if (Files.notExists(directoryPath)) {
+            Files.createDirectories(directoryPath);
+        }
 
         try {
-            // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
-            Files.createDirectories(directoryPath);
-
             // Ghi tệp vào đường dẫn
             Files.write(filePath, image.getBytes());
         } catch (IOException e) {
@@ -312,7 +323,7 @@ public class CTVController {
         }
 
         // Trả về URL của ảnh (đường dẫn tương đối)
-        return "/" + directoryPath.toString() + "/" + fileName;
+        return sanitizeFileName(tenTruyen)+"/"+sanitizeFileName(tenChuong)+"/"+sanitizedFileName;
     }
 
 }
