@@ -2339,6 +2339,36 @@ ol {
 	}
 }
 
+
+ .chapter-list {
+	 list-style: none;
+	 padding: 0;
+ }
+
+.chapter-list-item {
+
+	margin-bottom: 8px;
+}
+
+.chapter-list-item a {
+	text-decoration: none;
+	color: #333; /* Màu chữ */
+	display: block;
+	padding: 8px;
+	border: 1px solid #ddd; /* Viền */
+	border-radius: 4px; /* Góc bo tròn */
+	background-color: #f9f9f9; /* Màu nền */
+	transition: background-color 0.3s;
+}
+
+.chapter-list-item a:hover {
+	background-color: #e0e0e0; /* Màu nền khi hover */
+}
+.date-time {
+	margin-left: auto; /* Đẩy ngày tháng về bên phải */
+	font-style: italic; /* (Tùy chọn) Định dạng chữ in nghiêng cho ngày tháng */
+	color: #777; /* (Tùy chọn) Đặt màu chữ để nó không quá nổi bật */
+}
 /* Small Device = 320px */
 
 @media only screen and (max-width: 479px) {

@@ -194,10 +194,6 @@ public class CTVController {
             // Lọc danh sách truyện chỉ hiển thị những truyện thuộc về người dùng
             List<Truyen> truyens = truyenService.getTruyensByUserId(userId);
 
-            // Kiểm tra xem chương được thêm có thuộc về truyện của người dùng hay không
-            if (chuong.getTruyen() == null || !truyens.contains(chuong.getTruyen())) {
-                return new ResponseEntity<>("Chương không thuộc về truyện của người dùng", HttpStatus.BAD_REQUEST);
-            }
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (chuong.getTruyen() == null || chuong.getTruyen().getId() == null) {
                 return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
@@ -279,7 +275,7 @@ public class CTVController {
         model.addAttribute("authentication", authentication);
         model.addAttribute("chuong", chuong);
         model.addAttribute("truyen", truyenService.getAllTruyens());
-    // Lọc danh sách truyện chỉ hiển thị những truyện thuộc về người dùng
+    // Lọc danh sách truyện chỉ hiển thị những truyện thuộc về người dùng0
         List<Truyen> userTruyens = truyenService.getTruyensByUserId(userId);
         model.addAttribute("truyen", userTruyens);
         return "CTV/CTV-add-chuong";

@@ -18,14 +18,17 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" th:href="@{css/login/bootstrap.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/font-awesome.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/elegant-icons.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/plyr.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/nice-select.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/owl.carousel.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/slicknav.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/plyr.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/style.css}" type="text/css">
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
+
 </head>
 
 <body>
@@ -42,7 +45,7 @@
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a th:href="@{/}">
-                            <img th:src="@{img/Logo.png}" alt="">
+                            <img th:src="@{/img/Logo.png}" alt="">
                         </a>
                     </div>
                 </div>
@@ -50,7 +53,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Homepage</a></li>
+                                <li class="active "><a href="./index.html">Homepage</a></li>
                                 <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="./categories.html">Categories</a></li>
@@ -69,7 +72,7 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a href="#" class="search-switch"><span class="fas fa-search"></span></a>
                         <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="icon_profile"></span></a>
                     </div>
                 </div>
@@ -85,7 +88,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a th:href="@{/}"><i class="fa fa-home"></i> Home</a>
+                        <a th:href="@{/}"><i class="fas fa-home"></i> Home</a>
                         <a href="./categories.html">Categories</a>
                         <span>Romance</span>
                     </div>
@@ -101,9 +104,12 @@
             <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" th:object="${truyen}" th:attr="data-setbg=${truyen.getAvatarFilePath()}">
-                            <div class="comment" th:value="${truyen.getSoCmt()}"><i class="fa fa-comments"></i></div>
-                            <div class="view" th:value="${truyen.getSoLike()}"><i class="fa fa-eye"></i></div>
+                        <div class="anime__details__pic set-bg"     >
+                            <img th:src="@{'imgtaive' + ${truyen.avatarFileName}}" alt="Avatar">
+                            " alt="Avatar">
+
+                        <div class="comment" th:value="${truyen.getSoCmt()}"><i class="fa fa-comments"></i></div>
+                            <div class="view" th:value="${truyen.getSoLike()}"><i class="fas fa-eye"></i></div>
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -113,11 +119,11 @@
                             </div>
                             <div class="anime__details__rating">
                                 <div class="rating">
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
+                                    <a href="#"><i class="fas fa-star"></i></a>
+                                    <a href="#"><i class="fas fa-star"></i></a>
+                                    <a href="#"><i class="fas fa-star"></i></a>
+                                    <a href="#"><i class="fas fa-star"></i></a>
+                                    <a href="#"><i class="fas fa-star-half-o"></i></a>
                                 </div>
                                 <span>1.029 Votes</span>
                             </div>
@@ -126,35 +132,37 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Type:</span> TV Series</li>
-                                            <li><span>Studios:</span> Lerche</li>
-                                            <li th:value="${truyen.getNgayDang()}"><span>Ngày đăng:</span></li>
-                                            <li th:value="${truyen.getTrangThaiTruyenid().getTentrangthai()}"><span>Trạng thái:</span></li>
-                                            <li th:value="${truyen.getCategory().getTenTheLoai()}"><span>Genre:</span></li>
+                                            <li><span>Ngày đăng:</span> <span  th:text="${#temporals.format(truyen.ngayDang, 'dd-MM-yyyy')}"></span></li>
+                                            <li><span>Trạng thái:</span> <span th:text="${truyen.getTrangThaiTruyenid().getTentrangthai()}"></span></li>
+                                            <li><span>Genre:</span> <span th:text="${truyen.getCategory().getTenTheLoai()}"></span></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Scores:</span> 7.31 / 1,515</li>
                                             <li><span>Rating:</span> 8.5 / 161 times</li>
-                                            <li><span>Duration:</span> 24 min/ep</li>
-                                            <li><span>Quality:</span> HD</li>
                                             <li><span>Views:</span> 131,541</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                <a href="#" class="watch-btn"><span>Watch Now</span> <i
+                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Theo dõi</a>
+                                <a href="#" class="watch-btn"><span>Xem Ngay</span> <i
                                     class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <a th:each="chuong : ${chuongs}" th:text="${chuong.getTenChuong()}" th:href="@{/}"></a>
-                    </div>
+                <div>
+                    <ul class="chapter-list">
+                        <div th:each="chuong : ${chuongs}" class="chapter-list-item">
+                            <a th:href="@{/chuong/{id}(id=${chuong.getId()})}">
+                                <span th:text="${chuong.getTenChuong()}"></span>
+                                <span class="date-time"  th:text="${#temporals.format(chuong.getNgayDang(), 'dd/MM/yyyy HH:mm')}"></span>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 col-md-8">
@@ -164,7 +172,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-1.jpg" alt="">
+                                    <img src="/img/anime/review-1.jpg" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
@@ -174,7 +182,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-2.jpg" alt="">
+                                    <img src="/img/anime/review-2.jpg" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Lewis Mann - <span>5 Hour ago</span></h6>
@@ -183,7 +191,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-3.jpg" alt="">
+                                    <img src="/img/anime/review-3.jpg" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Louis Tyler - <span>20 Hour ago</span></h6>
@@ -192,7 +200,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-4.jpg" alt="">
+                                    <img src="/img/anime/review-4.jpg" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
@@ -202,16 +210,16 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-5.jpg" alt="">
+                                    <img src="/img/anime/review-5.jpg" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
+                                    <p> Finally it came out ages ago</p>
                                 </div>
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-6.jpg" alt="">
+                                    <img src="/img/anime/review-6.jpg" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Louis Tyler - <span>20 Hour ago</span></h6>
@@ -236,7 +244,7 @@
                             </div>
                             <div class="product__sidebar__view__item set-bg" th:attr="data-setbg=${truyen.getAvatarFilePath()}">
                                 <div class="ep" th:value="${truyen.getSoChuong()}"></div>
-                                <div class="view" th:value="${truyen.getSoLike()}"><i class="fa fa-eye"></i></div>
+                                <div class="view" th:value="${truyen.getSoLike()}"><i class="fas fa-eye"></i></div>
                                 <h5><a th:href="@{/truyenDetail/{id}(id=${truyen.getId()})}" th:value="${truyen.getTenTruyen()}"></a></h5>
                             </div>
                         </div>
@@ -255,7 +263,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <<div class="footer__logo">
-                        <a th:href="@{/}"><img th:src="@{img/Logo.png}" alt=""></a>
+                        <a th:href="@{/}"><img th:src="@{/img/Logo.png}" alt=""></a>
                     </div>
                     </div>
                     <div class="col-lg-6">
@@ -291,14 +299,14 @@
         <!-- Search model end -->
 
         <!-- Js Plugins -->
-        <script th:src="@{js/login/jquery-3.3.1.min.js}"></script>
-        <script th:src="@{js/login/bootstrap.min.js}"></script>
-        <script th:src="@{js/login/player.js}"></script>
-        <script th:src="@{js/login/jquery.nice-select.min.js}"></script>
-        <script th:src="@{js/login/mixitup.min.js}"></script>
-        <script th:src="@{js/login/jquery.slicknav.js}"></script>
-        <script th:src="@{js/login/owl.carousel.min.js}"></script>
-        <script th:src="@{js/login/main.js}"></script>
+        <script th:src="@{/js/login/jquery-3.3.1.min.js}"></script>
+        <script th:src="@{/js/login/bootstrap.min.js}"></script>
+        <script th:src="@{/js/login/player.js}"></script>
+        <script th:src="@{/js/login/jquery.nice-select.min.js}"></script>
+        <script th:src="@{/js/login/mixitup.min.js}"></script>
+        <script th:src="@{/js/login/jquery.slicknav.js}"></script>
+        <script th:src="@{/js/login/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/login/main.js}"></script>
         <!--    Back to top button-->
         <script>
             // Khởi tạo nút

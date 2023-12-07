@@ -43,6 +43,10 @@ public class Truyen {
 
     @Column(name = "so_cmt",nullable = true)
     private int SoCmt;
+
+    @Column(name = "so_rating",nullable = true)
+    private int SoRating;
+
     @Column(name = "mieu_ta")
     private String moTaNoiDung;
 

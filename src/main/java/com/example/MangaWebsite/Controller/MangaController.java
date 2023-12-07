@@ -107,22 +107,32 @@ public class MangaController {
             if (!Objects.requireNonNull(avatarFile.getContentType()).startsWith("image/")) {
                 return new ResponseEntity<>("Loại tệp không được hỗ trợ, vui lòng chọn tệp hình ảnh", HttpStatus.BAD_REQUEST);
             }
+            if(avatarFile.getOriginalFilename() == null){
 
-// Lưu tên tệp và đường dẫn thực tế
+                return new ResponseEntity<>("Tên file lỗi", HttpStatus.BAD_REQUEST);
+            }
+            // Xây dựng đường dẫn thư mục
+            Path directoryPath = Paths.get("D:/GCWT2", truyen.getTenTruyen());
+
+            // Lưu ảnh vào thư mục
             String fileName = avatarFile.getOriginalFilename();
-            Path filePath = Paths.get("imgtaive", fileName);
+            Path filePath = directoryPath.resolve(fileName);
+
+
+            // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
+
+            if (Files.notExists(directoryPath)) {
+                Files.createDirectories(directoryPath);
+            }
 
             try {
-                // Đảm bảo thư mục "imgtaive" đã tồn tại
-                if (!Files.exists(filePath.getParent())) {
-                    Files.createDirectories(filePath.getParent());
-                }
 
                 // Ghi tệp vào đường dẫn
                 Files.write(filePath, avatarFile.getBytes());
             } catch (IOException e) {
-                return new ResponseEntity<>("Lỗi khi lưu tệp: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+                throw new IOException("Lỗi khi lưu ảnh: " + e.getMessage());
             }
+
             // Nhận thông tin người dùng hiện tại từ SecurityContext
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String currentUsername = userDetails.getUsername();
@@ -134,9 +144,7 @@ public class MangaController {
             User currentUser = userService.getUserbyId(currentUserId);
             truyen.setUser(currentUser);
 
-            // Lưu thông tin vào đối tượng truyen
-            truyen.setAvatarFileName(fileName);
-            truyen.setAvatarFilePath(filePath.toString());
+
 
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
@@ -146,6 +154,9 @@ public class MangaController {
             if (selectedCategory == null) {
                 return new ResponseEntity<>("Danh mục không tồn tại", HttpStatus.BAD_REQUEST);
             }
+            // Lưu thông tin vào đối tượng truyen
+            truyen.setAvatarFileName("/" +filePath.toString() + "/" + fileName);
+
             // Đặt danh mục trong đối tượng truyen
             truyen.setCategory(selectedCategory);
             truyen.setNgayDang(LocalDateTime.now());
@@ -335,7 +346,7 @@ public class MangaController {
         }
 
         // Xây dựng đường dẫn thư mục
-        Path directoryPath = Paths.get("imgtaive", tenTruyen, tenChuong);
+        Path directoryPath = Paths.get("D:/GCWT2", tenTruyen, tenChuong);
 
         // Lưu ảnh vào thư mục
         String fileName = image.getOriginalFilename();
