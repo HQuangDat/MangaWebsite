@@ -119,7 +119,7 @@ public class MangaController {
 
             // Lưu ảnh vào thư mục
             Path filePath = directoryPath.resolve(sanitizedFileName);
-            String filepath = sanitizeFileName(truyen.getTenTruyen()) + sanitizedFileName;
+            String filepath = sanitizeFileName(truyen.getTenTruyen()) +"/"+ sanitizedFileName;
             // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
             if (Files.notExists(directoryPath)) {
                 Files.createDirectories(directoryPath);

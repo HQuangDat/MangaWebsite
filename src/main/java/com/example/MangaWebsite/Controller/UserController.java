@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,10 +17,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -128,4 +128,28 @@ public class UserController {
             return "redirect:/error";
         }
     }
+    @PostMapping("/makeCollaborator")
+    public String makeCollaborator(@RequestBody Long userId) {
+        try {
+            // Thực hiện logic để thêm người dùng vào vai trò CTV
+            userService.updateRoleCTV(userId);
+            return "redirect:/admin/qtv";
+        } catch (Exception e) {
+            return "redirect:/error";
+        }
+    }
+
+    @PostMapping("/removeCollaborator")
+    public String removeCollaborator(@RequestBody Long userId) {
+        try {
+            // Thực hiện logic để xóa người dùng khỏi vai trò CTV
+            userService.removeRoleCTV(userId); // Đảm bảo phương thức này là removeRoleCTV
+            return "redirect:/admin/qtv";
+        } catch (Exception e) {
+            return "redirect:/error";
+        }
+    }
+
+
 }
+

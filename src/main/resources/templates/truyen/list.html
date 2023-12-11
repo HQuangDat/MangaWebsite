@@ -59,33 +59,38 @@ $(document).ready(function() {
                         <a href="/admin"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">Quản lý chuyên mục</li><!-- /.menu-title -->
-                                        <li>
-                        <a href="../Admin/chuyen-muc.html"> <i class="menu-icon fa fa-list-ol"></i>Chuyên mục </a>
+                    <li>
+                        <a href="/admin/them-the-loai"> <i class="menu-icon fa fa-list-ol"></i>Thêm thể loại</a>
                     </li>
                     <li>
-                    <a href="../truyen/add"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
-                </li>
-                                        <li>
+                        <a href="../truyen/add"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
+                    </li>
+                    <li>
                         <a href="../truyen/add-chuong"> <i class="menu-icon fa fa-pencil"></i>Đăng chương</a>
                     </li>
-                
+
                     <li>
-                        <a href="../truyen/list"> <i class="menu-icon  fa  fa-list-alt"></i>Danh sách truyện tranh</a>
-                    </li>   
-                                         <li class="menu-title">Quản lý dịch vụ</li><!-- /.menu-title -->
-                  
-                  
+                        <a href="../truyen/list"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
+                    </li>
+                    <li class="menu-title">Quản lý dịch vụ</li><!-- /.menu-title -->
+
+
                     <li class="menu-title">Thành viên</li><!-- /.menu-title -->
 
-                   <li>
-                        <a href="../Admin/quan-tri-vien.html"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
+                    <li>
+                        <a href="/admin/qtv"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
                     </li>
                     <li>
-                        <a href="../Admin/cong-tac-vien.html"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
+                        <a href="/admin/ctv"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
                     </li>
                     <li>
-                        <a href="../Admin/thanh-vien.html"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
-                    </li>   
+                        <a href="/admin/thanhvien"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
+                    </li>
+                    <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
+
+                    <li>
+                        <a href="../Admin/lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
+                    </li>
 
                 </ul>
                               </div><!-- /.navbar-collapse -->
@@ -240,7 +245,7 @@ $(document).ready(function() {
 
                                         <td th:text="${truyen.user.displayname != null ? truyen.user.displayname : 'Unknown'}"></td>
                                         <td>
-                                            <img th:src="@{'/imgtaive/' + ${truyen.avatarFileName}}" alt="Avatar" style="width: 50px; height: 50px;">
+                                            <img th:src="@{'/Truyen/'+${truyen.getAvatarFileName()}}" alt="Avatar" style="width: 50px; height: 50px;">
                                         </td>
                                         <td>
                                             <!-- Thêm các thao tác như nút xóa, sửa ở đây -->
@@ -287,24 +292,17 @@ $(document).ready(function() {
 <!--Script Searching ---->
     <script>
         document.getElementById('searchInput').addEventListener('input', function () {
-            var searchValue = this.value.toLowerCase();
-            var truyenRows = document.querySelectorAll('#bootstrap-data-table tbody tr');
+            let searchValue = this.value.toLowerCase();
+            let truyenRows = document.querySelectorAll('#bootstrap-data-table tbody tr');
 
             truyenRows.forEach(function (row) {
-                var tenTruyen = row.querySelector('td:nth-child(2)').innerText.toLowerCase(); // Lấy tên truyện từ cột thứ 2
+                let tenTruyen = row.querySelector('td:nth-child(2)').innerText.toLowerCase(); // Lấy tên truyện từ cột thứ 2
 
                 // Ẩn hoặc hiện thị dựa trên kết quả tìm kiếm
                 row.style.display = tenTruyen.includes(searchValue) ? 'table-row' : 'none';
             });
         });
     </script>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="/admin/assets/js/main.js"></script>
 
 
 </body>

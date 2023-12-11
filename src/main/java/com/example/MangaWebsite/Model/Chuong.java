@@ -29,8 +29,12 @@ public class Chuong {
     @Column(name = "ten_chuong")
     private String tenChuong;
 
+
     @Column(name = "ngay_dang")
     private LocalDateTime ngayDang;
+
+    @Column(name = "gia_tien", columnDefinition = "INT DEFAULT 0")
+    private  int giaTien;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

@@ -15,4 +15,6 @@ public interface IChuongRepository extends JpaRepository<Chuong, Long> {
     List<Chuong> findAllByTruyenId(Long truyenId);
 
     Optional<Chuong> getChuongById(Long chuongId);
+
+    Chuong findByTenChuong(String tenChuong);
 }

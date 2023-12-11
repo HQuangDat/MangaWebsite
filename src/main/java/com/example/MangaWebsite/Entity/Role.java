@@ -4,6 +4,7 @@ import com.example.MangaWebsite.Entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "role")
 public class Role {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,13 +22,7 @@ public class Role {
     @Size(max = 50, message = "Ten loai is required")
     private String TenLoaiTK;
 
-    @ManyToMany
-    @JoinTable(name = "user_role",
-        joinColumns= @JoinColumn(name = "user_id"),
-        inverseJoinColumns =@JoinColumn(name = "role_id"))
-    private Set<Role> roles =new HashSet<>();
-
-
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
+
 }

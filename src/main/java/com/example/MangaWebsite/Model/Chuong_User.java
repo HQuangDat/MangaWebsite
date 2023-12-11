@@ -28,7 +28,7 @@ public class Chuong_User implements Serializable {
     private LocalDateTime ngay_mua;
 
     @Column(name = "gia", nullable = false)
-    private double gia;
+    private int gia;
 
     // other fields and methods
 }

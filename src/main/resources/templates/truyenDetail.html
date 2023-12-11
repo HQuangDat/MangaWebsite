@@ -6,11 +6,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Anime Template">
-    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="description" content="Manga Template">
+    <meta name="keywords" content="Manga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | Template</title>
+    <title>Manga | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -57,8 +57,8 @@
                                 <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./truyenDetail.html">Anime Details</a></li>
-                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
+                                        <li><a href="./truyenDetail.html">Manga Details</a></li>
+                                        <li><a href="./manga-watching.html">Manga Watching</a></li>
                                         <li><a href="./blog-details.html">Blog Details</a></li>
                                         <li><a th:href="@{/Register}">Sign Up</a></li>
                                         <li><a th:href="@{/login}">Login</a></li>
@@ -83,41 +83,28 @@
     <!-- Header End -->
 
     <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a th:href="@{/}"><i class="fas fa-home"></i> Home</a>
-                        <a href="./categories.html">Categories</a>
-                        <span>Romance</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Breadcrumb End -->
 
-    <!-- Anime Section Begin -->
-    <section class="anime-details spad">
+    <!-- Manga Section Begin -->
+    <section class="manga-details spad">
         <div class="container">
-            <div class="anime__details__content">
+            <div class="manga__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg"     >
+                        <div class="manga__details__pic set-bg"     >
                             <img th:src="@{'/Truyen/'+${truyen.avatarFileName}}" alt="Avatar">
-                            " alt="Avatar">
 
                         <div class="comment" th:value="${truyen.getSoCmt()}"><i class="fa fa-comments"></i></div>
                             <div class="view" th:value="${truyen.getSoLike()}"><i class="fas fa-eye"></i></div>
                         </div>
                     </div>
                     <div class="col-lg-9">
-                        <div class="anime__details__text">
-                            <div class="anime__details__title">
-                                <h3 th:value="${truyen.getName()}"></h3>
+                        <div class="manga__details__text">
+                            <div class="manga__details__title">
+                                <h3 th:text="${truyen.getName()}"></h3>
                             </div>
-                            <div class="anime__details__rating">
+                            <div class="manga__details__rating">
                                 <div class="rating">
                                     <a href="#"><i class="fas fa-star"></i></a>
                                     <a href="#"><i class="fas fa-star"></i></a>
@@ -127,25 +114,34 @@
                                 </div>
                                 <span>1.029 Votes</span>
                             </div>
-                            <p th:value="${truyen.getMoTaNoiDung()}"></p>
-                            <div class="anime__details__widget">
+
+                            <div class="manga__details__widget">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
                                             <li><span>Ngày đăng:</span> <span  th:text="${#temporals.format(truyen.ngayDang, 'dd-MM-yyyy')}"></span></li>
                                             <li><span>Trạng thái:</span> <span th:text="${truyen.getTrangThaiTruyenid().getTentrangthai()}"></span></li>
-                                            <li><span>Genre:</span> <span th:text="${truyen.getCategory().getTenTheLoai()}"></span></li>
+                                            <li><span>Thể loại:</span> <span th:text="${truyen.getCategory().getTenTheLoai()}"></span></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Rating:</span> 8.5 / 161 times</li>
+                                            <li><span>Like:</span> <span th:text="${truyen.getSoLike()}" class="fas fa-thumbs-up" ></span> </li>
                                             <li><span>Views:</span> 131,541</li>
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="anime__details__btn">
+                            <div class="manga__details__widget">
+
+                                     <p>Miêu tả nội dung : </p></li>
+                                     <p class = "text_content " th:text="${truyen.getMoTaNoiDung()}"></p>
+                                <div class="readMoreBtn" onclick="expandContent()">Xem thêm</div>
+                                <div class="readLessBtn" onclick="collapseContent()">Thu gọn</div>
+
+                            </div>
+                            <div class="manga__details__btn">
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Theo dõi</a>
                                 <a href="#" class="watch-btn"><span>Xem Ngay</span> <i
                                     class="fa fa-angle-right"></i></a>
@@ -156,8 +152,8 @@
                 <div>
                     <ul class="chapter-list">
                         <div th:each="chuong : ${chuongs}" class="chapter-list-item">
-                            <a th:href="@{/chuong/{id}(id=${chuong.getId()})}">
-                                <span th:text="${chuong.getTenChuong()}"></span>
+                            <a th:href="@{'/truyen/' + ${chuong.truyen.id} + '/chuong/' + ${chuong.id}}">
+                            <span th:text="${chuong.getTenChuong()}"></span>
                                 <span class="date-time"  th:text="${#temporals.format(chuong.getNgayDang(), 'dd/MM/yyyy HH:mm')}"></span>
                             </a>
                         </div>
@@ -166,68 +162,68 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 col-md-8">
-                        <div class="anime__details__review">
+                        <div class="manga__details__review">
                             <div class="section-title">
                                 <h5>Reviews</h5>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
+                            <div class="manga__review__item">
+                                <div class="manga__review__item__pic">
                                     <img src="/img/anime/review-1.jpg" alt="">
                                 </div>
-                                <div class="anime__review__item__text">
+                                <div class="manga__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
                                     <p>whachikan Just noticed that someone categorized this as belonging to the genre
                                     "demons" LOL</p>
                                 </div>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
+                            <div class="manga__review__item">
+                                <div class="manga__review__item__pic">
                                     <img src="/img/anime/review-2.jpg" alt="">
                                 </div>
-                                <div class="anime__review__item__text">
+                                <div class="manga__review__item__text">
                                     <h6>Lewis Mann - <span>5 Hour ago</span></h6>
                                     <p>Finally it came out ages ago</p>
                                 </div>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
+                            <div class="manga__review__item">
+                                <div class="manga__review__item__pic">
                                     <img src="/img/anime/review-3.jpg" alt="">
                                 </div>
-                                <div class="anime__review__item__text">
+                                <div class="manga__review__item__text">
                                     <h6>Louis Tyler - <span>20 Hour ago</span></h6>
                                     <p>Where is the episode 15 ? Slow update! Tch</p>
                                 </div>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
+                            <div class="manga__review__item">
+                                <div class="manga__review__item__pic">
                                     <img src="/img/anime/review-4.jpg" alt="">
                                 </div>
-                                <div class="anime__review__item__text">
+                                <div class="manga__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
                                     <p>whachikan Just noticed that someone categorized this as belonging to the genre
                                     "demons" LOL</p>
                                 </div>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
+                            <div class="manga__review__item">
+                                <div class="manga__review__item__pic">
                                     <img src="/img/anime/review-5.jpg" alt="">
                                 </div>
-                                <div class="anime__review__item__text">
+                                <div class="manga__review__item__text">
                                     <h6>Lewis Mann - <span>5 Hour ago</span></h6>
                                     <p> Finally it came out ages ago</p>
                                 </div>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
+                            <div class="manga__review__item">
+                                <div class="manga__review__item__pic">
                                     <img src="/img/anime/review-6.jpg" alt="">
                                 </div>
-                                <div class="anime__review__item__text">
+                                <div class="manga__review__item__text">
                                     <h6>Louis Tyler - <span>20 Hour ago</span></h6>
                                     <p>Where is the episode 15 ? Slow update! Tch</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="anime__details__form">
+                        <div class="manga__details__form">
                             <div class="section-title">
                                 <h5>Your Comment</h5>
                             </div>
@@ -238,7 +234,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
-                        <div class="anime__details__sidebar">
+                        <div class="manga__details__sidebar">
                             <div class="section-title">
                                 <h5>you might like...</h5>
                             </div>
@@ -252,7 +248,7 @@
                 </div>
             </div>
         </section>
-        <!-- Anime Section End -->
+        <!-- manga Section End -->
 
         <!-- Footer Section Begin -->
         <footer class="footer">
@@ -328,6 +324,28 @@
                 document.documentElement.scrollTop = 0;
             }
         </script>
+    <script>
+        let content = document.getElementById('content');
+        let readMoreBtn = document.getElementById('readMoreBtn');
+        let readLessBtn = document.getElementById('readLessBtn');
+
+        // Hiển thị nút "Xem thêm" nếu nội dung vượt quá chiều cao tối đa
+        if (content.scrollHeight > content.clientHeight) {
+            readMoreBtn.style.display = 'block';
+        }
+
+        function expandContent() {
+            content.style.maxHeight = 'none';
+            readMoreBtn.style.display = 'none';
+            readLessBtn.style.display = 'block';
+        }
+
+        function collapseContent() {
+            content.style.maxHeight = '100px'; // Đặt lại chiều cao tối đa
+            readMoreBtn.style.display = 'block';
+            readLessBtn.style.display = 'none';
+        }
+    </script>
     </body>
 
     </html>

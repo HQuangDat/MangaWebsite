@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,9 +39,9 @@ public class    SecurityConfig {
         return http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers( "/css/**", "/js/**", "/", "/Register",
-                                "/error","/img/**","/detail/{id}","/chuong")
+                                "/error","/img/**","/truyen/{id}","/chuong/{id}")
                         .permitAll()
-                       .requestMatchers( "/manga/edit", "/manga/delete")
+                        .requestMatchers( "/manga/edit", "/manga/delete")
                         .hasAnyAuthority("ADMIN","CTV")
                         .requestMatchers("/manga", "/manga/add","/admin")
                         .permitAll()
@@ -65,6 +66,7 @@ public class    SecurityConfig {
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.accessDeniedPage("/403"))
                 .build();
+
     }
 
 }

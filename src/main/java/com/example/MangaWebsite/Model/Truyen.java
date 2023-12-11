@@ -47,7 +47,11 @@ public class Truyen {
     @Column(name = "so_rating",nullable = true)
     private int SoRating;
 
-    @Column(name = "mieu_ta")
+    @Column(name = "so_view",nullable = true)
+    private int SoView;
+
+    @Column(name = "mieu_ta", columnDefinition = "TEXT")
+    @Lob
     private String moTaNoiDung;
 
 
@@ -60,9 +64,9 @@ public class Truyen {
     @Transient
     private String avatarFilePath;
 
-    @ManyToOne
-    @JoinColumn(name = "premium_id",nullable = true)
-    private Premium premium;
+
+    @Column(name = "premium_id")
+    private boolean premium = false;
 
     @Column(name = "ten_truyen",nullable = true)
     private String TenTruyen;
@@ -78,9 +82,6 @@ public class Truyen {
     @ValidUserId
     private  User user;
 
-
-    @OneToMany(mappedBy = "truyen")
-    private Set<User> users;
 
 
     public void setUserId(Long currentUser) {

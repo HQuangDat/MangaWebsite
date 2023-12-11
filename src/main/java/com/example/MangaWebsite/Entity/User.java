@@ -51,25 +51,24 @@ public class User {
     @Size(max = 13,message = "SDT must less than 13 characters")
     private String SDT;
 
-    @Column(name = "so_du",nullable = true)
-    private int SoDu;
+    @Column(name = "so_du",nullable = true, columnDefinition = "DOUBLE DEFAULT 0")
+    private double SoDu;
 
-    @Lob
-    @Column(name = "Avatar", columnDefinition = "longblob",nullable = true)
-    private byte[] Avatar;
 
+    @Column(name = "Avatar_url",nullable = true)
+    private String avatarUserFileName;
+
+    @Getter
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "truyen_id" ,referencedColumnName = "id", nullable = true)
-    private Truyen truyen;
-
     @OneToMany(mappedBy = "user")
     private Set<Chuong> chuongs;
     @OneToMany(mappedBy = "user")
     private Set<Truyen> truyens;
+    // Các phương thức và constructor khác
+
 }

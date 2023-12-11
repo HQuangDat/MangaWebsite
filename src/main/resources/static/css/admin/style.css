@@ -1198,6 +1198,10 @@ header .form-inline {
   float: left;
   padding: 1.875em;
   width: 100%; }
+.image-container {
+  display: inline-block;
+  vertical-align: top;  /* Để đảm bảo các ảnh bắt đầu từ trên xuống */
+}
 
 .card {
   margin-bottom: 1.875em;

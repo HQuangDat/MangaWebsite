@@ -44,4 +44,8 @@ public class ChuongService {
         return chuong.isPresent() && chuong.get().getTruyen().getId().equals(truyenId);
     }
 
+    public Chuong getIDChuongByTenTruyen(String tenChuong) {
+        Chuong chuong = chuongRepository.findByTenChuong(tenChuong);
+        return chuong;
+    }
 }

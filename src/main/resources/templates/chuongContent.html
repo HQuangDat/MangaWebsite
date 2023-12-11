@@ -12,14 +12,17 @@
     <meta charset="UTF-8">
     <title>Nội dung chương</title>
     <!-- Css Styles -->
-    <link rel="stylesheet" th:href="@{css/login/bootstrap.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/font-awesome.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/elegant-icons.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/plyr.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/nice-select.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/owl.carousel.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/slicknav.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{css/login/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/plyr.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/style.css}" type="text/css">
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
+
 </head>
 <body>
     <button th:onclick="topFunction()" th:id="toTop">Top</button>
@@ -37,11 +40,11 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Homepage</a></li>
+                                <li class="active"><a href="/">Homepage</a></li>
                                 <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
+                                        <li><a href="./anime-watching.html">Manga Watching</a></li>
                                         <li><a href="./blog-details.html">Blog Details</a></li>
                                         <li><a th:href="@{/Register}">Sign Up</a></li>
                                         <li><a th:href="@{/login}">Login</a></li>
@@ -67,34 +70,30 @@
     <div class="container">
         <div class="reading-control">
             <div class="chapter-nav" id="chapterNav">
-                <a class="home" th:href="@{/}" title="Trang chủ"><i class="fa fa-home"></i></a>
+                <a class="home" th:href="@{/}" title="Trang chủ"><i class="fas fa-home"></i></a>
                 <a href="#" class="prev a_prev"><i class="fa fa-chevron-left"></i></a>
-                <select name="ctl00$mainContent$ddlSelectChapter" id="ctl00_mainContent_ddlSelectChapter" class="select-chapter">
-                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 107</option>
-                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 106</option>
-                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 108</option>
-                    <option value="/truyen-tranh/boku-girl/chap-107.5/450056">Chapter 109</option>
+                <select name="ctl00$mainContent$ddlSelectChapter" id="ddlSelectChapter" class="select-chapter">
+                    <option th:each="chuong : ${chuong}"
+                            th:value="'/truyen/' + ${chuong.truyen.id} + '/chuong/' + ${chuong.id}"
+                            th:text="${chuong.tenChuong}"
+                            th:selected="${chuongHienTai != null and chuong.id == chuongHienTai[0].id}"
+                    ></option>
                 </select>
                 <a href="#" class="next a_next disabled"><i class="fa fa-chevron-right"></i></a>
             </div>
         </div>
+        <!--Content Truyen-->
         <div class="content" style="text-align: center;">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
-            <img src="https://gamek.mediacdn.vn/133514250583805952/2021/4/8/photo-1-1617865263935285761922.jpg" alt="">
+            <th:block th:each="image, stat : ${anh}">
+                <div class="image-container" style="margin-bottom: 20px;">
+                    <img th:src="@{'/Truyen/'+${image.getDuongDan()}}"
+                         class="lazy-image"
+                         alt=""
+                    >
+                </div>
+            </th:block>
         </div>
+
         <div class="bottom">
             <div class="chapter-nav-bottom text-center" id="chapterNavBottom">
                 <a href="https://www.nettruyenus.com/truyen-tranh/boku-girl/chap-107/450055" class="btn btn-danger prev"><em class="fa fa-chevron-left"></em> Chap trước</a>
@@ -124,14 +123,14 @@
         </div>
     </footer>
     <!-- Js Plugins -->
-    <script th:src="@{js/login/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{js/login/bootstrap.min.js}"></script>
-    <script th:src="@{js/login/player.js}"></script>
-    <script th:src="@{js/login/jquery.nice-select.min.js}"></script>
-    <script th:src="@{js/login/mixitup.min.js}"></script>
-    <script th:src="@{js/login/jquery.slicknav.js}"></script>
-    <script th:src="@{js/login/owl.carousel.min.js}"></script>
-    <script th:src="@{js/login/main.js}"></script>
+    <script th:src="@{/js/login/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/login/bootstrap.min.js}"></script>
+    <script th:src="@{/js/login/player.js}"></script>
+    <script th:src="@{/js/login/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/login/mixitup.min.js}"></script>
+    <script th:src="@{/js/login/jquery.slicknav.js}"></script>
+    <script th:src="@{/js/login/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/login/main.js}"></script>
 <!--    Back to top button-->
     <script>
         // Khởi tạo nút
@@ -153,5 +152,82 @@
             document.documentElement.scrollTop = 0;
         }
     </script>
+    <script>
+        // Lấy các phần tử DOM
+        let ddlSelectChapter = document.getElementById('ddlSelectChapter');
+        let prevButton = document.querySelector('.prev');
+        let nextButton = document.querySelector('.next');
+        let selectedIndex = ddlSelectChapter.selectedIndex;
+
+        // Thêm sự kiện click cho nút "prev"
+        prevButton.addEventListener('click', function () {
+            // Thực hiện logic khi nút "prev" được click
+            // Chuyển đến chương trước đó
+            if (selectedIndex > 0) {
+                ddlSelectChapter.selectedIndex = selectedIndex - 1;
+                selectedIndex = ddlSelectChapter.selectedIndex; // Cập nhật giá trị selectedIndex
+            }
+        });
+
+        // Thêm sự kiện click cho nút "next"
+        nextButton.addEventListener('click', function () {
+            // Thực hiện logic khi nút "next" được click
+            // Chuyển đến chương tiếp theo
+            if (selectedIndex < ddlSelectChapter.options.length - 1) {
+                ddlSelectChapter.selectedIndex = selectedIndex + 1;
+                selectedIndex = ddlSelectChapter.selectedIndex; // Cập nhật giá trị selectedIndex
+                toggleNextButton();
+            }
+        });
+
+        // Hàm kiểm tra và cập nhật trạng thái của nút "next"
+        function toggleNextButton() {
+            let isLastChapter = selectedIndex >= ddlSelectChapter.options.length - 1;
+
+            if (isLastChapter) {
+                // If it's the last chapter, disable the button and add the "disabled" class
+                document.querySelector('.next-container').classList.add('disabled');
+                nextButton.setAttribute('disabled', 'disabled');
+            } else {
+                // If it's not the last chapter, enable the button and remove the "disabled" class
+                document.querySelector('.next-container').classList.remove('disabled');
+                nextButton.removeAttribute('disabled');
+            }
+        }
+        // Gọi hàm để cài đặt trạng thái ban đầu
+        toggleNextButton();
+    </script>
+  <script>
+      // Gọi hàm khi trang được load lại
+      window.onload = function() {
+      // Lấy giá trị chương từ URL sau khi trang được load
+          let chuongMoiId = layChuongTuURL();
+
+      // Gán lại giá trị đã chọn cho dropdown
+          let dropdown = document.getElementById("ddlSelectChapter");
+      dropdown.value = '/truyen/' + chuongMoiId + '/chuong/' + chuongMoiId;
+
+      // Thêm sự kiện change cho dropdown
+      dropdown.addEventListener("change", function() {
+      chuyenTrang();
+  });
+  };
+
+      function layChuongTuURL() {
+      // Lấy đoạn chương từ URL (ví dụ: "/truyen/1/chuong/2" sẽ trả về "2")
+          let url = window.location.href;
+          let chuongIndex = url.lastIndexOf("/chuong/") + 8;
+      return url.substring(chuongIndex);
+  }
+
+      function chuyenTrang() {
+      // Lấy giá trị đã chọn
+      let selectedValue = document.getElementById("ddlSelectChapter").value;
+
+      // Chuyển hướng đến trang mới
+      window.location.href = selectedValue;
+  }
+  </script>
+    <script></script>
 </body>
 </html>
