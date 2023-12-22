@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Cpanel TMQ</title>
+
+    <meta name="description" content="Admin Cpanel TMQ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" th:href="@{/css/admin/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/style.css}">
+
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/admin/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="/css/admin/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/scss/mixins/_alert.scss" rel="stylesheet">
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet"/>
+
+    <!--    Sweet Alert 2(hiện thông báo)-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showSuccessNotification() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your operation was successful.',
+                showConfirmButton: false,
+                timer: 2000
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer || result.isConfirmed) {
+                    const form = document.getElementById('AddForm');
+
+                    form.submit();
+                }
+            });
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    /*<![CDATA[*/
+    $(document).ready(function() {
+    var pathname = window.location.pathname;
+    $('.nav navbar-nav > li > a[href="'+pathname+'"]').parent().addClass('active');
+    });
+    /*]]>*/
+
+    <style>
+
+        #flotPie1 td {
+            padding: 3px;
+        }
+
+        #flotPie1 table {
+            top: 20px !important;
+            right: -10px !important;
+        }
+
+    </style>
+</head>
+
+<body th:body>
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div th:fragment="commonAside" id="main-menu" class="main-menu collapse navbar-collapse">
+
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/admin"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                <li class="menu-title">Quản lý chuyên mục</li><!-- /.menu-title -->
+                <li>
+                    <a href="/admin/them-the-loai"> <i class="menu-icon fa fa-list-ol"></i>Thêm thể loại </a>
+                </li>
+                <li>
+                    <a href="../add"> <i class="menu-icon fas fa-pen"></i>Đăng truyện</a>
+                </li>
+                <li>
+                    <a href="../add-chuong"> <i class="menu-icon fas fa-pen"></i>Đăng chương</a>
+                </li>
+
+                <li>
+                    <a href="../list"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
+                </li>
+
+                <li class="menu-title">Thành viên</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="/admin/qtv"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
+                </li>
+                <li>
+                    <a href="/admin/ctv"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
+                </li>
+                <li>
+                    <a href="/admin/nap-tien"> <i class="menu-icon  fas fa-coins"></i>Nạp Tiền</a>
+                </li>
+                <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="/admin/lich-su"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+
+
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"><img style="width: 15%" src="/img/Logo.png" alt="Logo"></a>
+            </div>
+        </div>
+        <div class="top-right">
+            <div class="header-menu">
+                <div class="user-area dropdown float-right">
+                    <a href="../profile" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="User Avatar">
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <!-- /#header -->
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Dashboard</a></li>
+                                <li><a href="#">Chuyên mục</a></li>
+                                <li class="active">Sửa truyện</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Sửa Truyện</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <div th:if="${param.error}">
+                                <p style="color: red;">Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin nhập.</p>
+                            </div>
+                            <form id="AddForm" method="POST" enctype="multipart/form-data"
+                                  th:action="@{'/admin/truyen/'+${EditTruyen.id}+'/edit'}">
+                                <div class="form-group">
+                                    <label class="form-control-label">Tên Truyện</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-book"></i></div>
+                                        <label>
+                                            <input class="form-control" th:field="${EditTruyen.tenTruyen}"style="width: 600px"/>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Tác Giả</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                        <label>
+                                            <input class="form-control" th:field="${EditTruyen.tacGia}" style="width: 600px"/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Thể Loại Truyện</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-dropbox-alt"></i></div>
+                                        <select name="category" id="category" class="form-control"
+                                                th:field="${EditTruyen.category.id}">
+                                            <option value="">Chọn Loại Truyện</option>
+                                            <option th:each="cat : ${categories}" th:value="${cat.id}"
+                                                    th:text="${cat.tenTheLoai}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="noidungtruyen">Miêu tả nội dung</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="ti-info-alt"></i></div>
+                                        <textarea name="thongtin" id="noidungtruyen" rows="9" class="form-control"
+                                                  th:field="${EditTruyen.moTaNoiDung}"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="form-control-label">Hình ảnh bìa truyện</label>
+
+                                    <div class="form-group">
+                                        <input type="file" id="avatar" name="avatar" accept="image/*">
+
+                                    </div>
+                                </div>
+                                <button onclick="showSuccessNotification()" type="submit"
+                                        class="btn btn-outline-success" name="themsanpham" id="themtruyen">Thêm
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div> <!-- .content -->
+<div class="clearfix"></div>
+
+
+<footer class="site-footer">
+    <div class="footer-inner bg-white">
+        <div class="row">
+            <div class="col-sm-6">
+                Copyright &copy; 2023 Admin Cpanel
+            </div>
+            <div class="col-sm-6 text-right">
+                Designed by Huynh Can</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- /.site-footer -->
+
+<!-- /#right-panel -->
+
+
+
+
+<script>
+    // JavaScript để tự động đếm thời gian và hiển thị trên trường input
+    var thoiGianDangInput = document.getElementById('thoiGianDang');
+
+    function updateThoiGianDang() {
+        var now = moment().utcOffset(7); // Thiết lập múi giờ cho Hà Nội (UTC+7)
+        var formattedDate = now.format('YYYY-MM-DD | HH:mm'); // Định dạng theo yyyy-MM-ddTHH:mm
+        thoiGianDangInput.value = formattedDate;
+    }
+
+    // Gọi hàm update mỗi phút
+    setInterval(updateThoiGianDang, 60000);
+
+    // Gọi hàm lần đầu để hiển thị giá trị ban đầu
+    updateThoiGianDang();
+</script>
+</body>
+</html>

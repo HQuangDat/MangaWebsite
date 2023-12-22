@@ -87,38 +87,19 @@
     }
 }
 
-.manga__details__widget {
-    margin-bottom: 15px;
-
-    ul {
-        margin-bottom: 20px;
-
-        li {
-            list-style: none;
-            font-size: 15px;
-            color: $white-color;
-            line-height: 30px;
-            position: relative;
-            padding-left: 18px;
-
-            &:before {
-                position: absolute;
-                left: 0;
-                top: 12px;
-                height: 6px;
-                width: 6px;
-                background: #b7b7b7;
-                content: "";
-            }
-            
-            span {
-                color: #b7b7b7;
-                width: 115px;
-                display: inline-block;
-            }
-        }
-    }
+.manga__details__widget .text_content {
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.3s ease; /* Thêm hiệu ứng transition */
 }
+
+.manga__details__widget .readMoreBtn {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    display: inline;
+}
+
 
 .manga__details__btn {
 

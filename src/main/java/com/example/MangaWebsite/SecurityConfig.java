@@ -39,7 +39,8 @@ public class    SecurityConfig {
         return http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers( "/css/**", "/js/**", "/", "/Register",
-                                "/error","/img/**","/truyen/{id}","/chuong/{id}")
+                                "/error","/img/**","/truyen/**","/chuong/**",
+                                "/Truyen/**","/category/**","/search-results","/review/**")
                         .permitAll()
                         .requestMatchers( "/manga/edit", "/manga/delete")
                         .hasAnyAuthority("ADMIN","CTV")

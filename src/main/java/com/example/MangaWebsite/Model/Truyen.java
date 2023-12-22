@@ -4,9 +4,11 @@ import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Validator.annotation.ValidUserId;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,7 +20,7 @@ public class Truyen {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "caterory_id" ,referencedColumnName = "id")
+    @JoinColumn(name = "category_id" ,referencedColumnName = "id")
     private Category category;
 
 
@@ -28,13 +30,14 @@ public class Truyen {
     // Đặt giá trị mặc định cho trangThaiTruyenid là 1 khi tạo mới đối tượng Truyen
 // Giả sử 1 là giá trị mặc định bạn muốn set
         @ManyToOne
-        @JoinColumn(name = "manga_status_id")
-        private TrangThaiTruyen trangThaiTruyenid ;
+        @JoinColumn(name = "trangthaitruyen_id")
+
+        private TrangThaiTruyen trangThaiTruyen ;
 
     public Truyen() {
         // Tạo một đối tượng TrangThaiTruyen với id là 1 và set làm giá trị mặc định cho trangThaiTruyenid
-        this.trangThaiTruyenid = new TrangThaiTruyen();
-        this.trangThaiTruyenid.setId(1L);
+        this.trangThaiTruyen = new TrangThaiTruyen();
+        this.trangThaiTruyen.setId(1L);
     }
 
 
@@ -69,7 +72,7 @@ public class Truyen {
     private boolean premium = false;
 
     @Column(name = "ten_truyen",nullable = true)
-    private String TenTruyen;
+    private String tenTruyen;
 
     @Column(name = "tac_gia",nullable = true)
     private  String TacGia;
@@ -82,11 +85,14 @@ public class Truyen {
     @ValidUserId
     private  User user;
 
+    @OneToMany(mappedBy = "truyen", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Chuong> chuongList;
 
 
     public void setUserId(Long currentUser) {
 
     } public String getName() {
-        return TenTruyen;
+        return tenTruyen;
     }
+
 }

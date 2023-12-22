@@ -56,29 +56,44 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a href="./">Homepage</a></li>
-                            <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                            <li><a href="/category">Categories <span class="arrow_carrot-down"></span></a>
                                 <ul class="dropdown">
-                                    <li><a href="./categories.html">Categories</a></li>
-                                    <li><a href="truyenDetail.html">Manga Details</a></li>
-                                    <li><a href="./anime-watching.html">Manga Watching</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="/category">Categories</a></li>
                                     <li sec:authorize="!isAuthenticated()"><a th:href="@{/Register}">Sign Up</a></li>
                                     <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="fas fa-user">Login</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Our Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
+                            <li><a href="./review">Review</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
             <div class="col-lg-2">
                 <div class="header__right">
-                    <a href="#" class="search-switch"><span class="fas fa-search"></span></a>
-                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="icon_profile"></span></a>
-                    <a sec:authorize="isAuthenticated()" th:href="@{/profile}"><span class="fas fa-user"></span></a>
+                    <a href="/category" class="search-switch"><span class="fas fa-search"></span></a>
+                    <div class="dropdown-user">
+                        <!-- Hiển thị icon khóa nếu chưa đăng nhập -->
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="fas fa-lock"></span></a>
+                        <!-- Hiển thị icon mở khóa và menu khi đã đăng nhập -->
+                        <button class="dropbtn" sec:authorize="isAuthenticated()">
+                            <span class="fas fa-lock-open"></span>
+                        </button>
+                        <div class="dropdown-content">
+                            <!-- Thông tin cá nhân -->
+                            <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá nhân</a>
+                            <!-- Chuyển trang CTV -->
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('CTV') or hasAuthority('Admin')" th:href="@{'/CTV/' + ${#authentication.principal?.id} + '/CTV-list'}">Cộng tác viên</a>
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('Admin')" th:href="@{'/admin'}"> Admin</a>
+
+                            <!-- Đăng xuất -->
+                            <a sec:authorize="isAuthenticated()" href="/logout">Đăng xuất</a>
+                        </div>
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
         <div id="mobile-menu-wrap"></div>
@@ -145,7 +160,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="btn__all">
-                                <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                <a href="http://localhost:8888/search-results?TenTruyen=&trangThaiTruyen=&category=&sapxep=1" class="primary-btn">View All <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -163,7 +178,7 @@
                                 <div class="product__item__text">
                                     <ul>
                                         <li th:text="${item.category.tenTheLoai}"></li>
-                                        <li th:text="${item.trangThaiTruyenid.tentrangthai}"></li>
+                                        <li th:text="${item.trangThaiTruyen.tentrangthai}"></li>
                                     </ul>
                                     <h5><a th:href="@{'/truyen/' + ${item.id}}" th:text="${item.tenTruyen}"></a></h5>
                                 </div>
@@ -180,7 +195,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="btn__all">
-                                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                    <a href="http://localhost:8888/search-results?TenTruyen=&trangThaiTruyen=&category=&sapxep=2" class="primary-btn">View All <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +213,7 @@
                                     <div class="product__item__text">
                                         <ul>
                                             <li th:text="${newitem.category.tenTheLoai}"></li>
-                                            <li th:text="${newitem.trangThaiTruyenid.tentrangthai}"></li>
+                                            <li th:text="${newitem.trangThaiTruyen.tentrangthai}"></li>
                                         </ul>
                                         <h5><a th:href="@{'/truyen/' + ${newitem.id}}"
                                                th:text="${newitem.tenTruyen}"></a></h5>
@@ -222,7 +237,6 @@
                             <div class="filter__gallery">
                                 <div th:each="item, status : ${topViewsLists}"
                                      class="product__sidebar__view__item set-bg mix"
-                                     th:class="${status.index % 2 == 0} ? 'day' : 'week'"
                                      th:data-setbg="'/Truyen/'+${item.avatarFileName}">
                                     <div class="ep" th:text="${item.soChuong}"></div>
                                     <div class="view"><i class="fa fa-eye"></i> <span th:text="${item.soView}"></span></div>
@@ -233,12 +247,11 @@
 
                         <div class="product__sidebar__view">
                             <div class="section-title">
-                                <h5>Top Views</h5>
+                                <h5>Top Likes</h5>
                             </div>
                             <div class="filter__gallery">
                                 <div th:each="item, status : ${topLikeLists}"
                                      class="product__sidebar__view__item set-bg mix"
-                                     th:class="${status.index % 2 == 0} ? 'day' : 'week'"
                                      th:data-setbg="'/Truyen/'+${item.avatarFileName}">
                                     <div class="ep" th:text="${item.soChuong}"></div>
                                     <div class="view"><i class="fas fa-thumbs-up"></i> <span th:text="${item.soLike}"></span></div>
@@ -271,7 +284,7 @@
                     <ul>
                         <li class="active"><a th:href="@{/}">Homepage</a></li>
                         <li><a href="./categories.html">Categories</a></li>
-                        <li><a href="./preview.html">Preview </a></li>
+                        <li><a href="Review.html">Preview </a></li>
                         <li><a href="#">Contacts</a></li>
                     </ul>
                 </div>

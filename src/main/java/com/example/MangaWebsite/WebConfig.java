@@ -11,6 +11,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/Truyen/**")
                 .addResourceLocations("file:E:/GCWT2/");
+        registry.addResourceHandler("/User/**")
+                .addResourceLocations("file:E:/GCWT2_User/");
     }
 
 }

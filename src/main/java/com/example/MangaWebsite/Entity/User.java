@@ -2,6 +2,7 @@ package com.example.MangaWebsite.Entity;
 
 import com.example.MangaWebsite.Model.Chuong;
 import com.example.MangaWebsite.Model.Chuong_User;
+import com.example.MangaWebsite.Model.Like;
 import com.example.MangaWebsite.Model.Truyen;
 import com.example.MangaWebsite.Validator.annotation.ValidUsername;
 import jakarta.persistence.*;
@@ -9,9 +10,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -58,6 +61,12 @@ public class User {
     @Column(name = "Avatar_url",nullable = true)
     private String avatarUserFileName;
 
+    @Transient
+    private transient MultipartFile avatarFile;
+
+    @Transient
+    private String avatarFilePath;
+
     @Getter
     @ManyToMany
     @JoinTable(name = "user_role",
@@ -65,10 +74,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Like> likes;
     @OneToMany(mappedBy = "user")
     private Set<Chuong> chuongs;
     @OneToMany(mappedBy = "user")
     private Set<Truyen> truyens;
-    // Các phương thức và constructor khác
+
 
 }

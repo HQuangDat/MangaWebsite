@@ -6,7 +6,6 @@ import com.example.MangaWebsite.Repository.IUserRepository;
 import com.example.MangaWebsite.Repository.IRoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +18,8 @@ public class UserService {
     private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
-
+    @Autowired
+    private IRoleRepository iRoleRepository;
 
 
     @Transactional
@@ -35,7 +35,10 @@ public class UserService {
     public void updateUser(User user){
         userRepository.save(user);
     }
-
+    @Transactional
+    public void deleteUser(Long userId) {
+        userRepository.deleteUserById(userId);
+    }
     public User getUserbyId(Long id){
         return userRepository.findById(id).orElse(null);
     }
@@ -47,62 +50,33 @@ public class UserService {
         return (user != null) ? user.getId() : null;
     }
 
-    public void rechargeUser(Long userId, Double amount) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-
-            // Thực hiện nạp tiền cho người dùng
-            double currentBalance = user.getSoDu();
-            user.setSoDu(currentBalance + amount);
-
-            // Lưu lại thông tin người dùng đã được cập nhật vào cơ sở dữ liệu
-            userRepository.save(user);
-        }
-    }
 
     public List<User> getAllUsersWithRoles(long roleid) {
         List<User> usersWithRole1 = userRepository.findByRoleId(roleid);
         return usersWithRole1;
     }
 
-    public void updateRoleCTV(Long userId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            Role collaboratorRole = roleRepository.findById(3L)
-                    .orElseThrow(() -> new RuntimeException("Collaborator role not found"));
-
-            // Kiểm tra xem User đã là Collaborator chưa
-            if (user.getRoles().stream().noneMatch(role -> role.getId() == 3L)) {
-                // Nếu chưa, thêm vai trò Collaborator
-                user.getRoles().add(collaboratorRole);
+    public void updateRoleCTVForUser(Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            Role newRole = iRoleRepository.findById(3L).orElse(null);
+            if (newRole != null) {
+                user.getRoles().clear();
+                user.getRoles().add(newRole);
                 userRepository.save(user);
             }
-        } else {
-            throw new RuntimeException("User not found");
         }
     }
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+@Transactional
+    public void deleteRoleAssignment(Long userId, long roleId) {
+        userRepository.deleteRoleAssignment(userId,roleId);
+    }
 
-
-    public void removeRoleCTV(Long userId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            Role collaboratorRole = roleRepository.findById(3L)
-                    .orElseThrow(() -> new RuntimeException("Collaborator role not found"));
-
-            // Kiểm tra xem User đã là CTV chưa
-            if (user.getRoles().stream().noneMatch(role -> role.getId() != 3L)) {
-
-                user.getRoles().remove(collaboratorRole);
-            }
-
-            userRepository.save(user);
-        } else {
-            throw new RuntimeException("User not found");
-        }
+    public List<User> getUsersBySingleRole(Long roleId) {
+        // Lấy danh sách người dùng với chính xác một vai trò là roleId từ repository hoặc thông qua các truy vấn khác
+        return userRepository.findUsersBySingleRole(roleId);
     }
 }

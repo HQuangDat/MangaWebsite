@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
-
+    <!-- Thêm thư viện Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/scss/mixins/_alert.scss" rel="stylesheet">
@@ -32,50 +33,9 @@
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    /*<![CDATA[*/
-    $(document).ready(function() {
-        var pathname = window.location.pathname;
-        $('.nav navbar-nav > li > a[href="'+pathname+'"]').parent().addClass('active');
-    });
-    /*]]>*/
-</script>
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
 
-    <style>
-        #weatherWidget .currentDesc {
-            color: #ffffff!important;
-        }
-        .traffic-chart {
-            min-height: 335px;
-        }
-        #flotPie1  {
-            height: 150px;
-        }
-        #flotPie1 td {
-            padding:3px;
-        }
-        #flotPie1 table {
-            top: 20px!important;
-            right: -10px!important;
-        }
-        .chart-container {
-            display: table;
-            min-width: 270px ;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        #flotLine5  {
-            height: 105px;
-        }
-
-        #flotBarChart {
-            height: 150px;
-        }
-        #cellPaiChart{
-            height: 160px;
-        }
-
-    </style>
 </head>
 
 <body th:body>
@@ -91,33 +51,32 @@
                     <a href="admin/them-the-loai"> <i class="menu-icon fa fa-list-ol"></i>Thêm thể loại </a>
                 </li>
                 <li>
-                    <a href="admin/truyen/add"> <i class="menu-icon fa fa-pencil"></i>Đăng truyện</a>
+                    <a href="admin/truyen/add"> <i class="menu-icon fas fa-pen"></i>Đăng truyện</a>
                 </li>
                 <li>
-                    <a href="admin/truyen/add-chuong"> <i class="menu-icon fa fa-pencil"></i>Đăng chương</a>
+                    <a href="admin/truyen/add-chuong"> <i class="menu-icon fas fa-pen"></i>Đăng chương</a>
                 </li>
 
                 <li>
                     <a href="admin/truyen/list"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
                 </li>
-                <li class="menu-title">Quản lý dịch vụ</li><!-- /.menu-title -->
 
 
                 <li class="menu-title">Thành viên</li><!-- /.menu-title -->
 
                 <li>
-                    <a href="admin/qtv"> <i class="menu-icon ti-user"></i>Quản lý thành viên </a>
+                    <a href="admin/qtv"> <i class="menu-icon ti-user"></i>Quản lý User</a>
                 </li>
                 <li>
-                    <a href="admin/ctv"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
+                    <a href="admin/ctv"> <i class="menu-icon fa fa-user-md"></i>Quản lý Cộng tác viên</a>
                 </li>
-                <li>
-                    <a href="admin/thanhvien"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
-                </li>
+            <li>
+                <a href="/admin/nap-tien"> <i class="menu-icon  fas fa-coins"></i>Nạp Tiền</a>
+            </li>
                 <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
 
                 <li>
-                    <a href="lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
+                    <a href="/admin/lich-su"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
                 </li>
 
             </ul>
@@ -129,469 +88,107 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href="./"><img width="25%" src="#" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="" alt="Logo"></a>
-                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                <a class="navbar-brand" href="/"><img style="width: 15%" src="/img/Logo.png" alt="Logo"></a>
             </div>
         </div>
         <div class="top-right">
             <div class="header-menu">
-                <div class="header-left">
-                    <button class="search-trigger"><i class="fa fa-search"></i></button>
-                    <div class="form-inline">
-                        <form class="search-form">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                            <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                        </form>
-                    </div>
-
-                    <div class="dropdown for-notification">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bell"></i>
-                            <span class="count bg-danger">3</span>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="notification">
-                            <p class="red">You have 3 Notification</p>
-                            <a class="dropdown-item media" href="#">
-                                <i class="fa fa-check"></i>
-                                <p>Server #1 overloaded.</p>
-                            </a>
-                            <a class="dropdown-item media" href="#">
-                                <i class="fa fa-info"></i>
-                                <p>Server #2 overloaded.</p>
-                            </a>
-                            <a class="dropdown-item media" href="#">
-                                <i class="fa fa-warning"></i>
-                                <p>Server #3 overloaded.</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="dropdown for-message">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-envelope"></i>
-                            <span class="count bg-primary">0</span>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="message">
-                            <p class="red">Bạn có 0 thư</p>
-
-                        </div>
-                    </div>
-                </div>
-
                 <div class="user-area dropdown float-right">
-                    <a href="" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="../profile" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="user-avatar rounded-circle" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="User Avatar">
                     </a>
 
-                    <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="../User/Profile.html"><i class="fa fa- user"></i>My Profile</a>
-
-
-
-                        <a class="nav-link" href=""><i class="fa fa -cog"></i>Settings</a>
-
-                        <a class="nav-link" href=""><i class="fa fa-power -off"></i>Về Shop</a>
-                    </div>
                 </div>
 
             </div>
         </div>
     </header>
-
     <div class="content">
-        <!-- Animated -->
-        <div class="animated fadeIn">
-            <!-- Widgets  -->
-            <label>Thống kê chung <a href="doi-mat-khau.html"><b style="color:red">Đổi mật khẩu</b></a></label>
+        <canvas id="myChart" width="200" height="100"> </canvas>
 
-            <div class="row">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var chartData = /*[[${chartData}]]*/ [];
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-1">
-                                    <i class="pe-7s-cash"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">1363890</span></div>
-                                        <div class="stat-heading">Doanh thu</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            var daysOfWeek = chartData.map(data => data.dayOfWeek);
+            var numberOfStories = chartData.map(data => data.numberOfStories);
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-2">
-                                    <i class="pe-7s-cart"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">7</span></div>
-                                        <div class="stat-heading">Đã bán acc</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: daysOfWeek,
+                    datasets: [{
+                        label: 'Số lượng truyện',
+                        data: numberOfStories,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            /*]]>*/
+        </script>
+        <label> Biểu đồ truyện đăng trong 1 tuần</label>
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-3">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">28</span></div>
-                                        <div class="stat-heading">Tổng số acc</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <canvas id="myChartChuong" width="200" height="100"></canvas>
+        <script th:inline="javascript">
+            // Dữ liệu mẫu
+            var chartDataChuong = /*[[${chartDataChuong}]]*/ [];
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-4">
-                                    <i class="pe-7s-users"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">9</span></div>
-                                        <div class="stat-heading">Thành viên</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            var daysOfWeek = chartDataChuong.map(data => data.dayOfWeek);
+            var numberOfChuong= chartDataChuong.map(data => data.numberOfStories);
 
 
-            <div class="row">
+            // Lấy thẻ canvas
+            var ctx = document.getElementById('myChartChuong').getContext('2d');
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-1">
-                                    <i class="ti-money"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">2191128805</span></div>
-                                        <div class="stat-heading">Doanh thu ước tính</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-2">
-                                    <i class="ti-credit-card"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">2191128805</span></div>
-                                        <div class="stat-heading">Doanh thu nạp thẻ</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-3">
-                                    <i class="ti-shopping-cart-full"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">6</span></div>
-                                        <div class="stat-heading">Tổng số giao dịch</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-4">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">2191128805</span></div>
-                                        <div class="stat-heading">Đơn hàng dịch vụ</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /Widgets -->
-            <!-- Widgets  -->
-            <label>Thống kê ngày</label>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-1">
-                                    <i class="pe-7s-cash"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count"></span></div>
-                                        <div class="stat-heading">Doanh thu</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-2">
-                                    <i class="pe-7s-cart"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">0</span></div>
-                                        <div class="stat-heading">Nick đã bán</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-3">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">0</span></div>
-                                        <div class="stat-heading">Số account</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-4">
-                                    <i class="pe-7s-users"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">0</span></div>
-                                        <div class="stat-heading">Thành viên</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-2">
-                                    <i class="ti-credit-card"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count"></span></div>
-                                        <div class="stat-heading">Doanh thu nạp thẻ</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-five">
-                                <div class="stat-icon dib flat-color-3">
-                                    <i class="ti-shopping-cart-full"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">0</span></div>
-                                        <div class="stat-heading">Giao dịch hôm nay</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-            <!-- /Widgets -->
-
-            <div class="clearfix"></div>
-            <!-- Orders -->
-            <div class="orders">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="box-title">Giao dịch gần đây </h4>
-                            </div>
-                            <div class="card-body--">
-                                <div class="table-stats order-table ov-h">
-                                    <table class="table ">
-                                        <thead>
-                                        <tr>
-                                            <th class="serial">#</th>
-                                            <th class="avatar">Avatar</th>
-
-                                            <th>Name</th>
-                                            <th>Loại truyện</th>
-                                            <th>Giá tiền</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="serial">1.</td>
-                                            <td class="avatar">
-                                                <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://graph.facebook.com/huynhadmin/picture?width=200&height=200" alt=""></a>
-                                                </div>
-                                            </td>
-
-                                            <td>huynhadmin </td>
-                                            <td>Võ Luyện Đỉnh Phong </td>
-                                            <td><span class=" badge badge-complete count">45000</span></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="serial">2.</td>
-                                            <td class="avatar">
-                                                <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://graph.facebook.com/huynhadmin/picture?width=200&height=200" alt=""></a>
-                                                </div>
-                                            </td>
-
-                                            <td>huynhadmin </td>
-                                            <td>Liên minh huyền thoại </td>
-                                            <td><span class=" badge badge-complete count">123456</span></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="serial">3.</td>
-                                            <td class="avatar">
-                                                <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://graph.facebook.com/Dibovuotrau/picture?width=200&height=200" alt=""></a>
-                                                </div>
-                                            </td>
-
-                                            <td> </td>
-                                            <td>Liên minh huyền thoại </td>
-                                            <td><span class=" badge badge-complete count">345434</span></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="serial">4.</td>
-                                            <td class="avatar">
-                                                <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://graph.facebook.com/dung12/picture?width=200&height=200" alt=""></a>
-                                                </div>
-                                            </td>
-
-                                            <td> </td>
-                                            <td>Liên minh huyền thoại </td>
-                                            <td><span class=" badge badge-complete count">250000</span></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="serial">6.</td>
-                                            <td class="avatar">
-                                                <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://graph.facebook.com/hieuadmin/picture?width=200&height=200" alt=""></a>
-                                                </div>
-                                            </td>
-
-                                            <td>Khải đẹp trai </td>
-                                            <td>Liên minh huyền thoại </td>
-                                            <td><span class=" badge badge-complete count">250000</span></td>
-
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- /.table-stats -->
-                            </div>
-                        </div> <!-- /.card -->
-                    </div>  <!-- /.col-lg-8 -->
-
-
-                </div>
-            </div>
-            <!-- /.orders -->
-
-            <!-- /#add-category -->
-        </div>
+            // Tạo biểu đồ
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: daysOfWeek,
+                    datasets: [{
+                        label: 'Số lượng chương',
+                        data: numberOfChuong,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Màu nền
+                        borderColor: 'rgba(75, 192, 192, 1)', // Màu đường viền
+                        borderWidth: 1 // Độ rộng đường viền
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+        <label> Biểu đồ chương đăng trong 1 tuần</label>
     </div>
 
-    <footer class="site-footer">
-        <div class="footer-inner bg-white">
-            <div class="row">
-                <div class="col-sm-6">
-                    Copyright &copy; 2023 Admin Cpanel
-                </div>
-                <div class="col-sm-6 text-right">
-                    Designed by <a href="">Huynh Can</a>
-                </div>
+</div>
+<div>
+<footer class="site-footer" style=" margin-top: auto;">
+    <div class="footer-inner bg-white">
+        <div class="row">
+            <div class="col-sm-6">
+                Copyright &copy; 2023 Admin Cpanel
+            </div>
+            <div class="col-sm-6 text-right">
+                Designed by <a href="">Huynh Can</a>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 </div>
 </body>
 </html>

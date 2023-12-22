@@ -1,0 +1,231 @@
+<html id="ctl00_Html1" lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Cpanel TMQ</title>
+    <meta name="description" content="Admin Cpanel TMQ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/admin/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="/css/admin/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/admin/style.css"><!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/scss/mixins/_alert.scss" rel="stylesheet">
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // get current URL path and assign 'active' class
+            var pathname = window.location.pathname;
+            $('.nav navbar-nav > li > a[href="'+pathname+'"]').parent().addClass('active');
+        })
+    </script>
+    </script>
+    <style>
+
+        #flotPie1 td {
+            padding:3px;
+        }
+        #flotPie1 table {
+            top: 20px!important;
+            right: -10px!important;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/admin"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                <li class="menu-title">Quản lý chuyên mục</li><!-- /.menu-title -->
+                <li>
+                    <a href="/admin/them-the-loai"> <i class="menu-icon fa fa-list-ol"></i>Thêm thể loại</a>
+                </li>
+                <li>
+                    <a href="truyen/add"> <i class="menu-icon fas fa-pen"></i>Đăng truyện</a>
+                </li>
+                <li>
+                    <a href="truyen/add-chuong"> <i class="menu-icon fas fa-pen"></i>Đăng chương</a>
+                </li>
+
+                <li>
+                    <a href="truyen/list"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
+                </li>
+
+                <li class="menu-title">Thành viên</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="/admin/qtv"> <i class="menu-icon ti-user"></i>Quản trị viên </a>
+                </li>
+                <li>
+                    <a href="/admin/ctv"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
+                </li>
+                <li>
+                    <a href="/admin/nap-tien"> <i class="menu-icon  fas fa-coins"></i>Nạp Tiền</a>
+                </li>
+                <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="../Admin/lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"><img style="width: 15%" src="/img/Logo.png" alt="Logo"></a>
+            </div>
+        </div>
+        <div class="top-right">
+            <div class="header-menu">
+                <div class="user-area dropdown float-right">
+                    <a href="../profile" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="User Avatar">
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <!-- /#header -->
+    <!-- Header-->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Dashboard</a></li>
+                                <li class="active">Danh sách mua bán chương</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title ">Danh sách truyện đã đăng</strong>
+                            <input class="form-control" type="text" id="searchInput" placeholder="Nhập tên truyện..." />
+
+
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Tên truyện</th>
+                                    <th>Tên Chương</th>
+                                    <th>Tên người mua</th>
+                                    <th>Tên người đăng chương</th>
+                                    <th>Giá tền</th>
+                                    <th>Ngày đăng</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Dữ liệu truyện đã đăng sẽ được hiển thị ở đây -->
+                                <tr th:each="chu : ${chuongUserlist}">
+                                    <td th:text="${chu.getChuongId().truyen.tenTruyen}"></td>
+                                    <td th:text="${chu.getChuongId().tenChuong}"></td>
+                                    <td th:text="${chu.getUserId().displayname}"></td>
+                                    <td th:text="${chu.getChuongId().user.displayname}"></td>
+                                    <td th:text="${chu.getGia()}"></td>
+                                    <td th:text="${#temporals.format(chu.getNgay_mua(), 'dd-MM-yyyy HH:mm')}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+
+    <div class="clearfix"></div>
+
+    <script src="/admin/assets/js/ajax.js"></script>
+    <footer class="site-footer">
+        <div class="footer-inner bg-white">
+            <div class="row">
+                <div class="col-sm-6">
+                    Copyright &copy; 2023 Admin Cpanel
+                </div>
+                <div class="col-sm-6 text-right">
+                    Designed by <a href="https://facebook.com/">Huynh Can</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /.site-footer -->
+</div>
+<!-- /#right-panel -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
+    } );
+</script>
+<!--Script Searching ---->
+<script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+        let searchValue = this.value.toLowerCase();
+        let truyenRows = document.querySelectorAll('#bootstrap-data-table tbody tr');
+
+        truyenRows.forEach(function (row) {
+            let tenTruyen = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+
+            row.style.display = tenTruyen.includes(searchValue) ? 'table-row' : 'none';
+        });
+    });
+</script>
+
+
+</body>
+</html>

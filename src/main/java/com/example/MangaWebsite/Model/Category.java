@@ -21,5 +21,6 @@ public class Category {
 
     @Column(name = "ten_the_loai")
     private String TenTheLoai;
-
+    @OneToMany(mappedBy = "category")
+    private Set<Truyen> truyens;
 }

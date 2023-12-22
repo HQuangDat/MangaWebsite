@@ -1,12 +1,10 @@
 package com.example.MangaWebsite.Controller;
 
 import com.example.MangaWebsite.Entity.User;
-import com.example.MangaWebsite.Model.Anh;
-import com.example.MangaWebsite.Model.Category;
-import com.example.MangaWebsite.Model.Chuong;
-import com.example.MangaWebsite.Model.Truyen;
+import com.example.MangaWebsite.Model.*;
 
 
+import com.example.MangaWebsite.Service.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import com.example.MangaWebsite.Service.CategoryService;
-import com.example.MangaWebsite.Service.ChuongService;
-import com.example.MangaWebsite.Service.TruyenService;
-import com.example.MangaWebsite.Service.UserService;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,12 +39,13 @@ public class CTVController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ChuongUserService chuongUserService;
 
     @Autowired
     private ChuongService chuongService;
     @GetMapping("/{userId}/CTV-list")
     public String CTVGetTruyen(@PathVariable Long userId, Model model,Authentication authentication) {
-
         List<Truyen> truyens = truyenService.getTruyensByUserId(userId);
         model.addAttribute("authentication", authentication);
         model.addAttribute("truyens", truyens);
@@ -93,7 +88,7 @@ public class CTVController {
         return "CTV/CTV-add";
     }
     @PostMapping("/{userId}/CTV-add")
-    public ResponseEntity<String> addTruyen(@PathVariable("userId") Long userId,
+    public String addTruyen(@PathVariable("userId") Long userId,
                                             @ModelAttribute("truyen") @Valid Truyen truyen,
                                             @RequestParam("avatar") MultipartFile avatarFile,
                                             BindingResult result,
@@ -103,24 +98,23 @@ public class CTVController {
 
         if (result.hasErrors()) {
             // Xử lý lỗi kiểm tra hợp lệ
-            return new ResponseEntity<>("Có lỗi kiểm tra hợp lệ trong biểu mẫu", HttpStatus.BAD_REQUEST);
-        }
+            return "redirect:/CTV/{userId}/CTV-add?error";    }
 
         try {
             // Kiểm tra rằng tệp avatar không trống
             if (avatarFile.isEmpty()) {
-                return new ResponseEntity<>("Yêu cầu tệp avatar", HttpStatus.BAD_REQUEST);
+                return "redirect:/CTV/{userId}/CTV-add?error";
             }
 
             long maxSize = 10 * 1024 * 1024; // 10MB
             if (avatarFile.getSize() > maxSize) {
-                return new ResponseEntity<>("Kích thước tệp quá lớn, vui lòng chọn tệp nhỏ hơn " + maxSize + " bytes", HttpStatus.BAD_REQUEST);
+                return "redirect:/CTV/{userId}/CTV-add?error";
             }
 
 // Kiểm tra loại nội dung
             String allowedContentType = "image/*";
             if (!Objects.requireNonNull(avatarFile.getContentType()).startsWith("image/")) {
-                return new ResponseEntity<>("Loại tệp không được hỗ trợ, vui lòng chọn tệp hình ảnh", HttpStatus.BAD_REQUEST);
+                return "redirect:/CTV/{userId}/CTV-add?error";
             }
             // Xây dựng đường dẫn thư mục
             String fileName = avatarFile.getOriginalFilename();
@@ -153,21 +147,19 @@ public class CTVController {
             truyen.setAvatarFileName(fileName);
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
-                return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
-            }
+                return "redirect:/CTV/{userId}/CTV-add?error";  }
             Category selectedCategory = categoryService.getCategoryById(truyen.getCategory().getId());
             if (selectedCategory == null) {
-                return new ResponseEntity<>("Danh mục không tồn tại", HttpStatus.BAD_REQUEST);
-            }
+                return "redirect:/CTV/{userId}/CTV-add?error";  }
             // Đặt danh mục trong đối tượng truyen
             truyen.setCategory(selectedCategory);
             truyen.setNgayDang(LocalDateTime.now());
             // Lưu dữ liệu vào cơ sở dữ liệu bằng MangaService
             truyenService.addTruyen(truyen);
 
-            return new ResponseEntity<>("Truyện đã được thêm thành công", HttpStatus.OK);
+            return "redirect:/CTV/{userId}/CTV-add?success";
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi khi thêm Truyện: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/CTV/{userId}/CTV-add?error";
         }
     }
 
@@ -182,7 +174,7 @@ public class CTVController {
                 .replaceAll("\\p{M}", "");
     }
     @PostMapping("/{userId}/CTV-add-chuong")
-    public ResponseEntity<String> createChuong(
+    public String createChuong(
             @PathVariable("userId") Long userId,
             @ModelAttribute("chuong") @Valid Chuong chuong,
             @RequestParam("anhChuong") MultipartFile[] anhFiles,
@@ -196,7 +188,7 @@ public class CTVController {
 
             // Kiểm tra xem người dùng đăng nhập có đúng là chủ sở hữu của truyện hay không
             if (!userId.equals(userService.getUserIdByUsername(userDetails.getUsername()))) {
-                return new ResponseEntity<>("Người dùng không có quyền thêm chương cho truyện này", HttpStatus.FORBIDDEN);
+                return "redirect:/CTV/{userId}/CTV-add-chuong?error";
             }
 
             // Lọc danh sách truyện chỉ hiển thị những truyện thuộc về người dùng
@@ -204,13 +196,11 @@ public class CTVController {
 
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (chuong.getTruyen() == null || chuong.getTruyen().getId() == null) {
-                return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
-            }
+                return "redirect:/CTV/{userId}/CTV-add-chuong?error"; }
 
             Truyen selectedTruyen = truyenService.getTruyenById(chuong.getTruyen().getId());
             if (selectedTruyen == null) {
-                return new ResponseEntity<>("Danh mục không tồn tại", HttpStatus.BAD_REQUEST);
-            }
+                return "redirect:/CTV/{userId}/CTV-add-chuong?error"; }
             chuong.setTruyen(selectedTruyen);
 
             List<Anh> anhList = new ArrayList<>();
@@ -244,8 +234,7 @@ public class CTVController {
             // Đặt giá trị cho trường user trong đối tượng Chuong
             User currentUser = userService.getUserbyId(currentUserId);
             if (currentUser == null) {
-                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.BAD_REQUEST);
-            }
+                return "redirect:/CTV/{userId}/CTV-add-chuong?error";}
 
             // Đặt giá trị cho trường user trong đối tượng Chuong
             chuong.setUser(currentUser);
@@ -267,10 +256,9 @@ public class CTVController {
             // Lưu truyện đã cập nhật vào cơ sở dữ liệu
             truyenService.updateTruyen(truyen);
 
-            return new ResponseEntity<>("Thêm chương và ảnh thành công", HttpStatus.OK);
+            return "redirect:/CTV/{userId}/CTV-add-chuong?success";
         } catch (IOException e) {
-            return new ResponseEntity<>("Lỗi khi thêm chương và ảnh: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            return "redirect:/CTV/{userId}/CTV-add-chuong?error";  }
     }
 
 
@@ -283,47 +271,161 @@ public class CTVController {
         model.addAttribute("authentication", authentication);
         model.addAttribute("chuong", chuong);
         model.addAttribute("truyen", truyenService.getAllTruyens());
-    // Lọc danh sách truyện chỉ hiển thị những truyện thuộc về người dùng0
         List<Truyen> userTruyens = truyenService.getTruyensByUserId(userId);
         model.addAttribute("truyen", userTruyens);
         return "CTV/CTV-add-chuong";
     }
-    // Endpoint để tải lên một ảnh cho một Chương
+
     private String saveImageToDatabase(MultipartFile image, String tenTruyen, String tenChuong) throws IOException {
-        // Kiểm tra kích thước tệp
+
         long maxSize = 10 * 1024 * 1024; // 10MB
         if (image.getSize() > maxSize) {
             throw new IOException("Kích thước tệp quá lớn, vui lòng chọn tệp nhỏ hơn " + maxSize + " bytes");
         }
 
-        // Kiểm tra loại nội dung
         String allowedContentType = "image/*";
         if (!Objects.requireNonNull(image.getContentType()).startsWith("image/")) {
             throw new IOException("Loại tệp không được hỗ trợ, vui lòng chọn tệp hình ảnh");
         }
-        // Xây dựng đường dẫn thư mục
         String fileName = image.getOriginalFilename();
         String sanitizedFileName = sanitizeFileName(fileName);
-
         Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(tenTruyen),sanitizeFileName(tenChuong));
-
-        // Lưu ảnh vào thư mục
         Path filePath = directoryPath.resolve(sanitizedFileName);
-
-        // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
         if (Files.notExists(directoryPath)) {
             Files.createDirectories(directoryPath);
         }
-
         try {
-            // Ghi tệp vào đường dẫn
             Files.write(filePath, image.getBytes());
         } catch (IOException e) {
             throw new IOException("Lỗi khi lưu ảnh: " + e.getMessage());
         }
-
-        // Trả về URL của ảnh (đường dẫn tương đối)
         return sanitizeFileName(tenTruyen)+"/"+sanitizeFileName(tenChuong)+"/"+sanitizedFileName;
     }
 
+    //-------------EDIT TRUYEN------------------------------------------------
+    @GetMapping("/{userId}/{truyenId}/CTV-edit-truyen")
+    public String showCTVEdittruyen(
+            @PathVariable("userId") Long userId,
+            @PathVariable Long truyenId,
+            Model model,
+            Authentication authentication) {
+        Truyen truyen = truyenService.getTruyenById(truyenId);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("authentication", authentication);
+        model.addAttribute("truyen",truyen);
+
+        return "CTV/CTV-edit-truyen";
+    }
+    @PostMapping("/{userId}/{truyenId}/CTV-edit-truyen")
+    public String editTruyen(
+            @PathVariable Long userId,
+            @PathVariable Long truyenId,
+            @ModelAttribute("truyen") Truyen truyen,
+            @RequestParam("avatar") MultipartFile avatarFile,
+            BindingResult result,
+            Model model,
+            Authentication authentication
+    ) {
+
+        if (result.hasErrors()) {
+            return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error"; }
+
+        try {
+            if (avatarFile.isEmpty()) {
+                return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";   }
+
+            long maxSize = 10 * 1024 * 1024; // 10MB
+            if (avatarFile.getSize() > maxSize) {
+                return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";  }
+
+            String allowedContentType = "image/*";
+            if (!Objects.requireNonNull(avatarFile.getContentType()).startsWith("image/")) {
+                return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";}
+
+            String fileName = avatarFile.getOriginalFilename();
+            String sanitizedFileName = sanitizeFileName(fileName);
+
+            Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(truyen.getTenTruyen()));
+            Path filePath = directoryPath.resolve(sanitizedFileName);
+
+            if (Files.notExists(directoryPath)) {
+                Files.createDirectories(directoryPath);
+            }
+
+            Files.write(filePath, avatarFile.getBytes());
+
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String currentUsername = userDetails.getUsername();
+            Long currentUserId = userService.getUserIdByUsername(currentUsername);
+
+            User currentUser = userService.getUserbyId(currentUserId);
+            truyen.setUser(currentUser);
+            truyen.setAvatarFileName(fileName);
+
+            if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
+                return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";  }
+
+            Category selectedCategory = categoryService.getCategoryById(truyen.getCategory().getId());
+            if (selectedCategory == null) {
+                return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";   }
+            Truyen truyenEdit = truyenService.getTruyenById(truyenId);
+            if (truyenEdit == null) {
+                return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";  }
+
+
+            if (!Objects.equals(truyenEdit.getUser().getId(), currentUserId)) {
+                return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";  }
+
+
+            truyenEdit.setTenTruyen(truyen.getTenTruyen());
+            truyenEdit.setTacGia(truyen.getTacGia());
+            truyenEdit.setMoTaNoiDung(truyen.getMoTaNoiDung());
+            truyenEdit.setAvatarFileName(fileName);
+            truyenEdit.setCategory(truyen.getCategory());
+
+            truyenService.updateTruyen(truyenEdit);
+
+            return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?success"; } catch (Exception e) {
+            return "redirect:/CTV/{userId}/{truyenId}/CTV-edit-truyen?error";  }
+    }
+    //-------------DELETE TRUYEN------------------------------------------------
+    @PostMapping("/{userId}/delete/{truyenId}")
+    public String deleteTruyen(@PathVariable Long userId,
+                               @PathVariable Long truyenId,
+                               Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        if (!userId.equals(userService.getUserIdByUsername(userDetails.getUsername()))) {
+            return "redirect:../CTV-list";
+        }
+        truyenService.deleteTruyen(truyenId);
+        return "redirect:../CTV-list";
+    }
+    //-------------DELETE CHUONG------------------------------------------------
+    @PostMapping("/{userId}/{truyenId}/{chuongId}/delete")
+    public String deleteTruyen(@PathVariable Long userId,
+                               @PathVariable Long truyenId,
+                               @PathVariable Long chuongId,
+                               Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Truyen truyen = truyenService.getTruyenById(truyenId);
+        chuongUserService.DeleteAllByChuongId(chuongService.getChuongById(chuongId));
+        truyen.setSoChuong(truyen.getSoChuong() - 1);
+        truyenService.updateTruyen(truyen);
+        if (!userId.equals(userService.getUserIdByUsername(userDetails.getUsername()))) {
+            return "redirect:../CTV-list";
+        }
+       chuongService.deleteChuong(chuongId);
+
+        return "redirect:../CTV-list-chuong";  // Chuyển hướng về trang danh sách sau khi xóa
+    }
+    //-------------Lich SU GIao DIch------------------------------------------------
+    @GetMapping("/{userId}/CTV-lich-su")
+    public String listMuaChuong(Model model,
+                                @PathVariable Long userId) {
+        User account = userService.getUserbyId(userId);
+     List<Chuong_User> listdamua = chuongUserService.getChaptersAndUsersForAccount(account);
+        model.addAttribute("listdamuas", listdamua);
+        return "CTV/CTV-lich-su";
+    }
 }

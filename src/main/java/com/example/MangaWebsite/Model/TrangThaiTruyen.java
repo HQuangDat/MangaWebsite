@@ -20,7 +20,8 @@ public class TrangThaiTruyen {
     @Getter
     @Setter
     private String tentrangthai;
-    @OneToMany(mappedBy = "trangThaiTruyenid")
+
+    @OneToMany(mappedBy = "trangThaiTruyen")
     private Set<Truyen> truyens;
 
 

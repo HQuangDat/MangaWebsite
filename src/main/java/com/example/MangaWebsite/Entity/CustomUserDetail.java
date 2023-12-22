@@ -1,7 +1,7 @@
 package com.example.MangaWebsite.Entity;
 
-import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Repository.IUserRepository;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class CustomUserDetail implements UserDetails {
+    @Getter
     private final User user;
     private final IUserRepository userRepository;
 

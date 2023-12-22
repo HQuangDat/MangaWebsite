@@ -2,10 +2,7 @@ package com.example.MangaWebsite.Controller;
 
 import com.example.MangaWebsite.Entity.CustomUserDetail;
 import com.example.MangaWebsite.Entity.User;
-import com.example.MangaWebsite.Model.Category;
-import com.example.MangaWebsite.Model.Chuong;
-import com.example.MangaWebsite.Model.Truyen;
-import com.example.MangaWebsite.Model.Anh;
+import com.example.MangaWebsite.Model.*;
 import com.example.MangaWebsite.Repository.IChuongRepository;
 import com.example.MangaWebsite.Service.*;
 
@@ -29,11 +26,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
-@RequestMapping("admin/truyen/")
+@RequestMapping("admin/truyen")
 public class MangaController {
     @Autowired
     private TruyenService truyenService;
@@ -48,26 +46,27 @@ public class MangaController {
     private ChuongService chuongService;
     @Autowired
     private AnhService anhService;
+    @Autowired
+    private ChuongUserService chuongUserService;
 
     @GetMapping("List/{id}")
-    public ResponseEntity<?> getTruyen(@PathVariable String id) {
+    public String getTruyen(@PathVariable String id) {
         try {
             long truyenId = Long.parseLong(id);
             Truyen truyen = truyenService.getTruyenById(truyenId);
             if (truyen != null) {
-                return new ResponseEntity<>(truyen, HttpStatus.OK);
+                return "redirect:/admin/List/{id}";
             } else {
-                return new ResponseEntity<>("Truyen not found", HttpStatus.NOT_FOUND);
+                return "redirect:/admin/truyen/List/{id}?error";
             }
         } catch (NumberFormatException e) {
-            // Xử lý ngoại lệ nếu id không thể chuyển đổi thành kiểu long
-            return new ResponseEntity<>("Lỗi này này", HttpStatus.BAD_REQUEST);
+            return "redirect:/admin/truyen/List/{id}?error";
         }
     }
 
-// Hiển thị trang thêm truyện (GET)
+
     @GetMapping("/add")
-    public String   AddTruyenForm(Model model) {
+    public String AddTruyenForm(Model model) {
         // Tạo một đối tượng Truyen để binding với form
         Truyen truyen = new Truyen();
 
@@ -78,38 +77,39 @@ public class MangaController {
         // Trả về tên view (thường là tên của trang thêm truyện)
         return "truyen/add";
     }
+
     @PostMapping("/add")
-    public ResponseEntity<String> addTruyen(@ModelAttribute("truyen") @Valid Truyen truyen,
-                                            @RequestParam("avatar") MultipartFile avatarFile,
-                                            BindingResult result,
-                                            Model model,
-                                            Authentication authentication
+    public String addTruyen(@ModelAttribute("truyen") @Valid Truyen truyen,
+                            @RequestParam("avatar") MultipartFile avatarFile,
+                            BindingResult result,
+                            Model model,
+                            Authentication authentication
     ) {
 
         if (result.hasErrors()) {
             // Xử lý lỗi kiểm tra hợp lệ
-            return new ResponseEntity<>("Có lỗi kiểm tra hợp lệ trong biểu mẫu", HttpStatus.BAD_REQUEST);
+            return "redirect:/add?error";
         }
 
         try {
             // Kiểm tra rằng tệp avatar không trống
             if (avatarFile.isEmpty()) {
-                return new ResponseEntity<>("Yêu cầu tệp avatar", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add?error";
             }
 
             long maxSize = 10 * 1024 * 1024; // 10MB
             if (avatarFile.getSize() > maxSize) {
-                return new ResponseEntity<>("Kích thước tệp quá lớn, vui lòng chọn tệp nhỏ hơn " + maxSize + " bytes", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add?error";
             }
 
 // Kiểm tra loại nội dung
             String allowedContentType = "image/*";
             if (!Objects.requireNonNull(avatarFile.getContentType()).startsWith("image/")) {
-                return new ResponseEntity<>("Loại tệp không được hỗ trợ, vui lòng chọn tệp hình ảnh", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add?error";
             }
-            if(avatarFile.getOriginalFilename() == null){
+            if (avatarFile.getOriginalFilename() == null) {
 
-                return new ResponseEntity<>("Tên file lỗi", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add?error";
             }
             // Xây dựng đường dẫn thư mục
             String fileName = avatarFile.getOriginalFilename();
@@ -119,7 +119,7 @@ public class MangaController {
 
             // Lưu ảnh vào thư mục
             Path filePath = directoryPath.resolve(sanitizedFileName);
-            String filepath = sanitizeFileName(truyen.getTenTruyen()) +"/"+ sanitizedFileName;
+            String filepath = sanitizeFileName(truyen.getTenTruyen()) + "/" + sanitizedFileName;
             // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
             if (Files.notExists(directoryPath)) {
                 Files.createDirectories(directoryPath);
@@ -141,11 +141,11 @@ public class MangaController {
 
             // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
-                return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add?error";
             }
             Category selectedCategory = categoryService.getCategoryById(truyen.getCategory().getId());
             if (selectedCategory == null) {
-                return new ResponseEntity<>("Danh mục không tồn tại", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add?error";
             }
 
             // Lưu thông tin vào đối tượng truyen
@@ -157,9 +157,9 @@ public class MangaController {
             // Lưu dữ liệu vào cơ sở dữ liệu bằng MangaService
             truyenService.addTruyen(truyen);
 
-            return new ResponseEntity<>("Truyện đã được thêm thành công", HttpStatus.OK);
+            return "redirect:/admin/truyen/add?success";
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi khi thêm Truyện: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/admin/truyen/add?error";
         }
     }
 
@@ -174,59 +174,112 @@ public class MangaController {
                 .replaceAll("\\p{M}", "");
     }
 
+//-------------------------------  Xóa truyện ----------------------------------
 
-    // Xóa truyện
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<String> deleteTruyen(@PathVariable long id) {
-        truyenService.deleteTruyen(id);
-        return new ResponseEntity<>("Truyện đã được xóa thành công", HttpStatus.OK);
+    //
+
+    @PostMapping("/{truyenId}/delete")
+    public String deleteTruyen(@PathVariable Long truyenId,
+                               Authentication authentication) {
+        if (truyenId != null) {
+            truyenService.deleteTruyen(truyenId);
+            return "redirect:../list";
+        } else return "redirect:../list?error";
     }
-    @PostMapping("/delete")
-    public ResponseEntity<String> deleteTruyen(@RequestParam("truyenId") Long truyenId,
-                                               Authentication authentication) {
+
+    @PostMapping("/{truyenId}/{chuongId}/delete")
+    public String deleteChuong(@PathVariable Long truyenId,
+                               @PathVariable Long chuongId,
+                               Authentication authentication) {
+        if (chuongId != null) {
+            Truyen truyen = truyenService.getTruyenById(truyenId);
+            chuongUserService.DeleteAllByChuongId(chuongService.getChuongById(chuongId));
+            truyen.setSoChuong(truyen.getSoChuong() - 1);
+            truyenService.updateTruyen(truyen);
+            chuongService.deleteChuong(chuongId);
+            return "redirect:../list-chuong";
+        } else return "redirect:../list-chuong?error";
+    }
+    //-------------------------------  Chỉnh sửa truyện ----------------------------------
+
+    @GetMapping("/{truyenId}/edit")
+    public String editTruyenForm(@PathVariable Long truyenId, Model model) {
+
+        Truyen EditTruyen = truyenService.getTruyenById(truyenId);
+        model.addAttribute("EditTruyen", EditTruyen);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        return "truyen/edit-truyen";
+    }
+
+    @PostMapping("/{truyenId}/edit")
+    public String editTruyen(
+            @PathVariable Long truyenId,
+            @ModelAttribute("truyen") Truyen truyen,
+            @RequestParam("avatar") MultipartFile avatarFile,
+            BindingResult result,
+            Model model,
+            Authentication authentication
+    ) {
+
+        if (result.hasErrors()) {
+            return "redirect:/admin/truyen/{truyenId}/edit?error";
+        }
+
         try {
-            // Nhận thông tin người dùng hiện tại từ Authentication
+            if (avatarFile.isEmpty()) {
+                return "redirect:/admin/truyen/{truyenId}/edit?error";
+            }
+            long maxSize = 10 * 1024 * 1024; // 10MB
+            if (avatarFile.getSize() > maxSize) {
+                return "redirect:/admin/truyen/{truyenId}/edit?error";
+            }
+            String allowedContentType = "image/*";
+            if (!Objects.requireNonNull(avatarFile.getContentType()).startsWith("image/")) {
+                return "redirect:/admin/truyen/{truyenId}/edit?error";
+            }
+            String fileName = avatarFile.getOriginalFilename();
+            String sanitizedFileName = sanitizeFileName(fileName);
+
+            Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(truyen.getTenTruyen()));
+            Path filePath = directoryPath.resolve(sanitizedFileName);
+            String SaveURL = sanitizeFileName(truyen.getTenTruyen() + '/' + sanitizedFileName);
+            if (Files.notExists(directoryPath)) {
+                Files.createDirectories(directoryPath);
+            }
+
+            Files.write(filePath, avatarFile.getBytes());
+
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String currentUsername = userDetails.getUsername();
-
-            // Lấy ID của người dùng từ service
             Long currentUserId = userService.getUserIdByUsername(currentUsername);
 
-            // Kiểm tra xem truyện có thuộc về người dùng hiện tại không
-            Truyen truyen = truyenService.getTruyenById(truyenId);
+            User currentUser = userService.getUserbyId(currentUserId);
 
-            if (truyen != null && truyen.getUser() != null && truyen.getUser().getId().equals(currentUserId)) {
-                // Xóa truyện nếu nó thuộc về người dùng hiện tại
-                truyenService.deleteTruyen(truyenId);
-                return new ResponseEntity<>("Truyện đã được xóa thành công", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Không tìm thấy hoặc bạn không có quyền xóa truyện này", HttpStatus.BAD_REQUEST);
+
+            if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
+                return "redirect:/admin/truyen/{truyenId}/edit?error";
             }
+            Category selectedCategory = categoryService.getCategoryById(truyen.getCategory().getId());
+            if (selectedCategory == null) {
+                return "redirect:/admin/truyen/{truyenId}/edit?error";
+            }
+            Truyen truyenEdit = truyenService.getTruyenById(truyenId);
+            if (truyenEdit == null) {
+                return "redirect:/admin/truyen/{truyenId}/edit?error";
+            }
+            // Cập nhật thông tin truyện
+            truyenEdit.setTenTruyen(truyen.getTenTruyen());
+            truyenEdit.setTacGia(truyen.getTacGia());
+            truyenEdit.setMoTaNoiDung(truyen.getMoTaNoiDung());
+            truyenEdit.setAvatarFileName(SaveURL);
+            truyenEdit.setUser(currentUser);
+            truyenEdit.setCategory(truyen.getCategory());
+            truyenService.updateTruyen(truyenEdit);
+
+            return "redirect:/admin/truyen/{truyenId}/edit?error";
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi khi xóa Truyện: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/admin/truyen/{truyenId}/edit?error";
         }
-    }
-
-    // Chỉnh sửa truyện
-    // Lấy thông tin của một manga dựa vào ID
-    @GetMapping("/edit/{id}")
-    public String editTruyenForm(@PathVariable("id") Long id, Model model) {
-        Optional<Truyen> editTruyen = Optional.ofNullable(truyenService.getTruyenById(id));
-        if (editTruyen.isPresent()) {
-            Truyen truyen = editTruyen.get();
-            model.addAttribute("truyen", truyen);
-            model.addAttribute("categories", categoryService.getAllCategories());
-            model.addAttribute("selectedCategoryId", truyen.getCategory().getId());
-            return "truyen/edit";
-        } else {
-            return "not-found";
-        }
-    }
-
-    @PostMapping("/edit")
-    public String editTruyen(@ModelAttribute("truyen") Truyen truyen) {
-        truyenService.updateTruyen(truyen);
-        return "redirect:/list"; // Sửa đường dẫn chuyển hướng
     }
 
 
@@ -239,9 +292,8 @@ public class MangaController {
 
     //<----------------------------------------------------------------------------------------->
     //Chương và Ảnh
-    // Endpoint để tạo một Chương mới cho Truyện
     @PostMapping("/add-chuong")
-    public ResponseEntity<String> createChuong(
+    public String createChuong(
             @ModelAttribute("chuong") @Valid Chuong chuong,
             @RequestParam("anhChuong") MultipartFile[] anhFiles,
             BindingResult result,
@@ -249,26 +301,19 @@ public class MangaController {
             Authentication authentication
     ) {
         try {
-            // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (chuong.getTruyen() == null || chuong.getTruyen().getId() == null) {
-                return new ResponseEntity<>("Danh mục không hợp lệ", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add-chuong?error";
             }
-
             Truyen selectedTruyen = truyenService.getTruyenById(chuong.getTruyen().getId());
             if (selectedTruyen == null) {
-                return new ResponseEntity<>("Danh mục không tồn tại", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add-chuong?error";
             }
             chuong.setTruyen(selectedTruyen);
-
             List<Anh> anhList = new ArrayList<>();
-
-            // Nếu chuong chưa có id, thêm chuong vào cơ sở dữ liệu để có id
             if (chuong.getId() == null) {
                 // Lưu chương vào cơ sở dữ liệu
                 chuongService.addChuongs(chuong);
             }
-
-            // Lưu các URL của ảnh vào table Anh
             for (MultipartFile image : anhFiles) {
                 String imageUrl = saveImageToDatabase(image, chuong.getTruyen().getTenTruyen(), chuong.getTenChuong());
                 Anh anh = new Anh();
@@ -276,65 +321,47 @@ public class MangaController {
                 anh.setDuongDan(imageUrl);
                 anhList.add(anh);
             }
-
-            // Liên kết ảnh với chương
             chuong.setAnhList(anhList);
-
-
-
-            // Liên kết chương với người dùng hiện tại
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String currentUsername = userDetails.getUsername();
-
-            // Bạn có thể sử dụng username để lấy ID của người dùng từ service
             Long currentUserId = userService.getUserIdByUsername(currentUsername);
-
-            // Đặt giá trị cho trường user trong đối tượng Chuong
             User currentUser = userService.getUserbyId(currentUserId);
             if (currentUser == null) {
-                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.BAD_REQUEST);
+                return "redirect:/admin/truyen/add-chuong?error";
             }
-
-            // Đặt giá trị cho trường user trong đối tượng Chuong
             chuong.setUser(currentUser);
             chuong.setNgayDang(LocalDateTime.now());
             for (Anh anh : chuong.getAnhList()) {
                 anh.setChuong(chuong);
             }
-            // Thêm chương
+            if (chuong.getTruyen().isPremium()) {
+                if (chuong.getGiaTien() > 0) {
+                    chuong.setGiaTien(chuong.getGiaTien());
+                    chuong.setLocked(true);
+                }
+            } else
+                chuong.setGiaTien(0);
             chuongService.addChuongs(chuong);
-            // Lấy thông tin truyện từ chương vừa thêm
             Truyen truyen = chuong.getTruyen();
-
-            // Lấy số lượng chương hiện tại của truyện
             int soLuongChuongHienTai = truyen.getSoChuong();
-
-            // Cập nhật số lượng chương
             truyen.setSoChuong(soLuongChuongHienTai + 1);
+            truyenService.addTruyen(truyen);
 
-            // Lưu truyện đã cập nhật vào cơ sở dữ liệu
-            truyenService.updateTruyen(truyen);
-
-            return new ResponseEntity<>("Thêm chương và ảnh thành công", HttpStatus.OK);
+            return "redirect:/admin/truyen/add-chuong?success";
         } catch (IOException e) {
-            return new ResponseEntity<>("Lỗi khi thêm chương và ảnh: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return "redirect:/admin/truyen/add-chuong?error";
         }
     }
 
+    @GetMapping("/add-chuong")
+    public String showAddChuongForm(Model model) {
+        Chuong chuong = new Chuong();
+        model.addAttribute("chuong", chuong);
+        model.addAttribute("truyen", truyenService.getAllTruyens());
 
-    // Endpoint để lấy tất cả các Chương của một Truyện
-            @GetMapping("/add-chuong")
-            public String showAddChuongForm( Model model) {
+        return "truyen/add-chuong";
+    }
 
-
-                Chuong chuong = new Chuong();
-
-                model.addAttribute("chuong", chuong);
-                model.addAttribute("truyen", truyenService.getAllTruyens());
-
-                return "truyen/add-chuong";
-            }
-    // Endpoint để tải lên một ảnh cho một Chương
     private String saveImageToDatabase(MultipartFile image, String tenTruyen, String tenChuong) throws IOException {
         // Kiểm tra kích thước tệp
         long maxSize = 10 * 1024 * 1024; // 10MB
@@ -342,39 +369,31 @@ public class MangaController {
             throw new IOException("Kích thước tệp quá lớn, vui lòng chọn tệp nhỏ hơn " + maxSize + " bytes");
         }
 
-        // Kiểm tra loại nội dung
         String allowedContentType = "image/*";
         if (!Objects.requireNonNull(image.getContentType()).startsWith("image/")) {
             throw new IOException("Loại tệp không được hỗ trợ, vui lòng chọn tệp hình ảnh");
         }
 
-        // Xây dựng đường dẫn thư mục
         String fileName = image.getOriginalFilename();
         String sanitizedFileName = sanitizeFileName(fileName);
 
-        Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(tenTruyen),sanitizeFileName(tenChuong));
-
-        // Lưu ảnh vào thư mục
+        Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(tenTruyen), sanitizeFileName(tenChuong));
         Path filePath = directoryPath.resolve(sanitizedFileName);
 
-        // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
         if (Files.notExists(directoryPath)) {
             Files.createDirectories(directoryPath);
         }
 
         try {
-            // Ghi tệp vào đường dẫn
             Files.write(filePath, image.getBytes());
         } catch (IOException e) {
             throw new IOException("Lỗi khi lưu ảnh: " + e.getMessage());
         }
-
-        // Trả về URL của ảnh (đường dẫn tương đối)
-        return sanitizeFileName(tenTruyen)+"/"+sanitizeFileName(tenChuong)+"/"+sanitizedFileName;
+        return sanitizeFileName(tenTruyen) + "/" + sanitizeFileName(tenChuong) + "/" + sanitizedFileName;
     }
 
 
-    // Endpoint để lấy tất cả các ảnh của một Chương
+
     @GetMapping("/{truyenId}/list-chuong")
     public String getTruyenAndChuongs(@PathVariable Long truyenId, Model model) {
         // Kiểm tra xem truyen có tồn tại hay không, nếu không thì trả về 404
@@ -394,7 +413,17 @@ public class MangaController {
         return "truyen/list-chuong";
     }
 
-    // ...
+    //-------------------------------Thao tác bật premium Truyen ----------------------------------
+    @PostMapping("/{truyenId}/premium")
+    public String premiumTruyen(@PathVariable Long truyenId,
+                                Authentication authentication) {
+        Truyen truyen = truyenService.getTruyenById(truyenId);
+        if (truyenId != null) {
+            truyenService.togglePremiumStatus(truyenId);
+            truyen.setPremium(true);
+            return "redirect:../list";
+        } else return "redirect:../list?error";
+    }
 }
 
 

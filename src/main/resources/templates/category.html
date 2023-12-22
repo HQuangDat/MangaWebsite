@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Manga Template">
+    <meta name="keywords" content="Manga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manga | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/login/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/plyr.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/style.css}" type="text/css">
+    <!-- Sử dụng CDN -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="...">
+</head>
+
+<body>
+<button th:onclick="topFunction()" th:id="toTop">Top</button>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                    <a href="/">
+                        <img th:src="@{img/Logo.png}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./">Homepage</a></li>
+                            <li class="active"><a href="./category">Category <span class="arrow_carrot-down"></span></a>
+                                <ul class="dropdown">
+                                    <li><a href="./category">Categories</a></li>
+                                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/Register}">Sign Up</a></li>
+                                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="fas fa-user">Login</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="./review">Review</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="header__right">
+                    <a href="/search" class="search-switch"><span class="fas fa-search"></span></a>
+                    <div class="dropdown-user">
+                        <!-- Hiển thị icon khóa nếu chưa đăng nhập -->
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="fas fa-lock"></span></a>
+                        <!-- Hiển thị icon mở khóa và menu khi đã đăng nhập -->
+                        <button class="dropbtn" sec:authorize="isAuthenticated()">
+                            <span class="fas fa-lock-open"></span>
+                        </button>
+                        <div class="dropdown-content">
+                            <!-- Thông tin cá nhân -->
+                            <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá
+                                nhân</a>
+                            <!-- Chuyển trang CTV -->
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated()"
+                               th:href="@{'/CTV/'+${#authentication.principal?.id}+'/CTV-list'}">Cộng tác viên</a>
+                            <!-- Đăng xuất -->
+                            <a sec:authorize="isAuthenticated()" href="/logout">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
+
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="/"><i class="fa fa-home "></i>Home</a>
+                    <a href="/category" class="fas fa-chevron-right "> Category</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Product Section Begin -->
+<section class="product-page spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="product__page__content">
+                    <div class="product__page__title">
+                        <!-- ... -->
+                        <div class="row">
+                            <!-- ... -->
+                            <div>
+                                <div>
+                                    <label class="tim-kiem-label" for="tim-kiem">Tìm kiếm : </label>
+                                    <input type="text" class="tim-kiem" id="tim-kiem" placeholder="Nhập tên truyện">
+                                </div>
+                                <h4>Trạng Thái :</h4>
+                                <div class="button-category" id="trangthai-buttons">
+                                    <a th:each="ttt, status : ${trangthaiList}" href="javascript:void(0)">
+                                        <!-- Thay đổi th:data-genre thành th:data-id -->
+                                        <button class="genreButton trangthai-button" th:text="${ttt.tentrangthai}"
+                                                th:data-id="${ttt.getId()}"></button>
+                                    </a>
+                                </div>
+                                <h4>Sắp xếp :</h4>
+                                <div class="button-category" id="sapxep-buttons">
+                                    <a href="javascript:void(0)" onclick="sortByNewest()">
+                                        <button class="genreButton sapxep-button" th:text="'Mới cập nhật'" th:data-id="'1'"></button>
+                                    </a>
+                                    <a href="javascript:void(0)" onclick="sortByRecentlyAdded()">
+                                        <button class="genreButton sapxep-button" th:text="'Mới đăng'"  th:data-id="'2'"></button>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div>
+                                <h4>Thể loại :</h4>
+                                <div class="button-category" id="theloai-buttons">
+                                    <a th:each="spawn, status : ${categoryspawn}" href="javascript:void(0)">
+                                        <!-- Thay đổi th:data-genre thành th:data-id -->
+                                        <button class="genreButton theloai-button" th:text="${spawn.tenTheLoai}"
+                                                th:data-id="${spawn.getId()}"></button>
+                                    </a>
+                                </div>
+                                <div>
+                                    <!-- Thêm th:id để có thể dễ dàng chọn nút trong JavaScript -->
+                                    <button class="search-button fas fa-search" onclick="search()" th:id="searchButton">
+                                        Tìm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ... -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6" th:each="item : ${truyenList}">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg"
+                                     th:data-setbg="'/Truyen/'+${item.avatarFileName}">
+                                    <div class="ep" th:text="${item.soChuong} "></div>
+                                    <div class="comment"><i class="fas fa-thumbs-up" th:text="${item.soLike}"></i></div>
+                                    <div class="view"><i class="fas fa-eye" th:text="${item.soView}"></i></div>
+                                </div>
+                                <div class="product__item__text">
+                                    <ul>
+                                        <li th:text="${item.trangThaiTruyen.tentrangthai}"></li>
+                                        <li th:text="${item.category.tenTheLoai}"></li>
+                                    </ul>
+                                    <h5><a th:href="@{'/truyen/' + ${item.id}}" th:text="${item.tenTruyen}"></a></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="product__sidebar">
+                    <div class="product__sidebar__view">
+                        <div class="section-title">
+                            <h5>Top Views</h5>
+                        </div>
+                        <ul class="filter__controls">
+                            <li class="active" data-filter="*">Day</li>
+                            <li data-filter=".week">Week</li>
+                            <li data-filter=".month">Month</li>
+                            <li data-filter=".years">Years</li>
+                        </ul>
+                        <div class="filter__gallery">
+                            <div class="product__sidebar__view__item set-bg mix day years"
+                                 data-setbg="img/sidebar/tv-1.jpg">
+                                <div class="ep">18 / ?</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                            </div>
+                            <div class="product__sidebar__view__item set-bg mix month week"
+                                 data-setbg="img/sidebar/tv-2.jpg">
+                                <div class="ep">18 / ?</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                            </div>
+                            <div class="product__sidebar__view__item set-bg mix week years"
+                                 data-setbg="img/sidebar/tv-3.jpg">
+                                <div class="ep">18 / ?</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <h5><a href="#">Sword art online alicization war of underworld</a></h5>
+                            </div>
+                            <div class="product__sidebar__view__item set-bg mix years month"
+                                 data-setbg="img/sidebar/tv-4.jpg">
+                                <div class="ep">18 / ?</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+                            </div>
+                            <div class="product__sidebar__view__item set-bg mix day"
+                                 data-setbg="img/sidebar/tv-5.jpg">
+                                <div class="ep">18 / ?</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <h5><a href="#">Fate stay night unlimited blade works</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product__sidebar__comment">
+                        <div class="section-title">
+                            <h5>New Comment</h5>
+                        </div>
+                        <div class="product__sidebar__comment__item">
+                            <div class="product__sidebar__comment__item__pic">
+                                <img src="img/sidebar/comment-1.jpg" alt="">
+                            </div>
+                            <div class="product__sidebar__comment__item__text">
+                                <ul>
+                                    <li>Active</li>
+                                    <li>Movie</li>
+                                </ul>
+                                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                            </div>
+                        </div>
+                        <div class="product__sidebar__comment__item">
+                            <div class="product__sidebar__comment__item__pic">
+                                <img src="img/sidebar/comment-2.jpg" alt="">
+                            </div>
+                            <div class="product__sidebar__comment__item__text">
+                                <ul>
+                                    <li>Active</li>
+                                    <li>Movie</li>
+                                </ul>
+                                <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
+                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                            </div>
+                        </div>
+                        <div class="product__sidebar__comment__item">
+                            <div class="product__sidebar__comment__item__pic">
+                                <img src="img/sidebar/comment-3.jpg" alt="">
+                            </div>
+                            <div class="product__sidebar__comment__item__text">
+                                <ul>
+                                    <li>Active</li>
+                                    <li>Movie</li>
+                                </ul>
+                                <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
+                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                            </div>
+                        </div>
+                        <div class="product__sidebar__comment__item">
+                            <div class="product__sidebar__comment__item__pic">
+                                <img src="img/sidebar/comment-4.jpg" alt="">
+                            </div>
+                            <div class="product__sidebar__comment__item__text">
+                                <ul>
+                                    <li>Active</li>
+                                    <li>Movie</li>
+                                </ul>
+                                <h5><a href="#">Monogatari Series: Second Season</a></h5>
+                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer__logo">
+                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer__nav">
+                    <ul>
+                        <li class="active"><a href="./index.html">Homepage</a></li>
+                        <li><a href="./categories.html">Categories</a></li>
+                        <li><a href="./blog.html">Our Blog</a></li>
+                        <li><a href="#">Contacts</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search model Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+<!-- Js Plugins -->
+<script th:src="@{/js/login/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/login/bootstrap.min.js}"></script>
+<script th:src="@{/js/login/player.js}"></script>
+<script th:src="@{/js/login/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/login/mixitup.min.js}"></script>
+<script th:src="@{/js/login/jquery.slicknav.js}"></script>
+<script th:src="@{/js/login/owl.carousel.min.js}"></script>
+<script th:src="@{/js/login/main.js}"></script>
+<!--    Back to top button-->
+<script>
+    // Khởi tạo nút
+    let mybutton = document.getElementById("toTop");
+
+    // Hiện nút khi người dụng cuộn xuống 20px
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+<!-- JavaScript -->
+<script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+        var trangThaiButtons = document.querySelectorAll('.trangthai-button');
+        var theLoaiButtons = document.querySelectorAll('.theloai-button');
+        var sapXepButtons = document.querySelectorAll('.sapxep-button');
+
+        sapXepButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                sapXepButtons.forEach(function (btn) {
+                    btn.classList.toggle('selected', btn === button);
+                });
+
+                // Gọi hàm xử lý sắp xếp tương ứng
+                handleSort(button.textContent);
+            });
+        });
+        trangThaiButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                trangThaiButtons.forEach(function (btn) {
+                    btn.classList.toggle('selected', btn === button);
+                });
+            });
+        });
+
+        theLoaiButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                theLoaiButtons.forEach(function (btn) {
+                    btn.classList.toggle('selected', btn === button);
+                });
+            });
+        });
+    });
+
+    function search() {
+        var TenTruyen = encodeURIComponent(document.getElementById('tim-kiem').value);
+        var selectedTrangThai = document.querySelector('.trangthai-button.selected');
+        var selectedTheLoai = document.querySelector('.theloai-button.selected');
+        var selectedSapXep = document.querySelector('.sapxep-button.selected');
+        var trangThaiId = selectedTrangThai ? selectedTrangThai.getAttribute('data-id') : '';
+        var theLoaiId = selectedTheLoai ? selectedTheLoai.getAttribute('data-id') : '';
+        var sapXepId = selectedSapXep ? selectedSapXep.getAttribute('data-id'):'';
+        // Sử dụng URLSearchParams để xây dựng chuỗi tham số
+        var params = new URLSearchParams({
+            'TenTruyen': TenTruyen,
+            'trangThaiTruyen': trangThaiId,
+            'category': theLoaiId,
+            'sapxep' : sapXepId,
+        });
+
+        // Xây dựng URL tới trang kết quả tìm kiếm
+        var searchUrl = '/search-results?' + params;
+
+        // Chuyển hướng người dùng đến trang kết quả tìm kiếm
+        window.location.href = searchUrl;
+    }
+    /*
+        function handleSort(sortOption) {
+
+            if (sortOption === 'Mới cập nhật') {
+                sortByNewest();
+            } else if (sortOption === 'Mới đăng') {
+                sortByRecentlyAdded();
+            }
+        }
+
+        function sortByNewest() {
+            var truyenArray = [];
+
+            truyenArray.sort(function (a, b) {
+                return new Date(b.ngayXuatBan) - new Date(a.ngayXuatBan);
+            });
+            updateContent(truyenArray);
+        }
+
+        function sortByRecentlyAdded() {
+            var truyenArray = [];
+
+            truyenArray.sort(function (a, b) {
+                return new Date(b.ngayThem) - new Date(a.ngayThem);
+            });
+            updateContent(truyenArray);
+        }
+
+        function updateContent(sortedTruyenArray) {
+            // Iterate through the sorted array and update the content
+            var productItems = document.querySelectorAll('.product__item');
+
+            for (var i = 0; i < sortedTruyenArray.length; i++) {
+                var item = sortedTruyenArray[i];
+                var productItem = productItems[i];
+
+                // Update content within the product item, adjust as needed
+                productItem.querySelector('.ep').textContent = item.soChuong;
+                productItem.querySelector('.comment i').textContent = item.soLike;
+                productItem.querySelector('.view i').textContent = item.soView;
+            }**/
+
+</script>
+
+
+</body>
+
+</html>

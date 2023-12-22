@@ -40,28 +40,40 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="/">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                                <li ><a href="/">Homepage</a></li>
+                                <li><a href="http://localhost:8888/category">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./anime-watching.html">Manga Watching</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
+                                        <li><a href="http://localhost:8888/category">Categories</a></li>
                                         <li><a th:href="@{/Register}">Sign Up</a></li>
                                         <li><a th:href="@{/login}">Login</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
+                                <li><a href="../review">Review</a></li>
                             </ul>
                         </nav>
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="icon_profile"></span></a>
+                <div class="header__right">
+                    <a href="/search" class="search-switch"><span class="fas fa-search"></span></a>
+                    <div class="dropdown-user">
+                        <!-- Hiển thị icon khóa nếu chưa đăng nhập -->
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="fas fa-lock"></span></a>
+                        <!-- Hiển thị icon mở khóa và menu khi đã đăng nhập -->
+                        <button class="dropbtn" sec:authorize="isAuthenticated()">
+                            <span class="fas fa-lock-open"></span>
+                        </button>
+                        <div class="dropdown-content">
+                            <!-- Thông tin cá nhân -->
+                            <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá nhân</a>
+                            <!-- Chuyển trang CTV -->
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated()" th:href="@{'/CTV/'+${#authentication.principal?.id}+'/CTV-list'}">Cộng tác viên</a>
+                            <!-- Đăng xuất -->
+                            <a sec:authorize="isAuthenticated()" href="/logout">Đăng xuất</a>
+                        </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>
@@ -70,16 +82,29 @@
     <div class="container">
         <div class="reading-control">
             <div class="chapter-nav" id="chapterNav">
-                <a class="home" th:href="@{/}" title="Trang chủ"><i class="fas fa-home"></i></a>
-                <a href="#" class="prev a_prev"><i class="fa fa-chevron-left"></i></a>
-                <select name="ctl00$mainContent$ddlSelectChapter" id="ddlSelectChapter" class="select-chapter">
+                <a class="home" th:href="@{/}" title="Trang chủ"><i class="fas fa-home"></i>
+                </a>
+                <i class=" space fas fa-chevron-right"></i>
+                <a th:href="'/truyen/' + ${truyen.id} " th:text="${truyen.tenTruyen}"></a>
+                <a th:if="${chuongTruoc != null}" th:href="@{'/truyen/' + ${chuongTruoc.truyen?.id} + '/chuong/' + ${chuongTruoc.id}}" class="prev a_prev">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <select name="ctl00$mainContent$ddlSelectChapter" id="ddlSelectChapter" class="select-chapter" onchange="changeChapter(this)">
                     <option th:each="chuong : ${chuong}"
                             th:value="'/truyen/' + ${chuong.truyen.id} + '/chuong/' + ${chuong.id}"
                             th:text="${chuong.tenChuong}"
-                            th:selected="${chuongHienTai != null and chuong.id == chuongHienTai[0].id}"
-                    ></option>
+                            th:selected="${chuongHienTai != null and chuong.id == chuongHienTai.id}">
+
+                        <!-- Kiểm tra xem chuongHienTai có tồn tại và có chứa danh sách chương hay không -->
+                        <th:block th:if="${chuongHienTai != null and chuongHienTai.size() > 0}">
+
+                            <p th:text="${chuongHienTai[0].id}"></p>
+                        </th:block>
+                    </option>
                 </select>
-                <a href="#" class="next a_next disabled"><i class="fa fa-chevron-right"></i></a>
+
+                <a th:if="${chuongSau != null}" th:href="@{'/truyen/' + ${chuongSau.truyen?.id} + '/chuong/' + ${chuongSau.id}}"
+                class="next a_next disabled"><i class="fa fa-chevron-right"></i></a>
             </div>
         </div>
         <!--Content Truyen-->
@@ -96,8 +121,10 @@
 
         <div class="bottom">
             <div class="chapter-nav-bottom text-center" id="chapterNavBottom">
-                <a href="https://www.nettruyenus.com/truyen-tranh/boku-girl/chap-107/450055" class="btn btn-danger prev"><em class="fa fa-chevron-left"></em> Chap trước</a>
-                <a href="#" class="btn btn-danger next">Chap sau <em class="fa fa-chevron-right"></em></a>
+                <a th:if="${chuongTruoc != null}" th:href="@{'/truyen/' + ${chuongTruoc.truyen?.id} + '/chuong/' + ${chuongTruoc.id}}"
+                class="btn btn-danger prev"><em class="fa fa-chevron-left"></em> Chap trước</a>
+                <a th:if="${chuongSau != null}" th:href="@{'/truyen/' + ${chuongSau.truyen?.id} + '/chuong/' + ${chuongSau.id}}"
+                   class="btn btn-danger next">Chap sau <em class="fa fa-chevron-right"></em></a>
             </div>
         </div>
     </div>
@@ -153,49 +180,11 @@
         }
     </script>
     <script>
-        // Lấy các phần tử DOM
-        let ddlSelectChapter = document.getElementById('ddlSelectChapter');
-        let prevButton = document.querySelector('.prev');
-        let nextButton = document.querySelector('.next');
-        let selectedIndex = ddlSelectChapter.selectedIndex;
-
-        // Thêm sự kiện click cho nút "prev"
-        prevButton.addEventListener('click', function () {
-            // Thực hiện logic khi nút "prev" được click
-            // Chuyển đến chương trước đó
-            if (selectedIndex > 0) {
-                ddlSelectChapter.selectedIndex = selectedIndex - 1;
-                selectedIndex = ddlSelectChapter.selectedIndex; // Cập nhật giá trị selectedIndex
-            }
-        });
-
-        // Thêm sự kiện click cho nút "next"
-        nextButton.addEventListener('click', function () {
-            // Thực hiện logic khi nút "next" được click
-            // Chuyển đến chương tiếp theo
-            if (selectedIndex < ddlSelectChapter.options.length - 1) {
-                ddlSelectChapter.selectedIndex = selectedIndex + 1;
-                selectedIndex = ddlSelectChapter.selectedIndex; // Cập nhật giá trị selectedIndex
-                toggleNextButton();
-            }
-        });
-
-        // Hàm kiểm tra và cập nhật trạng thái của nút "next"
-        function toggleNextButton() {
-            let isLastChapter = selectedIndex >= ddlSelectChapter.options.length - 1;
-
-            if (isLastChapter) {
-                // If it's the last chapter, disable the button and add the "disabled" class
-                document.querySelector('.next-container').classList.add('disabled');
-                nextButton.setAttribute('disabled', 'disabled');
-            } else {
-                // If it's not the last chapter, enable the button and remove the "disabled" class
-                document.querySelector('.next-container').classList.remove('disabled');
-                nextButton.removeAttribute('disabled');
-            }
+        function changeChapter(select) {
+            var selectedOption = select.options[select.selectedIndex];
+            var chapterUrl = selectedOption.value;
+            window.location.href = chapterUrl;
         }
-        // Gọi hàm để cài đặt trạng thái ban đầu
-        toggleNextButton();
     </script>
   <script>
       // Gọi hàm khi trang được load lại
@@ -228,6 +217,31 @@
       window.location.href = selectedValue;
   }
   </script>
-    <script></script>
+    <script th:inline="javascript">
+        function incrementViewCount(chapterId) {
+            // Gọi hàm để tăng lượt xem ở phía server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/view-count', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                }
+            };
+
+            // Gửi dữ liệu đến server
+            xhr.send('chapterId=' + encodeURIComponent(chapterId));
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            // Gọi hàm để tăng lượt xem khi trang được tải
+            incrementViewCount();
+        });
+
+        // Gọi hàm khi chuyển chương
+        document.getElementById('ddlSelectChapter').addEventListener('change', function() {
+            incrementViewCount();
+        });
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,261 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Cpanel TMQ</title>
+    <meta name="description" content="Admin Cpanel TMQ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="/images/admin/favicon.png">
+    <link rel="shortcut icon" href="/admin/images/favicon.png">
+    <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/admin/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI/t1O1tbfSOlqLNr5XlMx46P8FqFYTfZ6N5sPdI="
+            crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="/css/admin/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/admin/style.css">
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
+
+    <script>
+        $(document).ready(function () {
+            // get current URL path and assign 'active' class
+            var pathname = window.location.pathname;
+            $('.nav navbar-nav > li > a[href="' + pathname + '"]').parent().addClass('active');
+        })
+    </script>
+    </script>
+    <style>
+        #weatherWidget .currentDesc {
+            color: #ffffff !important;
+        }
+
+        .traffic-chart {
+            min-height: 335px;
+        }
+
+        #flotPie1 {
+            height: 150px;
+        }
+
+        #flotPie1 td {
+            padding: 3px;
+        }
+
+        #flotPie1 table {
+            top: 20px !important;
+            right: -10px !important;
+        }
+
+        .chart-container {
+            display: table;
+            min-width: 270px;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        #flotLine5 {
+            height: 105px;
+        }
+
+        #flotBarChart {
+            height: 150px;
+        }
+
+        #cellPaiChart {
+            height: 160px;
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/admin"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                <li class="menu-title">Quản lý chuyên mục</li><!-- /.menu-title -->
+                <li>
+                    <a href="/admin/them-the-loai"> <i class="menu-icon fas fa-list-ol"></i>Thêm thể loại </a>
+                </li>
+                <li>
+                    <a href="truyen/add"> <i class="menu-icon fas fa-bookmark "></i>Đăng truyện</a>
+                </li>
+                <li>
+                    <a href="truyen/add-chuong"> <i class="menu-icon fas fa-pen"></i>Đăng chương</a>
+                </li>
+
+                <li>
+                    <a href="truyen/list"> <i class="menu-icon  fas  fa-list-alt"></i>Danh sách truyện tranh</a>
+                </li>
+
+                <li class="menu-title">Thành viên</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="/admin/qtv"> <i class="menu-icon fas fa-user"></i>Quản trị viên </a>
+                </li>
+                <li>
+                    <a href="/admin/ctv"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
+                </li>
+                <li>
+                    <a href="/admin/nap-tien"> <i class="menu-icon  fa fa-coins"></i>Nạp Tiền</a>
+                </li>
+                <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="/admin/lich-su"> <i class="menu-icon fa fa-history"></i>Lịch sử giao dịch</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"><img style="width: 15%" src="/img/Logo.png" alt="Logo"></a>
+            </div>
+        </div>
+        <div class="top-right">
+            <div class="header-menu">
+                <div class="user-area dropdown float-right">
+                    <a href="../profile" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="User Avatar">
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <!-- /#header -->
+    <link rel="stylesheet" href="/dataTables.bootstrap.min.css">
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Dashboard</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="#">Dashboard</a></li>
+
+                                <li class="active">Nạp Tiền</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div th:if="${param.error}">
+                                <p style="color: red;">Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin nhập.</p>
+                            </div>   <div th:if="${param.success}">
+                            <p style="color: green;">Thành công nạp tiền.</p>
+                        </div>
+                            <form id="AddForm" method="POST" th:action="@{/admin/nap-tien}">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                    <div class="input-group-addon"><i class="fas fa-user"> ID người dùng : </i></div>
+                                    <label class="form-control-label">
+                                        <input type="text" class="form-control" th:field="${userInput.id}" style="width: 600px" />
+                                    </label>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fas fa-coins"> Số tiền muốn nạp :</i></div>
+                                        <label class="form-control-label">
+                                            <input type="text" class="form-control" th:field="${userInput.amount}" style="width: 600px" />
+                                        </label>
+                                    </div>
+                                    </div>
+                                <!-- Thêm button để submit form -->
+                                <button type="submit" class="btn btn-primary" >Nạp Tiền</button>
+                            </form>
+                        </div>
+
+                        <div class="card-body card-block">
+
+                            <strong class="card-title">Danh sách thông tin người dùng</strong>
+                            <input class="form-control" type="text" id="searchInput"
+                                   placeholder="Nhập tên người dùng..."/>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <div th:if="${not #lists.isEmpty(users)}">
+                                        <div th:each="user : ${users}"
+                                             style="display: inline-block; width: 20%; margin: 10px; text-align: center;">
+                                            <div style="border: 1px solid #ccc; padding: 10px;">
+                                                <img th:src="@{/img/user.png}" style="font-size: 24px;" alt="">
+                                                <div th:text="${user != null ? user.id : 'N/A'}"></div>
+                                                <div th:text="${user != null ? user.getDisplayname() : 'N/A'}"></div>
+                                                <div th:text="${user != null ? user.getSoDu() : 'N/A'}"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .animated -->
+    <!-- .content -->
+    <div class="clearfix"></div>
+
+
+    <script src="/admin/assets/js/ajax.js"></script>
+    <footer class="site-footer">
+        <div class="footer-inner bg-white">
+            <div class="row">
+                <div class="col-sm-6">
+                    Copyright &copy; 2023 Admin Cpanel
+                </div>
+                <div class="col-sm-6 text-right">
+                    Designed by <a href="">Huynh Can</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /.site-footer -->
+</div>
+<script>
+    $(document).ready(function () {
+        // Xử lý sự kiện khi người dùng nhập từ khóa tìm kiếm
+        $("#searchInput").on("keyup", function () {
+            let value = $(this).val().toLowerCase(); // Lấy giá trị từ ô nhập liệu và chuyển thành chữ thường
+
+            // Lặp qua từng dòng của bảng
+            $("table tbody tr").filter(function () {
+                // Ẩn/hiện dòng tùy thuộc vào việc tìm thấy từ khóa trong cột "Tên thể loại"
+                $(this).toggle($(this).children("td:nth-child(2)").text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
+</body>
+</html>

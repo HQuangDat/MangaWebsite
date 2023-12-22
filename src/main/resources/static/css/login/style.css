@@ -65,6 +65,7 @@ h3 {
 
 h4 {
 	font-size: 24px;
+	color: #ffffff;
 }
 
 h5 {
@@ -438,6 +439,51 @@ ol {
 
 .slicknav_menu {
 	display: none;
+}/* Dropdown button */
+.dropbtn {
+	background-color: transparent;
+	color: #333;
+	font-size: 16px;
+	border: 1px;
+	cursor: pointer;
+	color: whitesmoke;
+}
+
+/* Dropdown container */
+.dropdown-user {
+	display: inline-block;
+	position: relative;
+
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	z-index: 999; /* Đặt giá trị z-index lớn hơn */
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+	color: #333;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: flex;
+}
+
+/* Change color on hover */
+.dropdown-content a:hover {
+	background-color: #f1f1f1;
+}
+
+
+
+/* Show the dropdown on hover */
+.dropdown-user:hover .dropdown-content {
+	display: block;
 }
 
 /*---------------------
@@ -809,7 +855,7 @@ ol {
 }
 
 .product__sidebar__view__item h5 a {
-	color: #ffffff;
+	color: #f0ece8;
 	font-weight: 700;
 	line-height: 26px;
 }
@@ -867,8 +913,8 @@ ol {
 	border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 	padding-bottom: 10px;
 	margin-bottom: 30px;
-}
 
+}
 .product__page__title .section-title {
 	margin-bottom: 0;
 }
@@ -1031,10 +1077,6 @@ ol {
 	color: #b7b7b7;
 }
 
-.manga__details__widget {
-	margin-bottom: 15px;
-}
-
 .manga__details__widget ul {
 	margin-bottom: 20px;
 }
@@ -1194,7 +1236,7 @@ ol {
 	left: 50%;
 	transform: translateX(-50%);
 	bottom: 0;
-	margin-inside: 20px;
+	margin-inside: 0px;
 }
 
 /*---------------------
@@ -1315,7 +1357,7 @@ ol {
 .breadcrumb__links a {
 	font-size: 15px;
 	color: #ffffff;
-	margin-right: 18px;
+	margin-right: 5px;
 	display: inline-block;
 	position: relative;
 }
@@ -1325,13 +1367,6 @@ ol {
 	color: #e53637;
 }
 
-.breadcrumb__links a:after {
-	position: absolute;
-	right: -14px;
-	top: 0;
-	content: "";
-	font-family: "FontAwesome";
-}
 
 .breadcrumb__links span {
 	font-size: 15px;
@@ -1969,7 +2004,10 @@ ol {
 	justify-content: center;
 	align-items: center;
 }
-
+.space
+{
+	color: whitesmoke;
+}
 
 .chapter-nav a {
 	margin: 0 10px;
@@ -2311,6 +2349,9 @@ ol {
 		text-align: left;
 	}
 	.product__page__title .section-title {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
 		margin-bottom: 30px;
 	}
 	.product__page__title .product__page__filter {
@@ -2391,7 +2432,53 @@ ol {
 	color: #777; /* (Tùy chọn) Đặt màu chữ để nó không quá nổi bật */
 }
 /* Small Device = 320px */
-
+.button-category{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	border: 1px solid white ;
+	border-radius: 5px;
+	padding: 10px;
+}
+/* CSS để làm đẹp nút */
+.genreButton {
+	padding: 10px;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.genreButton:hover {
+	background-color: darkred;
+	color: white;
+}
+.search-button {
+	float: right;
+	background-color: #0C81F6;
+	color: white; /* Màu chữ trắng */
+	padding: 10px 20px; /* Kích thước nút */
+	border: none; /* Không có đường viền */
+	border-radius: 5px; /* Góc bo tròn */
+	margin-top: 20px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+.genreButton.selected {
+	background-color: darkred; /* Đặt màu khi nút được chọn */
+	color: #ffffff; /* Đặt màu chữ khi nút được chọn */
+}
+.tim-kiem {
+	border: 1px solid white; /* Bạn cần chỉ định kiểu đường viền, ở đây là solid */
+	border-radius: 5px; /* Góc bo tròn */
+	width: 600px; /* Đặt chiều dài mong muốn */
+	padding: 8px; /* Đặt độ lớn của phần nền bên trong ô nhập */
+}
+.tim-kiem-label {
+	font-size: 24px;
+	color: white;
+}
 @media only screen and (max-width: 479px) {
 	.hero__slider.owl-carousel .owl-nav {
 		display: none;

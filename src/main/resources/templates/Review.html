@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Comment</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/login/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/plyr.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/style.css}" type="text/css">
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .review-container {
+        max-width: 600px;
+        margin: 20px auto;
+    }
+
+    .review {
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        background-color: #bbb;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .review-content {
+        flex: 1;
+    }
+
+    .user-name {
+        font-weight: bold;
+        margin: 0 0 5px 0;
+    }
+
+    .review-text {
+        margin: 0;
+    }
+
+</style>
+</head>
+
+<body>
+<button th:onclick="topFunction()" th:id="toTop">Top</button>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                    <a href="/">
+                        <img th:src="@{img/Logo.png}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li ><a href="./">Homepage</a></li>
+                            <li><a href="/category">Categories <span class="arrow_carrot-down"></span></a>
+                                <ul class="dropdown">
+                                    <li><a href="/category">Categories</a></li>
+                                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/Register}">Sign Up</a></li>
+                                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="fas fa-user">Login</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="active"> <a href="./review">Review</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="header__right">
+                    <a href="/category" class="search-switch"><span class="fas fa-search"></span></a>
+                    <div class="dropdown-user">
+                        <!-- Hiển thị icon khóa nếu chưa đăng nhập -->
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="fas fa-lock"></span></a>
+                        <!-- Hiển thị icon mở khóa và menu khi đã đăng nhập -->
+                        <button class="dropbtn" sec:authorize="isAuthenticated()">
+                            <span class="fas fa-lock-open"></span>
+                        </button>
+                        <div class="dropdown-content">
+                            <!-- Thông tin cá nhân -->
+                            <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá nhân</a>
+                            <!-- Chuyển trang CTV -->
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('CTV') or hasAuthority('Admin')" th:href="@{'/CTV/' + ${#authentication.principal?.id} + '/CTV-list'}">Cộng tác viên</a>
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('Admin')" th:href="@{'/admin'}"> Admin</a>
+
+                            <!-- Đăng xuất -->
+                            <a sec:authorize="isAuthenticated()" href="/logout">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
+
+
+
+<!-- Anime Section Begin -->
+<section class="anime-details spad">
+    <div class="container">
+        <div class="anime__details__content">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="anime__details__review">
+                        <div class="section-title">
+                            <h5>Reviews</h5>
+                        </div>
+                        <div class="anime__review__item" th:each="re : ${reviewList}">
+                            <div class="anime__review__item__pic">
+                                <img th:src="@{'User'+${re.user.avatarUserFileName}}" alt="Anime Image">
+                            </div>
+                            <div class="anime__review__item__text">
+                                <h6 th:text="${re.user.displayname} + ' - ' + ${#temporals.format(re.ngayDang, 'dd-MM-yyyy HH:mm')}"></h6>
+                                <p th:text="${re.noiDung}"></p>
+                                <a th:href="@{${re.getTruyen_url()}}"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="anime__details__form">
+                        <div class="section-title">
+                            <h5>Your Comment</h5>
+                        </div>
+                        <form th:action="@{/review}" method="post" sec:authorize="isAuthenticated()">
+                            <label>
+                                <textarea class="review-content" name="reviewcontent" placeholder="Review truyện nào..."></textarea>
+                            </label>
+                            <label>
+                                <input class="review-text" type="text" name="link" placeholder="Your Link">
+                            </label>
+                            <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="anime__details__sidebar">
+                        <div class="section-title">
+                            <h5>you might like...</h5>
+                        </div>
+                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-1.jpg">
+                            <div class="ep">18 / ?</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                        </div>
+                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-2.jpg">
+                            <div class="ep">18 / ?</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                        </div>
+                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-3.jpg">
+                            <div class="ep">18 / ?</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <h5><a href="#">Sword art online alicization war of underworld</a></h5>
+                        </div>
+                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-4.jpg">
+                            <div class="ep">18 / ?</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Anime Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer__logo">
+                    <a th:href="@{/}"><img th:src="@{/img/Logo.png}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer__nav">
+                    <ul>
+                        <li class="active"><a th:href="@{/}">Homepage</a></li>
+                        <li><a href="./category">Categories</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search model Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+<!-- Js Plugins -->
+<script th:src="@{/js/login/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/login/bootstrap.min.js}"></script>
+<script th:src="@{/js/login/player.js}"></script>
+<script th:src="@{/js/login/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/login/mixitup.min.js}"></script>
+<script th:src="@{/js/login/jquery.slicknav.js}"></script>
+<script th:src="@{/js/login/owl.carousel.min.js}"></script>
+<script th:src="@{/js/login/main.js}"></script>
+<!--    Back to top button-->
+<script>
+    // Khởi tạo nút
+    let mybutton = document.getElementById("toTop");
+
+    // Hiện nút khi người dụng cuộn xuống 20px
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+</body>
+
+</html>

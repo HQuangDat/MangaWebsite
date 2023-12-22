@@ -19,13 +19,6 @@
             color: $primary-color;
         }
 
-        &:after {
-            position: absolute;
-            right: -14px;
-            top: 0;
-            content: '\f105';
-            font-family: "FontAwesome";
-        }
     }
 
     span {

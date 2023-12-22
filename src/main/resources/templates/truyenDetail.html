@@ -15,7 +15,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+          rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" th:href="@{/css/login/bootstrap.min.css}" type="text/css">
@@ -27,325 +27,402 @@
     <link rel="stylesheet" th:href="@{/css/login/slicknav.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/css/login/style.css}" type="text/css">
     <!-- Sử dụng CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="...">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
 
+        var expanded = false;
+
+        function toggleContent() {
+            var content = document.querySelector('.manga__details__widget .text_content');
+            var moreBtn = document.querySelector('.manga__details__widget .readMoreBtn');
+
+            expanded = !expanded;
+
+            if (expanded) {
+                content.style.maxHeight = 'none';
+                moreBtn.innerHTML = 'Thu gọn';
+            } else {
+                content.style.maxHeight = '100px';
+                moreBtn.innerHTML = 'Xem thêm';
+            }
+        }
+    </script>
 </head>
 
 <body>
-    <button th:onclick="topFunction()" th:id="toTop">Top</button>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<button th:onclick="topFunction()" th:id="toTop">Top</button>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="header__logo">
-                        <a th:href="@{/}">
-                            <img th:src="@{/img/Logo.png}" alt="">
-                        </a>
-                    </div>
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                    <a th:href="@{/}">
+                        <img th:src="@{/img/Logo.png}" alt="">
+                    </a>
                 </div>
-                <div class="col-lg-8">
-                    <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li class="active "><a href="./index.html">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./truyenDetail.html">Manga Details</a></li>
-                                        <li><a href="./manga-watching.html">Manga Watching</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a th:href="@{/Register}">Sign Up</a></li>
-                                        <li><a th:href="@{/login}">Login</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="/">Homepage</a></li>
+                            <li><a href="../category">Categories <span class="arrow_carrot-down"></span></a>
+                                <ul class="dropdown">
+                                    <li><a href="../category">Categories</a></li>
+
+                                    <li><a th:href="@{/Register}">Sign Up</a></li>
+                                    <li><a th:href="@{/login}">Login</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./review">Review</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
-                        <a href="#" class="search-switch"><span class="fas fa-search"></span></a>
-                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="icon_profile"></span></a>
+            </div>
+            <div class="col-lg-2">
+                <div class="header__right">
+                    <a href="/search" class="search-switch"><span class="fas fa-search"></span></a>
+                    <div class="dropdown-user">
+                        <!-- Hiển thị icon khóa nếu chưa đăng nhập -->
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><span class="fas fa-lock"></span></a>
+                        <!-- Hiển thị icon mở khóa và menu khi đã đăng nhập -->
+                        <button class="dropbtn" sec:authorize="isAuthenticated()">
+                            <span class="fas fa-lock-open"></span>
+                        </button>
+                        <div class="dropdown-content">
+                            <!-- Thông tin cá nhân -->
+                            <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá
+                                nhân</a>
+                            <!-- Chuyển trang CTV -->
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated()"
+                               th:href="@{'/CTV/'+${#authentication.principal?.id}+'/CTV-list'}">Cộng tác viên</a>
+                            <!-- Đăng xuất -->
+                            <a sec:authorize="isAuthenticated()" href="/logout">Đăng xuất</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="mobile-menu-wrap"></div>
         </div>
-    </header>
-    <!-- Header End -->
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
 
-    <!-- Breadcrumb Begin -->
+<!-- Breadcrumb Begin -->
 
-    <!-- Breadcrumb End -->
+<!-- Breadcrumb End -->
 
-    <!-- Manga Section Begin -->
-    <section class="manga-details spad">
-        <div class="container">
-            <div class="manga__details__content">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="manga__details__pic set-bg"     >
-                            <img th:src="@{'/Truyen/'+${truyen.avatarFileName}}" alt="Avatar">
-
-                        <div class="comment" th:value="${truyen.getSoCmt()}"><i class="fa fa-comments"></i></div>
-                            <div class="view" th:value="${truyen.getSoLike()}"><i class="fas fa-eye"></i></div>
+<!-- Manga Section Begin -->
+<section class="manga-details spad">
+    <div class="container">
+        <div class="manga__details__content">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="manga__details__pic set-bg">
+                        <div th:if="${param.error}">
+                            <p style="color: red;">Có lỗi xảy ra. Vui lòng chờ trong ít phút.</p>
                         </div>
+                        <div th:if="${param.errorLockedChuong}">
+                            <p style="color: red;">Chương đã bị khóa vui lòng mua chương.</p>
+                        </div>
+                        <img th:src="@{'/Truyen/'+${truyen.avatarFileName}}" alt="Avatar">
+
+                        <div class="comment" th:value="${truyen.soLike}"><i class="fa fa-comments"></i></div>
+
                     </div>
-                    <div class="col-lg-9">
-                        <div class="manga__details__text">
-                            <div class="manga__details__title">
-                                <h3 th:text="${truyen.getName()}"></h3>
+                </div>
+                <div class="col-lg-9">
+                    <div class="manga__details__text">
+                        <div class="manga__details__title">
+                            <h3 th:text="${truyen.getName()}"></h3>
+                        </div>
+                        <div class="manga__details__rating">
+                            <div class="rating">
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star-half-o"></i></a>
                             </div>
-                            <div class="manga__details__rating">
-                                <div class="rating">
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star"></i></a>
-                                    <a href="#"><i class="fas fa-star-half-o"></i></a>
+                            <span>1.029 Votes</span>
+                        </div>
+
+                        <div class="manga__details__widget">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Ngày đăng:</span> <span
+                                                th:text="${#temporals.format(truyen.ngayDang, 'dd-MM-yyyy')}"></span>
+                                        </li>
+                                        <li><span>Trạng thái:</span> <span
+                                                th:text="${truyen.getTrangThaiTruyen().getTentrangthai()}"></span></li>
+                                        <li><span>Thể loại:</span> <span
+                                                th:text="${truyen.getCategory().getTenTheLoai()}"></span></li>
+                                    </ul>
                                 </div>
-                                <span>1.029 Votes</span>
-                            </div>
-
-                            <div class="manga__details__widget">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
-                                            <li><span>Ngày đăng:</span> <span  th:text="${#temporals.format(truyen.ngayDang, 'dd-MM-yyyy')}"></span></li>
-                                            <li><span>Trạng thái:</span> <span th:text="${truyen.getTrangThaiTruyenid().getTentrangthai()}"></span></li>
-                                            <li><span>Thể loại:</span> <span th:text="${truyen.getCategory().getTenTheLoai()}"></span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
-                                            <li><span>Like:</span> <span th:text="${truyen.getSoLike()}" class="fas fa-thumbs-up" ></span> </li>
-                                            <li><span>Views:</span> 131,541</li>
-                                        </ul>
-                                    </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Like:</span> <span th:text="${truyen.soLike}"
+                                                                     class="fas fa-thumbs-up"> </span></li>
+                                        <li><span>Views:</span> <span th:text="${truyen.soView}"
+                                                                      class="fas fa-eye"></span></li>
+                                    </ul>
                                 </div>
-
                             </div>
-                            <div class="manga__details__widget">
 
-                                     <p>Miêu tả nội dung : </p></li>
-                                     <p class = "text_content " th:text="${truyen.getMoTaNoiDung()}"></p>
-                                <div class="readMoreBtn" onclick="expandContent()">Xem thêm</div>
-                                <div class="readLessBtn" onclick="collapseContent()">Thu gọn</div>
+                        </div>
+                        <div class="manga__details__widget">
 
-                            </div>
+                            <p>Miêu tả nội dung : </p></li>
+                            <p class="text_content " th:text="${truyen.getMoTaNoiDung()}"></p>
+                            <div class="readMoreBtn" onclick="toggleContent()">Xem thêm</div>
                             <div class="manga__details__btn">
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Theo dõi</a>
-                                <a href="#" class="watch-btn"><span>Xem Ngay</span> <i
-                                    class="fa fa-angle-right"></i></a>
+                                <a th:if="${firstChuong != null}"
+                                   th:href="@{'/truyen/' + ${truyen.id} + '/chuong/'+ ${ firstChuong.id}}"
+                                   class="watch-btn"><span>Xem Ngay</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <div th:if="${param.errorkhongdutien}">
+                                    <p style="color: red;">Bạn không dủ số dư để mua chương.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                <div>
-                    <ul class="chapter-list">
-                        <div th:each="chuong : ${chuongs}" class="chapter-list-item">
-                            <a th:href="@{'/truyen/' + ${chuong.truyen.id} + '/chuong/' + ${chuong.id}}">
-                            <span th:text="${chuong.getTenChuong()}"></span>
-                                <span class="date-time"  th:text="${#temporals.format(chuong.getNgayDang(), 'dd/MM/yyyy HH:mm')}"></span>
-                            </a>
-                        </div>
-                    </ul>
-                </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 col-md-8">
-                        <div class="manga__details__review">
-                            <div class="section-title">
-                                <h5>Reviews</h5>
-                            </div>
-                            <div class="manga__review__item">
-                                <div class="manga__review__item__pic">
-                                    <img src="/img/anime/review-1.jpg" alt="">
-                                </div>
-                                <div class="manga__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
-                                </div>
-                            </div>
-                            <div class="manga__review__item">
-                                <div class="manga__review__item__pic">
-                                    <img src="/img/anime/review-2.jpg" alt="">
-                                </div>
-                                <div class="manga__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="manga__review__item">
-                                <div class="manga__review__item__pic">
-                                    <img src="/img/anime/review-3.jpg" alt="">
-                                </div>
-                                <div class="manga__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
-                            <div class="manga__review__item">
-                                <div class="manga__review__item__pic">
-                                    <img src="/img/anime/review-4.jpg" alt="">
-                                </div>
-                                <div class="manga__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
-                                </div>
-                            </div>
-                            <div class="manga__review__item">
-                                <div class="manga__review__item__pic">
-                                    <img src="/img/anime/review-5.jpg" alt="">
-                                </div>
-                                <div class="manga__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p> Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="manga__review__item">
-                                <div class="manga__review__item__pic">
-                                    <img src="/img/anime/review-6.jpg" alt="">
-                                </div>
-                                <div class="manga__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="manga__details__form">
-                            <div class="section-title">
-                                <h5>Your Comment</h5>
-                            </div>
-                            <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="manga__details__sidebar">
-                            <div class="section-title">
-                                <h5>you might like...</h5>
-                            </div>
-                            <div class="product__sidebar__view__item set-bg" th:attr="data-setbg=${truyen.getAvatarFilePath()}">
-                                <div class="ep" th:value="${truyen.getSoChuong()}"></div>
-                                <div class="view" th:value="${truyen.getSoLike()}"><i class="fas fa-eye"></i></div>
-                                <h5><a th:href="@{/truyenDetail/{id}(id=${truyen.getId()})}" th:value="${truyen.getTenTruyen()}"></a></h5>
+                            <div sec:authorize="isAuthenticated()">
+                                <form th:action="@{'/like/' + ${truyen.id}}" method="post">
+                                    <button type="submit" th:text="${userLikedTruyen ? 'Unlike' : 'Like'}"></button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- manga Section End -->
+            <div>
+                <ul class="chapter-list">
+                    <div th:each="chuong : ${ChuongDaChecks}  " class="chapter-list-item">
+                        <div>
+                            <th:block th:if="${chuong.locked}">
+                                <!-- Nếu chưa mua, hiển thị nút mua -->
+                                <form th:action="@{'/mua-chuong/' + ${chuong.truyen.id} + '/' + ${chuong.id}}" method="post"
+                                      onsubmit="return muaChuong(${chuong.giaTien})">
+                                    <span th:text="${chuong.getTenChuong()}"></span>
+                                    <span class="date-time" th:text="${#temporals.format(chuong.getNgayDang(), 'dd/MM/yyyy HH:mm')}"></span>
+                                    <button type="submit">Mua chương</button>
+                                </form>
+                            </th:block>
+                            <th:block th:unless="${chuong.locked}" >
+                                <!-- Nếu chương đã mua, hiển thị nút xem -->
+                                <a th:href="@{'/truyen/' + ${chuong.truyen.id} + '/chuong/' + ${chuong.id}}">
+                                    <span th:text="${chuong.getTenChuong()}"></span>
+                                    <span class="date-time" th:text="${#temporals.format(chuong.getNgayDang(), 'dd/MM/yyyy HH:mm')}"></span>
+                                </a>
+                            </th:block>
 
-        <!-- Footer Section Begin -->
-        <footer class="footer">
-            <div class="page-up">
-                <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <<div class="footer__logo">
-                        <a th:href="@{/}"><img th:src="@{/img/Logo.png}" alt=""></a>
-                    </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="footer__nav">
-                            <ul>
-                                <li class="active"><a th:href="@{/}">Homepage</a></li>
-                                <li><a href="./categories.html">Categories</a></li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-
-                      </div>
-                  </div>
-              </div>
-          </footer>
-          <!-- Footer Section End -->
-
-          <!-- Search model Begin -->
-          <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch"><i class="icon_close"></i></div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
+                </ul>
             </div>
         </div>
-        <!-- Search model end -->
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="manga__details__review">
+                    <div class="section-title">
+                        <h5>Reviews</h5>
+                    </div>
+                    <div class="manga__review__item">
+                        <div class="manga__review__item__pic">
+                            <img src="/img/anime/review-1.jpg" alt="">
+                        </div>
+                        <div class="manga__review__item__text">
+                            <h6>Chris Curry - <span>1 Hour ago</span></h6>
+                            <p>whachikan Just noticed that someone categorized this as belonging to the genre
+                                "demons" LOL</p>
+                        </div>
+                    </div>
+                    <div class="manga__review__item">
+                        <div class="manga__review__item__pic">
+                            <img src="/img/anime/review-2.jpg" alt="">
+                        </div>
+                        <div class="manga__review__item__text">
+                            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
+                            <p>Finally it came out ages ago</p>
+                        </div>
+                    </div>
+                    <div class="manga__review__item">
+                        <div class="manga__review__item__pic">
+                            <img src="/img/anime/review-3.jpg" alt="">
+                        </div>
+                        <div class="manga__review__item__text">
+                            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
+                            <p>Where is the episode 15 ? Slow update! Tch</p>
+                        </div>
+                    </div>
+                    <div class="manga__review__item">
+                        <div class="manga__review__item__pic">
+                            <img src="/img/anime/review-4.jpg" alt="">
+                        </div>
+                        <div class="manga__review__item__text">
+                            <h6>Chris Curry - <span>1 Hour ago</span></h6>
+                            <p>whachikan Just noticed that someone categorized this as belonging to the genre
+                                "demons" LOL</p>
+                        </div>
+                    </div>
+                    <div class="manga__review__item">
+                        <div class="manga__review__item__pic">
+                            <img src="/img/anime/review-5.jpg" alt="">
+                        </div>
+                        <div class="manga__review__item__text">
+                            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
+                            <p> Finally it came out ages ago</p>
+                        </div>
+                    </div>
+                    <div class="manga__review__item">
+                        <div class="manga__review__item__pic">
+                            <img src="/img/anime/review-6.jpg" alt="">
+                        </div>
+                        <div class="manga__review__item__text">
+                            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
+                            <p>Where is the episode 15 ? Slow update! Tch</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="manga__details__form">
+                    <div class="section-title">
+                        <h5>Your Comment</h5>
+                    </div>
+                    <form action="#">
+                        <textarea placeholder="Your Comment"></textarea>
+                        <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="manga__details__sidebar">
+                    <div class="section-title">
+                        <h5>you might like...</h5>
+                    </div>
+                    <div class="product__sidebar__view__item set-bg" th:attr="data-setbg=${truyen.getAvatarFilePath()}">
+                        <div class="ep" th:value="${truyen.getSoChuong()}"></div>
+                        <div class="view" th:value="${truyen.getSoLike()}"><i class="fas fa-eye"></i></div>
+                        <h5><a th:href="@{/truyenDetail/{id}(id=${truyen.getId()})}"
+                               th:value="${truyen.getTenTruyen()}"></a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- manga Section End -->
 
-        <!-- Js Plugins -->
-        <script th:src="@{/js/login/jquery-3.3.1.min.js}"></script>
-        <script th:src="@{/js/login/bootstrap.min.js}"></script>
-        <script th:src="@{/js/login/player.js}"></script>
-        <script th:src="@{/js/login/jquery.nice-select.min.js}"></script>
-        <script th:src="@{/js/login/mixitup.min.js}"></script>
-        <script th:src="@{/js/login/jquery.slicknav.js}"></script>
-        <script th:src="@{/js/login/owl.carousel.min.js}"></script>
-        <script th:src="@{/js/login/main.js}"></script>
-        <!--    Back to top button-->
-        <script>
-            // Khởi tạo nút
-            let mybutton = document.getElementById("toTop");
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <
+                <div class="footer__logo">
+                    <a th:href="@{/}"><img th:src="@{/img/Logo.png}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer__nav">
+                    <ul>
+                        <li class="active"><a th:href="@{/}">Homepage</a></li>
+                        <li><a href="./categories.html">Categories</a></li>
+                        <li><a href="./blog.html">Our Blog</a></li>
+                        <li><a href="#">Contacts</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 
-            // Hiện nút khi người dụng cuộn xuống 20px
-            window.onscroll = function() {scrollFunction()};
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
 
-            function scrollFunction() {
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    mybutton.style.display = "block";
-                } else {
-                    mybutton.style.display = "none";
+<!-- Search model Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+
+<!-- Js Plugins -->
+<script th:src="@{/js/login/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/login/bootstrap.min.js}"></script>
+<script th:src="@{/js/login/player.js}"></script>
+<script th:src="@{/js/login/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/login/mixitup.min.js}"></script>
+<script th:src="@{/js/login/jquery.slicknav.js}"></script>
+<script th:src="@{/js/login/owl.carousel.min.js}"></script>
+<script th:src="@{/js/login/main.js}"></script>
+<!--    Back to top button-->
+<script>
+    // Khởi tạo nút
+    let mybutton = document.getElementById("toTop");
+
+    // Hiện nút khi người dụng cuộn xuống 20px
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+<script>
+    function muaChuong(giatien) {
+        if (confirm('Mua chương mất ' + giatien + ' đồng. Bạn có chắc chắn muốn mua không?')) {
+            // Thực hiện POST request
+            $.ajax({
+                type: 'POST',
+                url: '/mua-chuong/',
+                success: function(data) {
+                    // Xử lý kết quả thành công nếu cần
+                    console.log('Mua chương thành công:', data);
+                    // Cập nhật giao diện hoặc thực hiện các bước khác
+                },
+                error: function(xhr, status, error) {
+                    // Xử lý lỗi nếu có
+                    console.error('Lỗi mua chương:', error);
+                    // Hiển thị thông báo lỗi hoặc thực hiện các bước khác
                 }
-            }
-
-            function topFunction() {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-            }
-        </script>
-    <script>
-        let content = document.getElementById('content');
-        let readMoreBtn = document.getElementById('readMoreBtn');
-        let readLessBtn = document.getElementById('readLessBtn');
-
-        // Hiển thị nút "Xem thêm" nếu nội dung vượt quá chiều cao tối đa
-        if (content.scrollHeight > content.clientHeight) {
-            readMoreBtn.style.display = 'block';
+            });
+        } else {
+            // Người dùng đã hủy bỏ mua chương
         }
+    }
+</script>
 
-        function expandContent() {
-            content.style.maxHeight = 'none';
-            readMoreBtn.style.display = 'none';
-            readLessBtn.style.display = 'block';
-        }
+</body>
 
-        function collapseContent() {
-            content.style.maxHeight = '100px'; // Đặt lại chiều cao tối đa
-            readMoreBtn.style.display = 'block';
-            readLessBtn.style.display = 'none';
-        }
-    </script>
-    </body>
-
-    </html>
+</html>

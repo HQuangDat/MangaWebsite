@@ -16,6 +16,8 @@
     <!-- External CSS files -->
     <link rel="stylesheet" href="/css/admin/cs-skin-elastic.css">
     <link rel="stylesheet" href="/css/admin/style.css">
+    <!-- Sử dụng CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="/css/admin/bootstrap.min.css">
@@ -97,7 +99,6 @@
                 <li>
                     <a href="../truyen/list"> <i class="menu-icon  fa  fa-list-alt"></i>Quản lý truyện tranh</a>
                 </li>
-                <li class="menu-title">Quản lý dịch vụ</li><!-- /.menu-title -->
 
 
                 <li class="menu-title">Thành viên</li><!-- /.menu-title -->
@@ -109,12 +110,12 @@
                     <a href="/admin/ctv"> <i class="menu-icon fa fa-user-md"></i>Cộng tác viên</a>
                 </li>
                 <li>
-                    <a href="/admin/thanhvien"> <i class="menu-icon  fa  fa-users"></i>Thành viên</a>
+                    <a href="/admin/nap-tien"> <i class="menu-icon  fas fa-coins"></i>Nạp Tiền</a>
                 </li>
                 <li class="menu-title">Lịch sử hoạt động</li><!-- /.menu-title -->
 
                 <li>
-                    <a href="../Admin/lich-su.html"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
+                    <a href="/admin/lich-su"> <i class="menu-icon fa fa-history"></i>Lịch sử đăng truyện</a>
                 </li>
 
             </ul>
@@ -130,75 +131,16 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../Admin"><img width="25%" src="" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="../Admin"><img src="" alt="Logo"></a>
-                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                <a class="navbar-brand" href="/"><img style="width: 15%" src="/img/Logo.png" alt="Logo"></a>
             </div>
         </div>
         <div class="top-right">
             <div class="header-menu">
-                <div class="header-left">
-                    <button class="search-trigger"><i class="fa fa-search"></i></button>
-                    <div class="form-inline">
-                        <form class="search-form">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search ..."
-                                   aria-label="Search">
-                            <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                        </form>
-                    </div>
-
-                    <div class="dropdown for-notification">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bell"></i>
-                            <span class="count bg-danger">3</span>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="notification">
-                            <p class="red">You have 3 Notification</p>
-                            <a class="dropdown-item media" href="#">
-                                <i class="fa fa-check"></i>
-                                <p>Server #1 overloaded.</p>
-                            </a>
-                            <a class="dropdown-item media" href="#">
-                                <i class="fa fa-info"></i>
-                                <p>Server #2 overloaded.</p>
-                            </a>
-                            <a class="dropdown-item media" href="#">
-                                <i class="fa fa-warning"></i>
-                                <p>Server #3 overloaded.</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="dropdown for-message">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="message"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-envelope"></i>
-                            <span class="count bg-primary">0</span>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="message">
-                            <p class="red">Bạn có 0 thư</p>
-
-                        </div>
-                    </div>
-                </div>
-
                 <div class="user-area dropdown float-right">
-                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        <img class="user-avatar rounded-circle"
-                             src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-                             alt="User Avatar">
+                    <a href="../profile" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar rounded-circle" src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" alt="User Avatar">
                     </a>
 
-                    <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="/profile/info.html"><i class="fa fa- user"></i>My Profile</a>
-
-
-                        <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-                        <a class="nav-link" href="/static"><i class="fa fa-power -off"></i>Về Shop</a>
-                    </div>
                 </div>
 
             </div>
@@ -241,6 +183,9 @@
                             <strong>Đăng Truyện</strong>
                         </div>
                         <div class="card-body card-block">
+                            <div th:if="${param.error}">
+                                <p style="color: red;">Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin nhập.</p>
+                            </div>
                             <form id="AddForm" method="POST" enctype="multipart/form-data"
                                   th:action="@{/admin/truyen/add}">
                                 <div class="form-group">
@@ -248,7 +193,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                         <label>
-                                            <input class="form-control" th:field="${truyen.tenTruyen}"/>
+                                            <input class="form-control" th:field="${truyen.tenTruyen}"style="width: 600px"/>
                                         </label>
                                     </div>
                                 </div>
@@ -258,7 +203,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                         <label>
-                                            <input class="form-control" th:field="${truyen.tacGia}"/>
+                                            <input class="form-control" th:field="${truyen.tacGia}" style="width: 600px"/>
                                         </label>
                                     </div>
                                 </div>

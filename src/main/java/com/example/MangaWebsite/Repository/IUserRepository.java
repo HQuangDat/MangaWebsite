@@ -29,4 +29,11 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u JOIN u.roles r WHERE r.id = :roleId")
     List<User> findByRoleId(@Param("roleId") Long roleId);
+
+    void deleteUserById(Long userId);
+    @Modifying
+    @Query(value = "DELETE FROM user_role WHERE user_id = :userId AND role_id = :roleId", nativeQuery = true)
+    void deleteRoleAssignment(@Param("userId") Long userId, @Param("roleId") Long roleId);
+    @Query("SELECT DISTINCT u FROM User u JOIN u.roles r WHERE SIZE(u.roles) = 1 AND r.id = :roleId")
+    List<User> findUsersBySingleRole(@Param("roleId") Long roleId);
 }

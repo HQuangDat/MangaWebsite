@@ -41,7 +41,10 @@ public class Chuong {
     @ValidUserId
     private  User user;
 
-    @OneToMany(mappedBy = "chuong", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
+    @Column(name = "locked", nullable = true)
+    private boolean locked;
+
+    @OneToMany(mappedBy = "chuong", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Anh> anhList;
 
 
@@ -56,9 +59,8 @@ public class Chuong {
 
     }
 
-  /*  @OneToMany(mappedBy = "chuong", fetch = FetchType.LAZY)
-    private Set<User> users;*/
 
+    public Chuong(Chuong chuong) {
 
-
+    }
 }

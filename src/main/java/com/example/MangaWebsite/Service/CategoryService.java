@@ -1,6 +1,7 @@
 package com.example.MangaWebsite.Service;
 
 import com.example.MangaWebsite.Model.Category;
+import com.example.MangaWebsite.Model.Truyen;
 import com.example.MangaWebsite.Repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,4 +16,6 @@ public class CategoryService {
     public Category getCategoryById(Long id){return categoryRepository.findById(id).orElse(null);}
     public Category saveCategory(Category category){return categoryRepository.save(category);}
     public void deleteCategory(Long id){categoryRepository.deleteById(id);}
+
+
 }
