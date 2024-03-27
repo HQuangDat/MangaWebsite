@@ -148,13 +148,16 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="anime__details__review">
                         <div class="section-title">
+                            <div th:if="${param.errorkhongnhaptrong}">
+                                <p style="color: red;">Không nhập review trống .</p>
+                            </div>
                             <h5>Reviews</h5>
                         </div>
-                        <div class="anime__review__item" th:each="re : ${reviewList}">
-                            <div class="anime__review__item__pic">
-                                <img th:src="@{'User'+${re.user.avatarUserFileName}}" alt="Anime Image">
+                        <div class="manga__review__item" th:each="re : ${reviewList}">
+                            <div class="manga__review__item__pic">
+                                <img th:src="@{'User/'+${re.user.avatarUserFileName}}" alt="Anime Image">
                             </div>
-                            <div class="anime__review__item__text">
+                            <div class="manga__review__item__text">
                                 <h6 th:text="${re.user.displayname} + ' - ' + ${#temporals.format(re.ngayDang, 'dd-MM-yyyy HH:mm')}"></h6>
                                 <p th:text="${re.noiDung}"></p>
                                 <a th:href="@{${re.getTruyen_url()}}"></a>
@@ -162,17 +165,13 @@
                         </div>
 
                     </div>
-                    <div class="anime__details__form">
+                    <div class="manga__details__form">
                         <div class="section-title">
-                            <h5>Your Comment</h5>
+                            <h5>Your Review</h5>
                         </div>
                         <form th:action="@{/review}" method="post" sec:authorize="isAuthenticated()">
-                            <label>
                                 <textarea class="review-content" name="reviewcontent" placeholder="Review truyện nào..."></textarea>
-                            </label>
-                            <label>
                                 <input class="review-text" type="text" name="link" placeholder="Your Link">
-                            </label>
                             <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                         </form>
                     </div>

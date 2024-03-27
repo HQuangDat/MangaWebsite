@@ -5,6 +5,7 @@ import com.example.MangaWebsite.Entity.User;
 import com.example.MangaWebsite.Model.*;
 import com.example.MangaWebsite.Service.*;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +51,8 @@ public class ContentController {
                     model.addAttribute("ChuongDaChecks", ChuongDaCheck);
                     Chuong firstChuong = chuongService.getFirstChuongOfTruyen(id_truyen);
                    model.addAttribute("firstChuong", firstChuong);
+                    List<Comment> commentList = commentService.getAllComment(id_truyen);
+                    model.addAttribute("commentLists", commentList);
                     return "/truyenDetail";
                 }
             } else {
@@ -120,14 +124,12 @@ public class ContentController {
 
         if (truyenOptional.isPresent()) {
             Truyen truyen = truyenOptional.get();
-            // Nhận thông tin người dùng hiện tại từ SecurityContext
+
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             String currentUsername = userDetails.getUsername();
 
-            // Bạn có thể sử dụng username để lấy ID của người dùng từ service
             Long currentUserId = userService.getUserIdByUsername(currentUsername);
 
-            // Đặt giá trị cho trường user trong đối tượng Truyen
             User currentUser = userService.getUserbyId(currentUserId);
             likeService.toggleLike(truyen, currentUser);
             truyenService.updateTruyen(truyen);
@@ -161,5 +163,30 @@ public class ContentController {
         }
         return "redirect:/truyen/{id_truyen}";
     }
+    @PostMapping("/truyen/{id_truyen}/cmt")
+    public String cmtTruyen(@ModelAttribute("cmt") @Valid Comment cmt,
+                            @PathVariable Long id_truyen,
+                            @RequestParam("cmtcontent") String commentcontent,
+                            Model model,
+                            Authentication authentication) {
+        Optional<Truyen> truyenOptional = truyenService.findById(id_truyen);
 
+        if(commentcontent.isEmpty())
+            return "redirect:/truyen/{id_truyen}?errorkhongnhaptrong";
+        if (truyenOptional.isPresent()) {
+            Truyen truyen = truyenOptional.get();
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String currentUsername = userDetails.getUsername();
+            Long currentUserId = userService.getUserIdByUsername(currentUsername);
+            User currentUser = userService.getUserbyId(currentUserId);
+
+            cmt.setUser(currentUser);
+            cmt.setNgayDang(LocalDateTime.now());
+            cmt.setNoiDung(commentcontent);
+            cmt.setTruyen(truyen);
+            commentService.update(cmt);
+        }
+
+        return "redirect:/truyen/{id_truyen}";
+    }
 }

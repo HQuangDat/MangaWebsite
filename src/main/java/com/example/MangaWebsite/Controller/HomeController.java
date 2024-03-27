@@ -33,9 +33,9 @@ public class HomeController {
         List<Chuong> chuongList = chuongService.getAllChuongs();
 
         chuongList.sort(Comparator.comparing(Chuong::getNgayDang).reversed());
-        // Lọc ra danh sách chương mới cập nhật
+
         List<Chuong>chuongMoiCapNhatList = chuongList.stream().limit(6).collect(Collectors.toList());
-        // Lọc ra danh sách truyện mà có chương mới cập nhật
+
         List<Truyen> truyenMoiCapNhatList = truyenList.stream()
                 .filter(truyen -> chuongMoiCapNhatList.stream()
                         .anyMatch(chuong -> Objects.equals(chuong.getTruyen().getId(), truyen.getId())))

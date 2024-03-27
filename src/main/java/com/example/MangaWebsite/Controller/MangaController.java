@@ -67,14 +67,14 @@ public class MangaController {
 
     @GetMapping("/add")
     public String AddTruyenForm(Model model) {
-        // Tạo một đối tượng Truyen để binding với form
+
         Truyen truyen = new Truyen();
 
-        // Truyền đối tượng Truyen và danh sách các danh mục vào model
+
         model.addAttribute("truyen", truyen);
         model.addAttribute("categories", categoryService.getAllCategories());
 
-        // Trả về tên view (thường là tên của trang thêm truyện)
+
         return "truyen/add";
     }
 
@@ -87,12 +87,12 @@ public class MangaController {
     ) {
 
         if (result.hasErrors()) {
-            // Xử lý lỗi kiểm tra hợp lệ
+
             return "redirect:/add?error";
         }
 
         try {
-            // Kiểm tra rằng tệp avatar không trống
+
             if (avatarFile.isEmpty()) {
                 return "redirect:/admin/truyen/add?error";
             }
@@ -102,7 +102,7 @@ public class MangaController {
                 return "redirect:/admin/truyen/add?error";
             }
 
-// Kiểm tra loại nội dung
+
             String allowedContentType = "image/*";
             if (!Objects.requireNonNull(avatarFile.getContentType()).startsWith("image/")) {
                 return "redirect:/admin/truyen/add?error";
@@ -111,35 +111,30 @@ public class MangaController {
 
                 return "redirect:/admin/truyen/add?error";
             }
-            // Xây dựng đường dẫn thư mục
+
             String fileName = avatarFile.getOriginalFilename();
             String sanitizedFileName = sanitizeFileName(fileName);
 
             Path directoryPath = Paths.get("E:/GCWT2", sanitizeFileName(truyen.getTenTruyen()));
 
-            // Lưu ảnh vào thư mục
+
             Path filePath = directoryPath.resolve(sanitizedFileName);
             String filepath = sanitizeFileName(truyen.getTenTruyen()) + "/" + sanitizedFileName;
-            // Đảm bảo thư mục đã tồn tại hoặc tạo mới nếu chưa tồn tại
+
             if (Files.notExists(directoryPath)) {
                 Files.createDirectories(directoryPath);
             }
 
-            // Ghi tệp vào đường dẫn
             Files.write(filePath, avatarFile.getBytes());
 
-            // Nhận thông tin người dùng hiện tại từ SecurityContext
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String currentUsername = userDetails.getUsername();
 
-            // Bạn có thể sử dụng username để lấy ID của người dùng từ service
             Long currentUserId = userService.getUserIdByUsername(currentUsername);
 
-            // Đặt giá trị cho trường user trong đối tượng Truyen
             User currentUser = userService.getUserbyId(currentUserId);
             truyen.setUser(currentUser);
 
-            // Nhận danh mục được chọn dựa trên ID từ biểu mẫu
             if (truyen.getCategory() == null || truyen.getCategory().getId() == null) {
                 return "redirect:/admin/truyen/add?error";
             }
@@ -148,13 +143,11 @@ public class MangaController {
                 return "redirect:/admin/truyen/add?error";
             }
 
-            // Lưu thông tin vào đối tượng truyen
-            truyen.setAvatarFileName(filepath);
 
-            // Đặt danh mục trong đối tượng truyen
-            truyen.setCategory(selectedCategory);
+            truyen.setAvatarFileName(filepath);
+  truyen.setCategory(selectedCategory);
             truyen.setNgayDang(LocalDateTime.now());
-            // Lưu dữ liệu vào cơ sở dữ liệu bằng MangaService
+
             truyenService.addTruyen(truyen);
 
             return "redirect:/admin/truyen/add?success";

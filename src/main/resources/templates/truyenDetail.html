@@ -82,7 +82,7 @@
                                     <li><a th:href="@{/login}">Login</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./review">Review</a></li>
+                            <li><a href="../review">Review</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -99,11 +99,11 @@
                         </button>
                         <div class="dropdown-content">
                             <!-- Thông tin cá nhân -->
-                            <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá
-                                nhân</a>
+                            <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá nhân</a>
                             <!-- Chuyển trang CTV -->
-                            <a class="fas fa-pen" sec:authorize="isAuthenticated()"
-                               th:href="@{'/CTV/'+${#authentication.principal?.id}+'/CTV-list'}">Cộng tác viên</a>
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('CTV') or hasAuthority('Admin')" th:href="@{'/CTV/' + ${#authentication.principal?.id} + '/CTV-list'}">Cộng tác viên</a>
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('Admin')" th:href="@{'/admin'}"> Admin</a>
+
                             <!-- Đăng xuất -->
                             <a sec:authorize="isAuthenticated()" href="/logout">Đăng xuất</a>
                         </div>
@@ -233,73 +233,31 @@
             <div class="col-lg-8 col-md-8">
                 <div class="manga__details__review">
                     <div class="section-title">
-                        <h5>Reviews</h5>
+                        <h5>Comment</h5>
                     </div>
-                    <div class="manga__review__item">
-                        <div class="manga__review__item__pic">
-                            <img src="/img/anime/review-1.jpg" alt="">
+                    <div th:if="${param.errorkhongnhaptrong}">
+                        <p style="color: red;">Không nhập comment trống .</p>
+                    </div>
+                    <div th:each="cmt : ${commentLists}" class="manga__review__item">
+                        <div  class="manga__review__item__pic">
+                            <img th:src="@{'../User/' + ${cmt.user.avatarUserFileName}}" alt="">
                         </div>
                         <div class="manga__review__item__text">
-                            <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                            <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                "demons" LOL</p>
+                            <h6 th:text="${cmt.user.displayname}"> <span  class="date-time" th:text="${#temporals.format(cmt.ngayDang, 'dd/MM/yyyy HH:mm')}"></span></h6>
+                            <p th:text="${cmt.noiDung}"></p>
                         </div>
                     </div>
-                    <div class="manga__review__item">
-                        <div class="manga__review__item__pic">
-                            <img src="/img/anime/review-2.jpg" alt="">
-                        </div>
-                        <div class="manga__review__item__text">
-                            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                            <p>Finally it came out ages ago</p>
-                        </div>
-                    </div>
-                    <div class="manga__review__item">
-                        <div class="manga__review__item__pic">
-                            <img src="/img/anime/review-3.jpg" alt="">
-                        </div>
-                        <div class="manga__review__item__text">
-                            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                            <p>Where is the episode 15 ? Slow update! Tch</p>
-                        </div>
-                    </div>
-                    <div class="manga__review__item">
-                        <div class="manga__review__item__pic">
-                            <img src="/img/anime/review-4.jpg" alt="">
-                        </div>
-                        <div class="manga__review__item__text">
-                            <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                            <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                "demons" LOL</p>
-                        </div>
-                    </div>
-                    <div class="manga__review__item">
-                        <div class="manga__review__item__pic">
-                            <img src="/img/anime/review-5.jpg" alt="">
-                        </div>
-                        <div class="manga__review__item__text">
-                            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                            <p> Finally it came out ages ago</p>
-                        </div>
-                    </div>
-                    <div class="manga__review__item">
-                        <div class="manga__review__item__pic">
-                            <img src="/img/anime/review-6.jpg" alt="">
-                        </div>
-                        <div class="manga__review__item__text">
-                            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                            <p>Where is the episode 15 ? Slow update! Tch</p>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="manga__details__form">
+                <div sec:authorize="isAuthenticated()" class="manga__details__form">
                     <div class="section-title">
                         <h5>Your Comment</h5>
                     </div>
-                    <form action="#">
-                        <textarea placeholder="Your Comment"></textarea>
+                    <form id="AddCmtForm" method="POST" th:action="@{'/truyen/' + ${truyen.getId()} + '/cmt'}">
+                        <textarea placeholder="Your Comment" name="cmtcontent"></textarea>
                         <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                     </form>
+
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">

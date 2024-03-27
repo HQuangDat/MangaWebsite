@@ -48,7 +48,7 @@
                                         <li><a th:href="@{/login}">Login</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="../review">Review</a></li>
+                                <li><a href="http://localhost:8888/review">Review</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -67,7 +67,9 @@
                             <!-- Thông tin cá nhân -->
                             <a class="fas fa-user" sec:authorize="isAuthenticated()" th:href="@{/profile}">Thông tin cá nhân</a>
                             <!-- Chuyển trang CTV -->
-                            <a class="fas fa-pen" sec:authorize="isAuthenticated()" th:href="@{'/CTV/'+${#authentication.principal?.id}+'/CTV-list'}">Cộng tác viên</a>
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('CTV') or hasAuthority('Admin')" th:href="@{'/CTV/' + ${#authentication.principal?.id} + '/CTV-list'}">Cộng tác viên</a>
+                            <a class="fas fa-pen" sec:authorize="isAuthenticated() and hasAuthority('Admin')" th:href="@{'/admin'}"> Admin</a>
+
                             <!-- Đăng xuất -->
                             <a sec:authorize="isAuthenticated()" href="/logout">Đăng xuất</a>
                         </div>

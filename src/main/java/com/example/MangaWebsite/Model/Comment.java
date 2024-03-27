@@ -2,12 +2,14 @@ package com.example.MangaWebsite.Model;
 
 import com.example.MangaWebsite.Entity.User;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "user_cmt")
 
 public class Comment {

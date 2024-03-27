@@ -27,7 +27,7 @@
                             <div th:if="${param.error}">
                             <p style="color: red;">Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin nhập.</p>
                         </div>
-                            <img th:src="@{'User'+${user.avatarUserFileName}}" alt="Admin" class="rounded-circle" width="150">
+                            <img th:src="@{'User/'+${user.avatarUserFileName}}" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
                                 <h4 th:text="${user.displayname}"></h4>
                                 <div th:each="Singlerole : ${role}">

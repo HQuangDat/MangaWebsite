@@ -97,7 +97,6 @@ public class UserController {
     }
 
     private String sanitizeFileName(String fileName) {
-        // Chuyển đổi tên file thành không dấu và thay thế khoảng trắng bằng dấu _
         String fileNameWithoutAccent = convertToAscii(fileName);
         return fileNameWithoutAccent.replaceAll("\\s", "_");
     }

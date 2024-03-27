@@ -50,6 +50,8 @@ public class ReviewController {
                                 @RequestParam("reviewcontent") String reviewcontent,
                                @RequestParam("link") String link,
                                Authentication authentication){
+        if(link.isEmpty())
+            return "redirect:/review?errorkhongnhaptrong";
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUsername = userDetails.getUsername();
         Long currentUserId = userService.getUserIdByUsername(currentUsername);
@@ -60,7 +62,7 @@ public class ReviewController {
         review.setTruyen_url(link);
         reviewService.update(review);
 
-        return "Review";}
+        return "redirect:/review";}
 
 
 }
